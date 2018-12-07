@@ -24,11 +24,11 @@ class send_email:
         report_file["Content-Disposition"] = 'attachment;filename='+reportName
         msg.attach(report_file) # 添加附件
         msg['Subject'] = '88APP自动化测试报告:'+reportName # 邮件标题
-        msg['From'] = gl.email_name  #发件人
+        msg['From'] = gl.email_from  #发件人
         msg['To'] = gl.email_To  #收件人列表
         try:
             server = smtplib.SMTP(gl.smtp_sever)
-            server.login(gl.email_name,gl.email_password)
+            server.login(gl.email_from, gl.email_password)
             server.sendmail(msg['From'],msg['To'].split(';'),msg.as_string())
             server.quit()
         except smtplib.SMTPException:

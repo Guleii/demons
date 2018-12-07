@@ -14,9 +14,14 @@ test_case_path = project_path+"\\src\\test_case"
 # print u'日志路径：'+log_path
 # 测试报告存储路径，并以当前时间作为报告名称前缀
 report_path = project_path+"\\report\\"
-report_name = report_path+time.strftime('%Y%m%d%H%S', time.localtime())
+report_name = "report.html"
+log_name = "Launcher.log"
+# report_name = report_path+time.strftime('%Y%m%d%H%S', time.localtime())
 # 设置发送测试报告的公共邮箱、用户名和密码
-smtp_sever = 'smtp.exmail.qq.com'  # 邮箱SMTP服务，各大运营商的smtp服务可以在网上找，然后可以在foxmail这些工具中验正
-email_name = "888@x88.com"  # 发件人名称
-email_password = "*888"  # 发件人登录密码
-email_To = '888@qq.com;88@88.com'  # 收件人
+smtp_sever = 'smtp.qq.com'  # 邮箱SMTP服务，各大运营商的smtp服务可以在网上找，然后可以在foxmail这些工具中验正
+email_from = "1291380515@qq.com"  # 发件人名称
+email_port = 25  # 默认是25 qq的是465
+email_password = "nquhwnclzhnwbagf"  # 发件人登录密码
+email_To = ["alan.li@xgimi.com", "1291380515@qq.com"]  # 收件人
+email_title = 'Launcher测试报告'  # 邮件标题
+email_content = 'Launcher测试用例已完成测试，请查收，报告与日志'  # 邮件内容

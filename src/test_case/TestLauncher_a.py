@@ -2,54 +2,55 @@
 
 """HTMLTestRunner 截图版示例 appium版"""
 import sys
-
+from config import globalparameter as gl
 from appium import webdriver
 import unittest
 from HTMLTestRunner_cn import HTMLTestRunner
 from general.AppLog import *
-from general import Key_code_touch, Utils
-from moudle import HomeTabUtils
+from general import Key_code_touch, Utils, BaseUnittest, send_email
+from general.BaseEmail import start_send_email
+from moudle import HomeTabUtils, InputManagerUtils
 
 sys.path.append('D:\machine_Learning\machine_pycharm\Common')
 
 
-class case_01(unittest.TestCase):
+class case_01(BaseUnittest.BaseTestCase):
     currentActivity = ""
 
-    @classmethod
-    def setUpClass(cls):
-        desired_caps = {}
-        desired_caps['platformName'] = 'Android'
-        desired_caps['platformVersion'] = '8.0.0'
-        desired_caps['deviceName'] = '621MECQE3DY4K'
-        desired_caps['noReset'] =True
-        desired_caps['unicodeKeyboard'] = True
-        desired_caps['resetKeyboard'] = True
-        # desired_caps['app'] = 'com.xgimi.instruction30'
-        desired_caps['app'] = 'com.xgimi.home'
-        # desired_caps['appActivity'] = 'com.xgimi.instruction30.net_instruction.ui.SplashActivity'
-        desired_caps['appActivity'] = 'com.xgimi.home.ui.MainActivity'
-        cls.driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)
-
-    @classmethod
-    def tearDownClass(cls):
-
-        cls.driver.quit()
-        # closeLog()
-
-    # closeLog()
-
-    def add_img(self):
-        # 在是python3.x 中，如果在这里初始化driver ，因为3.x版本 unittest 运行机制不同，会导致用力失败时截图失败
-        self.imgs.append(self.driver.get_screenshot_as_base64())
-        return True
-
-    def setUp(self):
-        self.imgs = []
-        self.addCleanup(self.cleanup)
-
-    def cleanup(self):
-        pass
+    # @classmethod
+    # def setUpClass(cls):
+    #     desired_caps = {}
+    #     desired_caps['platformName'] = 'Android'
+    #     desired_caps['platformVersion'] = '8.0.0'
+    #     desired_caps['deviceName'] = '621MECQE3DY4K'
+    #     desired_caps['noReset'] =True
+    #     desired_caps['unicodeKeyboard'] = True
+    #     desired_caps['resetKeyboard'] = True
+    #     # desired_caps['app'] = 'com.xgimi.instruction30'
+    #     desired_caps['app'] = 'com.xgimi.home'
+    #     # desired_caps['appActivity'] = 'com.xgimi.instruction30.net_instruction.ui.SplashActivity'
+    #     desired_caps['appActivity'] = 'com.xgimi.home.ui.MainActivity'
+    #     cls.driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)
+    #
+    # @classmethod
+    # def tearDownClass(cls):
+    #
+    #     cls.driver.quit()
+    #     # closeLog()
+    #
+    # # closeLog()
+    #
+    # def add_img(self):
+    #     # 在是python3.x 中，如果在这里初始化driver ，因为3.x版本 unittest 运行机制不同，会导致用力失败时截图失败
+    #     self.imgs.append(self.driver.get_screenshot_as_base64())
+    #     return True
+    #
+    # def setUp(self):
+    #     self.imgs = []
+    #     self.addCleanup(self.cleanup)
+    #
+    # def cleanup(self):
+    #     pass
 
     """
         Launcher:更多模块测试
@@ -58,7 +59,9 @@ class case_01(unittest.TestCase):
         Utils.Logging.error("当前界面：test_case1:  " + self.driver.current_activity)
         self.currentActivity = self.driver.current_activity
 
-        Key_code_touch.KeyCode.touch_left(self.driver, 4)
+        HomeTabUtils.TabUtils.click_tab_two(self.driver, before_wait_time=2)
+
+        # Key_code_touch.KeyCode.touch_left(self.driver, 4)
         Key_code_touch.KeyCode.touch_down(self.driver, 2)
 
         # 首页专题
@@ -101,8 +104,10 @@ class case_01(unittest.TestCase):
     def _b_launcher_user(self):
         log(filename="TV22", logtag="com.xgimi.instruction30")
 
+        HomeTabUtils.TabUtils.click_tab_three(self.driver, before_wait_time=2)
+
         # 防止上一个用例执行失败，返回Tab栏
-        Key_code_touch.KeyCode.touch_back(self.driver, 4)
+        # Key_code_touch.KeyCode.touch_back(self.driver, 4)
         # Key_code_touch.KeyCode.touch_right(self.driver, 2)
 
         Key_code_touch.KeyCode.touch_down(self.driver, 2)
@@ -188,8 +193,9 @@ class case_01(unittest.TestCase):
             Launcher:VIP模块测试
         """
     def _c_launcher_vip(self):
-        Key_code_touch.KeyCode.touch_back(self.driver, 4)
-        Key_code_touch.KeyCode.touch_right(self.driver, 2)
+        HomeTabUtils.TabUtils.click_tab_four(self.driver, before_wait_time=2)
+        # Key_code_touch.KeyCode.touch_back(self.driver, 4)
+        # Key_code_touch.KeyCode.touch_right(self.driver, 2)
 
         # 专题-2
         Key_code_touch.KeyCode.touch_down(self.driver, 2, 3)
@@ -199,8 +205,9 @@ class case_01(unittest.TestCase):
         Launcher:电影模块测试
      """
     def _d_launcher_movie(self):
-        Key_code_touch.KeyCode.touch_back(self.driver, 4)
-        Key_code_touch.KeyCode.touch_right(self.driver, 2, 2)
+        HomeTabUtils.TabUtils.click_tab_five(self.driver, before_wait_time=2)
+        # Key_code_touch.KeyCode.touch_back(self.driver, 4)
+        # Key_code_touch.KeyCode.touch_right(self.driver, 2, 2)
 
         # 专题 -2
         Key_code_touch.KeyCode.touch_down(self.driver, 2, 2)
@@ -222,8 +229,9 @@ class case_01(unittest.TestCase):
          Launcher:少儿 模块测试
      """
     def _e_launcher_children(self):
-        Key_code_touch.KeyCode.touch_back(self.driver, 4)
-        Key_code_touch.KeyCode.touch_right(self.driver, 2, 3)
+        HomeTabUtils.TabUtils.click_tab_six(self.driver, before_wait_time=2)
+        # Key_code_touch.KeyCode.touch_back(self.driver, 4)
+        # Key_code_touch.KeyCode.touch_right(self.driver, 2, 3)
 
         # 专题
         Key_code_touch.KeyCode.touch_down(self.driver, 2)
@@ -244,8 +252,9 @@ class case_01(unittest.TestCase):
         Launcher:电视剧 模块测试
     """
     def _f_launcher_tv_series(self):
-        Key_code_touch.KeyCode.touch_back(self.driver, 4)
-        Key_code_touch.KeyCode.touch_right(self.driver, 2, 4)
+        HomeTabUtils.TabUtils.click_tab_seven(self.driver, before_wait_time=2)
+        # Key_code_touch.KeyCode.touch_back(self.driver, 4)
+        # Key_code_touch.KeyCode.touch_right(self.driver, 2, 4)
 
         # 专题
         Key_code_touch.KeyCode.touch_down(self.driver, 2, 4)
@@ -255,8 +264,9 @@ class case_01(unittest.TestCase):
          Launcher:综艺 模块测试
     """
     def _g_launcher_variety(self):
-        Key_code_touch.KeyCode.touch_back(self.driver, 4)
-        Key_code_touch.KeyCode.touch_right(self.driver, 2, 5)
+        HomeTabUtils.TabUtils.click_tab_eight(self.driver, before_wait_time=2)
+        # Key_code_touch.KeyCode.touch_back(self.driver, 4)
+        # Key_code_touch.KeyCode.touch_right(self.driver, 2, 5)
 
         # 专题-2
         Key_code_touch.KeyCode.touch_down(self.driver, 2, 2)
@@ -270,8 +280,9 @@ class case_01(unittest.TestCase):
         Launcher:体育 模块测试
     """
     def _h_launcher_sport(self):
-        Key_code_touch.KeyCode.touch_back(self.driver, 4)
-        Key_code_touch.KeyCode.touch_right(self.driver, 2, 6)
+        HomeTabUtils.TabUtils.click_tab_nine(self.driver, before_wait_time=2)
+        # Key_code_touch.KeyCode.touch_back(self.driver, 4)
+        # Key_code_touch.KeyCode.touch_right(self.driver, 2, 6)
 
         # 专题-2
         Key_code_touch.KeyCode.touch_down(self.driver, 2)
@@ -294,10 +305,10 @@ class case_01(unittest.TestCase):
     """
          Launcher:4K 模块测试
     """
-
     def _i_launcher_4k(self):
-        Key_code_touch.KeyCode.touch_back(self.driver, 4)
-        Key_code_touch.KeyCode.touch_right(self.driver, 2, 7)
+        HomeTabUtils.TabUtils.click_tab_ten(self.driver, before_wait_time=2)
+        # Key_code_touch.KeyCode.touch_back(self.driver, 4)
+        # Key_code_touch.KeyCode.touch_right(self.driver, 2, 7)
 
         # 专题
         Key_code_touch.KeyCode.touch_down(self.driver, 2)
@@ -313,8 +324,9 @@ class case_01(unittest.TestCase):
         Launcher:应用 模块测试
     """
     def _j_launcher_app(self):
-        Key_code_touch.KeyCode.touch_back(self.driver, 4)
-        Key_code_touch.KeyCode.touch_right(self.driver, 2, 8)
+        HomeTabUtils.TabUtils.click_tab_eleven(self.driver, before_wait_time=2)
+        # Key_code_touch.KeyCode.touch_back(self.driver, 4)
+        # Key_code_touch.KeyCode.touch_right(self.driver, 2, 8)
 
         # 顶部
         Key_code_touch.KeyCode.touch_down(self.driver, 2)
@@ -335,18 +347,18 @@ class case_01(unittest.TestCase):
          Launcher:搜索 模块测试
     """
     def _k_launcher_search(self):
-
-        # Key_code_touch.KeyCode.touch_back(self.driver, 4)
-        # Key_code_touch.KeyCode.touch_left(self.driver, 2, 2)
-        # InputManagerUtils.InputManager.input_x(self.driver)
-        # InputManagerUtils.InputManager.input_i(self.driver)
-        # InputManagerUtils.InputManager.input_a(self.driver)
-        # InputManagerUtils.InputManager.input_o(self.driver)
-        # InputManagerUtils.InputManager.input_m(self.driver)
-        # InputManagerUtils.InputManager.input_i(self.driver)
-        # InputManagerUtils.InputManager.input_nine(self.driver)
-        # InputManagerUtils.InputManager.input_delete(self.driver, after_wait_time=3)
-        # InputManagerUtils.InputManager.input_clear(self.driver)
+        HomeTabUtils.TabUtils.click_tab_one(self.driver, before_wait_time=2)
+        Key_code_touch.KeyCode.touch_back(self.driver, 4)
+        Key_code_touch.KeyCode.touch_left(self.driver, 2, 2)
+        InputManagerUtils.InputManager.input_x(self.driver)
+        InputManagerUtils.InputManager.input_i(self.driver)
+        InputManagerUtils.InputManager.input_a(self.driver)
+        InputManagerUtils.InputManager.input_o(self.driver)
+        InputManagerUtils.InputManager.input_m(self.driver)
+        InputManagerUtils.InputManager.input_i(self.driver)
+        InputManagerUtils.InputManager.input_nine(self.driver)
+        InputManagerUtils.InputManager.input_delete(self.driver, after_wait_time=3)
+        InputManagerUtils.InputManager.input_clear(self.driver)
         time.sleep(3)
         time.sleep(9)
 
@@ -354,7 +366,7 @@ class case_01(unittest.TestCase):
             Launcher:tab测试
     """
     def test_j_launcher_search(self):
-
+        # log()
         HomeTabUtils.TabUtils.click_tab_one(self.driver, before_wait_time=2)
         HomeTabUtils.TabUtils.click_tab_two(self.driver, before_wait_time=2)
         HomeTabUtils.TabUtils.click_tab_three(self.driver, before_wait_time=2)
@@ -483,8 +495,9 @@ if __name__ == "__main__":
 
 
     testdir = r'D:\Android_AutoTest\TestCode\Module\LaucherTest\report'
-    now = time.strftime('%Y-%m-%d-%H_%M_%S', time.localtime(time.time()))
-    logcatname = testdir + "\\" + now + r"报告.html"
+    # now = time.strftime('%Y-%m-%d-%H_%M_%S', time.localtime(time.time()))
+    # logcatname = testdir + "\\" + now + "报告.html"
+    logcatname = testdir + "\\" + gl.report_name
 
 
     suiteAll = unittest.TestSuite()
@@ -495,6 +508,10 @@ if __name__ == "__main__":
     now = time.strftime("%Y-%m-%M-%H_%M_%S", time.localtime(time.time()))
     runer = HTMLTestRunner(title="带截图的测试报告", description="测试描述", stream=open(logcatname, "wb"), verbosity=2, retry=0, save_last_try=True)
     runer.run(suiteAll)
+
+    # 发送邮件
+    time.sleep(5)  # 设置睡眠时间，等待测试报告生成完毕（这里被坑了＝＝）
+    start_send_email()
 
 
 

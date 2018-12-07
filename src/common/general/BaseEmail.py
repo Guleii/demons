@@ -6,12 +6,29 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.application import MIMEApplication
 import smtplib
 import os
+from config import globalparameter as gl
 PATH = lambda p: os.path.abspath(
     os.path.join(os.path.dirname(__file__), p)
 )
+
+to_addr = gl.email_To
+mail_host = gl.smtp_sever
+mail_user = gl.email_from
+mail_pass = gl.email_password
+port = gl.email_port
+header_msg = gl.email_title
+attach = gl.email_content
+report = gl.report_path+"report.html"
+log = gl.report_path+"Launcher.log"
+log_name = gl.log_name
+report_name = gl.report_name
+
+
 def _format_addr(s):
     name, addr = parseaddr(s)
     return formataddr((Header(name, 'utf-8').encode(), addr))
+
+
 def send_mail(**kwargs):
     '''
     :param f: 附件路径
@@ -31,23 +48,33 @@ def send_mail(**kwargs):
     msg['Subject'] = Header(kwargs["header_msg"], 'utf-8').encode()
     msg.attach(MIMEText(kwargs["attach"], 'plain', 'utf-8'))
 
+    # html报告
     if kwargs.get("report", "0") != "0":
         part = MIMEApplication(open(kwargs["report"], 'rb').read())
         part.add_header('Content-Disposition', 'attachment', filename=('gb2312', '', kwargs["report_name"]))
         msg.attach(part)
 
-    server = smtplib.SMTP_SSL(smtp_server, kwargs["port"])
+    # logcat日志
+    if kwargs.get("log", "0") != "0":
+        part = MIMEApplication(open(kwargs["log"], 'rb').read())
+        part.add_header('Content-Disposition', 'attachment', filename=('gb2312', '', kwargs["log_name"]))
+        msg.attach(part)
+
+    server = smtplib.SMTP(smtp_server, 25)
     server.set_debuglevel(1)
     server.login(from_addr, password)
     server.sendmail(from_addr, kwargs["to_addr"], msg.as_string())
     server.quit()
-if __name__ == '__main__':
-    to_addr = ["284772894@qq.com"]
-    mail_host = "smtp.qq.com"
-    mail_user = "284772894@qq.com"
-    mail_pass = "oftllbhnknegbjhb"
-    port = "465"
-    header_msg = "接口测试"
-    attach = "接口测试"
-    report = PATH("../Runner/report.xlsx")
-    send_mail(to_addr = to_addr, mail_host = mail_host, mail_user=mail_user, port=port, mail_pass=mail_pass, header_msg=header_msg, report=report, attach=attach, report_name="接口测试报告")
+
+
+def start_send_email():
+    # report_list = os.listdir(gl.report_path)
+    # report_list.sort(
+    #     key=lambda fn: os.path.getmtime(gl.report_path + fn) if not os.path.isdir(gl.report_path + fn) else 0)
+    # new_report = os.path.join(gl.report_path, report_list[-1])
+    send_mail(to_addr=to_addr, mail_host=mail_host, mail_user=mail_user, port=port, mail_pass=mail_pass,
+              header_msg=header_msg, report=report, attach=attach, report_name=report_name, log=log, log_name=log_name)
+
+
+if __name__ == "__main__":
+    start_send_email()
