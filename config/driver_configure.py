@@ -12,8 +12,8 @@ class driver_configure():
         try:
             self.desired_caps = {}
             self.desired_caps['platformName'] = 'Android'  # 平台
-            self.desired_caps['platformVersion'] = '8.0.0'  # 系统版本
-            # self.desired_caps['platformVersion'] = '6.0'  # 系统版本
+            # self.desired_caps['platformVersion'] = '8.0.0'  # 系统版本
+            self.desired_caps['platformVersion'] = '6.0'  # 系统版本
             # self.desired_caps['app'] = 'E:/autotestingPro/app/UCliulanqi_701.apk'   # 指向.apk文件，如果设置appPackage和appActivity，那么这项会被忽略
             self.desired_caps['appPackage'] = 'com.xgimi.home'     # APK包名
             self.desired_caps['appActivity'] = 'com.xgimi.home.ui.MainActivity'     # 被测程序启动时的Activity

@@ -1,4 +1,8 @@
-# -*- coding: utf-8 -*-
+# coding:utf-8
+__author__ = 'Alan'
+'''
+description:发送邮箱的工具类
+'''
 from email.header import Header
 from email.mime.text import MIMEText
 from email.utils import parseaddr, formataddr
@@ -6,11 +10,14 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.application import MIMEApplication
 import smtplib
 import os
+import time
 from config import globalparameter as gl
 PATH = lambda p: os.path.abspath(
     os.path.join(os.path.dirname(__file__), p)
 )
 
+
+# 读取邮箱配置信心
 to_addr = gl.email_To
 mail_host = gl.smtp_sever
 mail_user = gl.email_from
@@ -18,8 +25,8 @@ mail_pass = gl.email_password
 port = gl.email_port
 header_msg = gl.email_title
 attach = gl.email_content
-report = gl.report_path+"report.html"
-log = gl.report_path+"Launcher.log"
+report = gl.report_path+gl.report_name
+log = gl.report_path+gl.log_name
 log_name = gl.log_name
 report_name = gl.report_name
 
@@ -67,11 +74,17 @@ def send_mail(**kwargs):
     server.quit()
 
 
+"""
+    调用此函数发送邮箱
+"""
+
+
 def start_send_email():
     # report_list = os.listdir(gl.report_path)
     # report_list.sort(
     #     key=lambda fn: os.path.getmtime(gl.report_path + fn) if not os.path.isdir(gl.report_path + fn) else 0)
     # new_report = os.path.join(gl.report_path, report_list[-1])
+    time.sleep(5)  # 设置睡眠时间，等待测试报告生成完毕（不然邮件会因为报告为空而无法发送）
     send_mail(to_addr=to_addr, mail_host=mail_host, mail_user=mail_user, port=port, mail_pass=mail_pass,
               header_msg=header_msg, report=report, attach=attach, report_name=report_name, log=log, log_name=log_name)
 

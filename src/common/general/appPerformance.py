@@ -56,10 +56,10 @@ def get_fps(devices, pkg_name):
 #     flow[0].append(ceil(int(t[6][1])/1024)) # 下载
 #     flow[1].append(ceil(int(t[6][9])/1024)) # 发送
 #     return flow
-def read_report(f=""):
-    from common.operateFile import OperateFile
-    op = OperateFile(f, "r")
-    return op.read_txt_row()
-if __name__ == '__main__':
-    print(top_cpu(devices="DU2TAN15AJ049163",pkg_name="cn.ibona.t1_beta"))
-    pass
+# def read_report(f=""):
+#     from common.operateFile import OperateFile
+#     op = OperateFile(f, "r")
+#     return op.read_txt_row()
+# if __name__ == '__main__':
+#     print(top_cpu(devices="DU2TAN15AJ049163",pkg_name="cn.ibona.t1_beta"))
+#     pass

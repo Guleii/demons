@@ -57,13 +57,15 @@ class case_01(BaseUnittest.BaseTestCase):
     """
         Launcher:更多模块测试
     """
-    def a_launcher_more(self):
+    def test_a_launcher_more(self):
         Utils.Logging.error("当前界面：test_case1:  " + self.driver.current_activity)
         self.currentActivity = self.driver.current_activity
 
-        HomeTabUtils.TabUtils.click_tab_two(self.driver, before_wait_time=2)
 
-        # Key_code_touch.KeyCode.touch_left(self.driver, 4)
+        # HomeTabUtils.TabUtils.click_tab_five(self.driver, before_wait_time=5)
+        # HomeTabUtils.TabUtils.click_tab_two(self.driver, before_wait_time=5)
+
+        Key_code_touch.KeyCode.touch_left(self.driver, 4)
         Key_code_touch.KeyCode.touch_down(self.driver, 2)
 
         # 首页专题
@@ -72,7 +74,7 @@ class case_01(BaseUnittest.BaseTestCase):
         Key_code_touch.KeyCode.touch_down(self.driver, 1, 6)
 
         # 视频应用
-        self.enterDetail()
+        # self.enterDetail()
 
         Key_code_touch.KeyCode.touch_down(self.driver, 1)
 
@@ -92,18 +94,19 @@ class case_01(BaseUnittest.BaseTestCase):
         Key_code_touch.KeyCode.touch_down(self.driver, 1, 2)
 
         # 少儿天地
-        self.enterDetail()
-        Key_code_touch.KeyCode.touch_back(self.driver, 2)
-
-        Key_code_touch.KeyCode.touch_down(self.driver, 2, 2)
+        # self.enterDetail()
+        # Key_code_touch.KeyCode.touch_back(self.driver, 2)
+        #
+        # Key_code_touch.KeyCode.touch_down(self.driver, 2, 2)
 
         # 电影票房榜
-        self.enterDetail()
+        # self.enterDetail()
+        Key_code_touch.KeyCode.touch_back(self.driver, 4)
 
     """
          Launcher:我的模块测试
      """
-    def _b_launcher_user(self):
+    def test_b_launcher_user(self):
         log(filename="TV22", logtag="com.xgimi.instruction30")
 
         HomeTabUtils.TabUtils.click_tab_three(self.driver, before_wait_time=2)
@@ -194,7 +197,8 @@ class case_01(BaseUnittest.BaseTestCase):
         """
             Launcher:VIP模块测试
         """
-    def _c_launcher_vip(self):
+    def test_c_launcher_vip(self):
+        Key_code_touch.KeyCode.touch_back(self.driver, 4)
         HomeTabUtils.TabUtils.click_tab_four(self.driver, before_wait_time=2)
         # Key_code_touch.KeyCode.touch_back(self.driver, 4)
         # Key_code_touch.KeyCode.touch_right(self.driver, 2)
@@ -206,7 +210,8 @@ class case_01(BaseUnittest.BaseTestCase):
     """
         Launcher:电影模块测试
      """
-    def _d_launcher_movie(self):
+    def test_d_launcher_movie(self):
+        Key_code_touch.KeyCode.touch_back(self.driver, 4)
         HomeTabUtils.TabUtils.click_tab_five(self.driver, before_wait_time=2)
         # Key_code_touch.KeyCode.touch_back(self.driver, 4)
         # Key_code_touch.KeyCode.touch_right(self.driver, 2, 2)
@@ -230,7 +235,8 @@ class case_01(BaseUnittest.BaseTestCase):
     """
          Launcher:少儿 模块测试
      """
-    def _e_launcher_children(self):
+    def test_e_launcher_children(self):
+        Key_code_touch.KeyCode.touch_back(self.driver, 4)
         HomeTabUtils.TabUtils.click_tab_six(self.driver, before_wait_time=2)
         # Key_code_touch.KeyCode.touch_back(self.driver, 4)
         # Key_code_touch.KeyCode.touch_right(self.driver, 2, 3)
@@ -243,17 +249,18 @@ class case_01(BaseUnittest.BaseTestCase):
         self.enterDetail()
 
         # 长图标
-        Key_code_touch.KeyCode.touch_down(self.driver, 2, 6)
-        self.enterDetail()
+        # Key_code_touch.KeyCode.touch_down(self.driver, 2, 6)
+        # self.enterDetail()
 
         # 中间的
-        Key_code_touch.KeyCode.touch_down(self.driver, 2, 31)
-        self.enterDetail()
+        # Key_code_touch.KeyCode.touch_down(self.driver, 2, 31)
+        # self.enterDetail()
 
     """
         Launcher:电视剧 模块测试
     """
-    def _f_launcher_tv_series(self):
+    def test_f_launcher_tv_series(self):
+        Key_code_touch.KeyCode.touch_back(self.driver, 4)
         HomeTabUtils.TabUtils.click_tab_seven(self.driver, before_wait_time=2)
         # Key_code_touch.KeyCode.touch_back(self.driver, 4)
         # Key_code_touch.KeyCode.touch_right(self.driver, 2, 4)
@@ -265,7 +272,8 @@ class case_01(BaseUnittest.BaseTestCase):
     """
          Launcher:综艺 模块测试
     """
-    def _g_launcher_variety(self):
+    def test_g_launcher_variety(self):
+        Key_code_touch.KeyCode.touch_back(self.driver, 4)
         HomeTabUtils.TabUtils.click_tab_eight(self.driver, before_wait_time=2)
         # Key_code_touch.KeyCode.touch_back(self.driver, 4)
         # Key_code_touch.KeyCode.touch_right(self.driver, 2, 5)
@@ -281,7 +289,8 @@ class case_01(BaseUnittest.BaseTestCase):
     """
         Launcher:体育 模块测试
     """
-    def _h_launcher_sport(self):
+    def test_h_launcher_sport(self):
+        Key_code_touch.KeyCode.touch_back(self.driver, 4)
         HomeTabUtils.TabUtils.click_tab_nine(self.driver, before_wait_time=2)
         # Key_code_touch.KeyCode.touch_back(self.driver, 4)
         # Key_code_touch.KeyCode.touch_right(self.driver, 2, 6)
@@ -307,7 +316,8 @@ class case_01(BaseUnittest.BaseTestCase):
     """
          Launcher:4K 模块测试
     """
-    def _i_launcher_4k(self):
+    def test_i_launcher_4k(self):
+        Key_code_touch.KeyCode.touch_back(self.driver, 4)
         HomeTabUtils.TabUtils.click_tab_ten(self.driver, before_wait_time=2)
         # Key_code_touch.KeyCode.touch_back(self.driver, 4)
         # Key_code_touch.KeyCode.touch_right(self.driver, 2, 7)
@@ -325,7 +335,8 @@ class case_01(BaseUnittest.BaseTestCase):
     """
         Launcher:应用 模块测试
     """
-    def _j_launcher_app(self):
+    def test_j_launcher_app(self):
+        Key_code_touch.KeyCode.touch_back(self.driver, 4)
         HomeTabUtils.TabUtils.click_tab_eleven(self.driver, before_wait_time=2)
         # Key_code_touch.KeyCode.touch_back(self.driver, 4)
         # Key_code_touch.KeyCode.touch_right(self.driver, 2, 8)
@@ -342,13 +353,14 @@ class case_01(BaseUnittest.BaseTestCase):
         Key_code_touch.KeyCode.touch_back(self.driver, 0)
         Key_code_touch.KeyCode.touch_left(self.driver, 2)
         self.enterDetail()
-        Key_code_touch.KeyCode.touch_right(self.driver, 3)
-        self.enterDetail()
+        # Key_code_touch.KeyCode.touch_right(self.driver, 3)
+        # self.enterDetail()
 
     """
          Launcher:搜索 模块测试
     """
-    def _k_launcher_search(self):
+    def test_k_launcher_search(self):
+        Key_code_touch.KeyCode.touch_back(self.driver, 4)
         HomeTabUtils.TabUtils.click_tab_one(self.driver, before_wait_time=2)
         Key_code_touch.KeyCode.touch_back(self.driver, 4)
         Key_code_touch.KeyCode.touch_left(self.driver, 2, 2)
@@ -356,8 +368,8 @@ class case_01(BaseUnittest.BaseTestCase):
         InputManagerUtils.InputManager.input_i(self.driver)
         InputManagerUtils.InputManager.input_a(self.driver)
         InputManagerUtils.InputManager.input_o(self.driver)
-        InputManagerUtils.InputManager.input_m(self.driver)
-        InputManagerUtils.InputManager.input_i(self.driver)
+        # InputManagerUtils.InputManager.input_m(self.driver)
+        # InputManagerUtils.InputManager.input_i(self.driver)
         InputManagerUtils.InputManager.input_nine(self.driver)
         InputManagerUtils.InputManager.input_delete(self.driver, after_wait_time=3)
         InputManagerUtils.InputManager.input_clear(self.driver)
@@ -367,7 +379,8 @@ class case_01(BaseUnittest.BaseTestCase):
     """
             Launcher:tab测试
     """
-    def test_j_launcher_search(self):
+    def test_l_launcher_search(self):
+        Key_code_touch.KeyCode.touch_back(self.driver, 4)
         # log()
         HomeTabUtils.TabUtils.click_tab_one(self.driver, before_wait_time=2)
         HomeTabUtils.TabUtils.click_tab_two(self.driver, before_wait_time=2)
