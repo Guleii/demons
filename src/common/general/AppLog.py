@@ -21,13 +21,22 @@ def log(filename='..\\testFFS.log',logtag='',loglevel='E'):
     # testdir = r"D:\other\jenkins\workspace\AppiumTest"
     now = time.strftime('%Y-%m-%d-%H_%M_%S', time.localtime(time.time()))
     # logcatname = testdir + "\\" +filename+ "_"+now + r"_logcat.log"
-    cmd = "adb logcat *:"+loglevel+" -s "+logtag+" -f >%s" % (logcatname)
+    cmd = "adb logcat *:"+loglevel+" -s "+logtag+" -f >%s" % (logcatname) # 真正可以过滤的条件
     # cmd = "adb  logcat -v time >%s" % (logcatname)+"  *:W | grep "+logtag+""
     # cmd = "adb logcat  >%s" % (logcatname)
     os.popen(cmd)
 
 
 
+def log_get_now(filename='..\\testFFS.log',logtag='',loglevel='E'):
+    global file,pi
+    logcat_name = gl.report_path+"Current.log"
+    # cmd = "adb logcat "+" -s "+logtag+":"+loglevel+" -f >%s" % (logcat_name)
+    cmd = "adb logcat -t 10"+" -s "+"*:"+loglevel+" -f >%s" % (logcat_name)
+    os.popen(cmd)
+
+
 def closeLog():
-    os.system('adb kill-server')
+    # os.system('adb kill-server')
+    os.popen('Ctrl c')
 

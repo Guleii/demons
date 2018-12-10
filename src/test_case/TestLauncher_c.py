@@ -15,6 +15,8 @@ from moudle import HomeTabUtils, InputManagerUtils
 
 sys.path.append('D:\machine_Learning\machine_pycharm\Common')
 
+skip_case = True
+skip_reason = "调试"
 
 class case_01(BaseUnittest.BaseTestCase):
     currentActivity = ""
@@ -57,6 +59,7 @@ class case_01(BaseUnittest.BaseTestCase):
     """
         Launcher:更多模块测试
     """
+    @unittest.skipIf(skip_case, skip_reason)
     def test_a_launcher_more(self):
         Utils.Logging.error("当前界面：test_case1:  " + self.driver.current_activity)
         self.currentActivity = self.driver.current_activity
@@ -106,6 +109,8 @@ class case_01(BaseUnittest.BaseTestCase):
     """
          Launcher:我的模块测试
      """
+
+    @unittest.skipIf(2 > 31, skip_reason)
     def test_b_launcher_user(self):
         log(filename="TV22", logtag="com.xgimi.instruction30")
 
@@ -118,7 +123,12 @@ class case_01(BaseUnittest.BaseTestCase):
         Key_code_touch.KeyCode.touch_down(self.driver, 2)
 
         # 我的顶部专题
-        # self.enterDetail()
+        self.enterDetail()
+        log_get_now(logtag="ItemBean")
+        time.sleep(3)
+        # closeLog()
+        time.sleep(30)
+        return
 
         Key_code_touch.KeyCode.touch_down(self.driver, 2, 2)
 
@@ -194,9 +204,10 @@ class case_01(BaseUnittest.BaseTestCase):
         # 爱情喜剧电影
         # self.enterDetail()
 
-        """
-            Launcher:VIP模块测试
-        """
+    """
+         Launcher:VIP模块测试
+    """
+    @unittest.skipIf(skip_case, skip_reason)
     def test_c_launcher_vip(self):
         Key_code_touch.KeyCode.touch_back(self.driver, 4)
         HomeTabUtils.TabUtils.click_tab_four(self.driver, before_wait_time=2)
@@ -210,6 +221,7 @@ class case_01(BaseUnittest.BaseTestCase):
     """
         Launcher:电影模块测试
      """
+    @unittest.skipIf(skip_case, skip_reason)
     def test_d_launcher_movie(self):
         Key_code_touch.KeyCode.touch_back(self.driver, 4)
         HomeTabUtils.TabUtils.click_tab_five(self.driver, before_wait_time=2)
@@ -235,6 +247,8 @@ class case_01(BaseUnittest.BaseTestCase):
     """
          Launcher:少儿 模块测试
      """
+
+    @unittest.skipIf(skip_case, skip_reason)
     def test_e_launcher_children(self):
         Key_code_touch.KeyCode.touch_back(self.driver, 4)
         HomeTabUtils.TabUtils.click_tab_six(self.driver, before_wait_time=2)
@@ -259,6 +273,8 @@ class case_01(BaseUnittest.BaseTestCase):
     """
         Launcher:电视剧 模块测试
     """
+
+    @unittest.skipIf(skip_case, skip_reason)
     def test_f_launcher_tv_series(self):
         Key_code_touch.KeyCode.touch_back(self.driver, 4)
         HomeTabUtils.TabUtils.click_tab_seven(self.driver, before_wait_time=2)
@@ -272,6 +288,8 @@ class case_01(BaseUnittest.BaseTestCase):
     """
          Launcher:综艺 模块测试
     """
+
+    @unittest.skipIf(skip_case, skip_reason)
     def test_g_launcher_variety(self):
         Key_code_touch.KeyCode.touch_back(self.driver, 4)
         HomeTabUtils.TabUtils.click_tab_eight(self.driver, before_wait_time=2)
@@ -289,6 +307,8 @@ class case_01(BaseUnittest.BaseTestCase):
     """
         Launcher:体育 模块测试
     """
+
+    @unittest.skipIf(skip_case, skip_reason)
     def test_h_launcher_sport(self):
         Key_code_touch.KeyCode.touch_back(self.driver, 4)
         HomeTabUtils.TabUtils.click_tab_nine(self.driver, before_wait_time=2)
@@ -316,6 +336,8 @@ class case_01(BaseUnittest.BaseTestCase):
     """
          Launcher:4K 模块测试
     """
+
+    @unittest.skipIf(skip_case, skip_reason)
     def test_i_launcher_4k(self):
         Key_code_touch.KeyCode.touch_back(self.driver, 4)
         HomeTabUtils.TabUtils.click_tab_ten(self.driver, before_wait_time=2)
@@ -335,6 +357,8 @@ class case_01(BaseUnittest.BaseTestCase):
     """
         Launcher:应用 模块测试
     """
+
+    @unittest.skipIf(skip_case, skip_reason)
     def test_j_launcher_app(self):
         Key_code_touch.KeyCode.touch_back(self.driver, 4)
         HomeTabUtils.TabUtils.click_tab_eleven(self.driver, before_wait_time=2)
@@ -359,6 +383,8 @@ class case_01(BaseUnittest.BaseTestCase):
     """
          Launcher:搜索 模块测试
     """
+
+    @unittest.skipIf(skip_case, skip_reason)
     def test_k_launcher_search(self):
         Key_code_touch.KeyCode.touch_back(self.driver, 4)
         HomeTabUtils.TabUtils.click_tab_one(self.driver, before_wait_time=2)
@@ -379,6 +405,8 @@ class case_01(BaseUnittest.BaseTestCase):
     """
             Launcher:tab测试
     """
+
+    @unittest.skipIf(skip_case, skip_reason)
     def test_l_launcher_search(self):
         Key_code_touch.KeyCode.touch_back(self.driver, 4)
         # log()
@@ -525,7 +553,7 @@ if __name__ == "__main__":
     runner.run(suiteAll)
 
     # 发送邮件
-    start_send_email()
+    # start_send_email()
 
 
 
