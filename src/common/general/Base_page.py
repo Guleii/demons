@@ -6,6 +6,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from general import Utils as U
 import time
 
+
 class Base:
     driver = None
 

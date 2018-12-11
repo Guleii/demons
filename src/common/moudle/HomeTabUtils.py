@@ -4,7 +4,7 @@ __author__ = 'Alan'
 description: Launcher主界面点击Tab栏法的工具类
 '''
 
-
+from general.KeyCodeSentUtils import *
 import time
 
 oneLocation = [(102, 123), (223, 165)]
@@ -21,12 +21,57 @@ elevenLocation = [(1557, 123), (1707, 165)]
 
 
 # 点击某一个点击Tab栏前默认的等待的时间
-defaultWaitTime = 3
+defaultWaitTime = 2
 # 点击某一个点击Tab栏后默认的等待的时间
 defaultAfterWaitTime = 0
 
+default_index = 0
+
+tab_one = 1
+tab_two = 2
+tab_three = 3
+tab_four = 4
+tab_five = 5
+tab_six = 6
+tab_seven = 7
+tab_eight = 8
+tab_nine = 9
+tab_ten = 10
+tab_eleven = 11
+
 
 class TabUtils:
+    """
+       点击Tab栏根据输入的下标，
+       duration :点击时长
+       before_wait_time: 点击Tab栏前等待的时长 （默认是2s）
+       after_wait_time：点击Tab栏后等待的时间 （默认是0s）
+    """
+    @staticmethod
+    def click_tab_by_input_index(driver, index=default_index, before_wait_time=defaultWaitTime, after_wait_time=defaultAfterWaitTime):
+        if tab_one == index:
+            TabUtils.click_tab_one(driver, before_wait_time=before_wait_time, after_wait_time=after_wait_time)
+        elif tab_two == index:
+            TabUtils.click_tab_one(driver, before_wait_time=before_wait_time, after_wait_time=after_wait_time)
+            TabUtils.click_tab_two(driver, before_wait_time=1, after_wait_time=0)
+        elif tab_three == index:
+            TabUtils.click_tab_three(driver, before_wait_time=before_wait_time, after_wait_time=after_wait_time)
+        elif tab_four == index:
+            TabUtils.click_tab_four(driver, before_wait_time=before_wait_time, after_wait_time=after_wait_time)
+        elif tab_five == index:
+            TabUtils.click_tab_five(driver, before_wait_time=before_wait_time, after_wait_time=after_wait_time)
+        elif tab_six == index:
+            TabUtils.click_tab_six(driver, before_wait_time=before_wait_time, after_wait_time=after_wait_time)
+        elif tab_seven == index:
+            TabUtils.click_tab_seven(driver, before_wait_time=before_wait_time, after_wait_time=after_wait_time)
+        elif tab_eight == index:
+            TabUtils.click_tab_eight(driver, before_wait_time=before_wait_time, after_wait_time=after_wait_time)
+        elif tab_nine == index:
+            TabUtils.click_tab_nine(driver, before_wait_time=before_wait_time, after_wait_time=after_wait_time)
+        elif tab_ten == index:
+            TabUtils.click_tab_ten(driver, before_wait_time=before_wait_time, after_wait_time=after_wait_time)
+        elif tab_eleven == index:
+            TabUtils.click_tab_eleven(driver, before_wait_time=before_wait_time, after_wait_time=after_wait_time)
 
     """
     点击Tab栏“1”，
