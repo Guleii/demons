@@ -16,7 +16,7 @@ class BaseTestCase(unittest.TestCase):
     def setUpClass(cls):
         driver_config = driver_configure.driver_configure()
         cls.driver = driver_config.get_driver()
-        # log(filename="Launcher", logtag="com.xgimi.home")
+        log()
 
     @classmethod
     def tearDownClass(cls):

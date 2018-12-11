@@ -8,12 +8,12 @@ import unittest
 # from HTMLTestRunner_cn import HTMLTestRunner
 from general.HTMLTestRunner_cn import HTMLTestRunner
 from general.AppLog import *
-from general import Key_code_touch, Utils, BaseUnittest
+from general import KeyCodeSentUtils, Utils, BaseUnittest
 from general.BaseEmail import start_send_email
 from general.HtmlReportUtils import HtmlReport
 from moudle import HomeTabUtils, InputManagerUtils
-
-sys.path.append('D:\machine_Learning\machine_pycharm\Common')
+import time
+# sys.path.append('D:\machine_Learning\machine_pycharm\Common')
 
 skip_case = True
 skip_reason = "调试"
@@ -68,33 +68,33 @@ class case_01(BaseUnittest.BaseTestCase):
         # HomeTabUtils.TabUtils.click_tab_five(self.driver, before_wait_time=5)
         # HomeTabUtils.TabUtils.click_tab_two(self.driver, before_wait_time=5)
 
-        Key_code_touch.KeyCode.touch_left(self.driver, 4)
-        Key_code_touch.KeyCode.touch_down(self.driver, 2)
+        KeyCodeSentUtils.KeyCode.touch_left(self.driver, 4)
+        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2)
 
         # 首页专题
         self.enterDetail()
 
-        Key_code_touch.KeyCode.touch_down(self.driver, 1, 6)
+        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 1, 6)
 
         # 视频应用
         # self.enterDetail()
 
-        Key_code_touch.KeyCode.touch_down(self.driver, 1)
+        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 1)
 
         # 主题影院
         self.enterDetail()
 
-        Key_code_touch.KeyCode.touch_down(self.driver, 1, 2)
+        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 1, 2)
 
         # 剧集分类
         self.enterDetail()
 
-        Key_code_touch.KeyCode.touch_down(self.driver, 1, 2)
+        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 1, 2)
 
         # 综艺show
         self.enterDetail()
 
-        Key_code_touch.KeyCode.touch_down(self.driver, 1, 2)
+        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 1, 2)
 
         # 少儿天地
         # self.enterDetail()
@@ -104,15 +104,14 @@ class case_01(BaseUnittest.BaseTestCase):
 
         # 电影票房榜
         # self.enterDetail()
-        Key_code_touch.KeyCode.touch_back(self.driver, 4)
+        KeyCodeSentUtils.KeyCode.touch_back(self.driver, 4)
 
     """
          Launcher:我的模块测试
      """
 
-    @unittest.skipIf(2 > 31, skip_reason)
+    @unittest.skipIf(skip_case, skip_reason)
     def test_b_launcher_user(self):
-        log(filename="TV22", logtag="com.xgimi.instruction30")
 
         HomeTabUtils.TabUtils.click_tab_three(self.driver, before_wait_time=2)
 
@@ -120,79 +119,78 @@ class case_01(BaseUnittest.BaseTestCase):
         # Key_code_touch.KeyCode.touch_back(self.driver, 4)
         # Key_code_touch.KeyCode.touch_right(self.driver, 2)
 
-        Key_code_touch.KeyCode.touch_down(self.driver, 2)
-
+        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2)
         # 我的顶部专题
         self.enterDetail()
-        log_get_now(logtag="ItemBean")
+
         time.sleep(3)
         # closeLog()
         time.sleep(30)
         return
 
-        Key_code_touch.KeyCode.touch_down(self.driver, 2, 2)
+        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2, 2)
 
         # 我的精选，第一次如果未安装，则点击安装，然后等待6秒后重试
         # self.enter_load_retry()
 
-        Key_code_touch.KeyCode.touch_down(self.driver, 2)
+        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2)
 
         # 观影历史
         # self.enterDetail()
 
-        Key_code_touch.KeyCode.touch_down(self.driver, 2)
+        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2)
 
         # 今天值得观看，第一次如果未安装，则点击安装，然后等待6秒后重试
         # self.enter_load_retry()
 
-        Key_code_touch.KeyCode.touch_down(self.driver, 2)
+        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2)
 
         # 为你推荐
         # self.enterDetail()
 
-        Key_code_touch.KeyCode.touch_down(self.driver, 2)
+        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2)
 
         # 系统设置
         # self.enterDetail()
 
-        Key_code_touch.KeyCode.touch_down(self.driver, 2)
+        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2)
 
         # 豆瓣佳片推荐，欢乐好时光
         # self.enterDetail()
         # Key_code_touch.KeyCode.touch_back(self.driver, 2)
 
-        Key_code_touch.KeyCode.touch_down(self.driver, 2)
+        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2)
 
         # 今日热播，大家都在看
         # self.enterDetail()
 
-        Key_code_touch.KeyCode.touch_down(self.driver, 2, 2)
+        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2, 2)
 
         # 最新上线
         # self.enterDetail()
 
-        Key_code_touch.KeyCode.touch_down(self.driver, 2)
+        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2)
 
         # 精选专区
         # self.enterDetail()
 
-        Key_code_touch.KeyCode.touch_down(self.driver, 2)
+        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2)
 
         # 重磅推荐：精选好句看不停
         # self.enterDetail()
 
-        Key_code_touch.KeyCode.touch_down(self.driver, 2, 2)
+        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2, 2)
 
         # 电影：精选大片看到爽
         # self.enterDetail()
 
-        Key_code_touch.KeyCode.touch_down(self.driver, 2, 2)
+        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2, 2)
 
         # 精彩不容错过
         self.enterDetail()
-        Key_code_touch.KeyCode.touch_back(self.driver, 2, 1)
+        KeyCodeSentUtils.KeyCode.touch_back(self.driver, 2, 1)
         # Key_code_touch.KeyCode.touch_down(self.driver, 2, 2)
-        Key_code_touch.KeyCode.touch_center(self.driver, wait_time=2)
+        KeyCodeSentUtils.KeyCode.touch_center(self.driver, wait_time=2)
 
         # Key_code_touch.KeyCode.touch_down(self.driver, 2)
 
@@ -209,13 +207,13 @@ class case_01(BaseUnittest.BaseTestCase):
     """
     @unittest.skipIf(skip_case, skip_reason)
     def test_c_launcher_vip(self):
-        Key_code_touch.KeyCode.touch_back(self.driver, 4)
+        KeyCodeSentUtils.KeyCode.touch_back(self.driver, 4)
         HomeTabUtils.TabUtils.click_tab_four(self.driver, before_wait_time=2)
         # Key_code_touch.KeyCode.touch_back(self.driver, 4)
         # Key_code_touch.KeyCode.touch_right(self.driver, 2)
 
         # 专题-2
-        Key_code_touch.KeyCode.touch_down(self.driver, 2, 3)
+        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2, 3)
         self.enterDetail()
 
     """
@@ -223,25 +221,25 @@ class case_01(BaseUnittest.BaseTestCase):
      """
     @unittest.skipIf(skip_case, skip_reason)
     def test_d_launcher_movie(self):
-        Key_code_touch.KeyCode.touch_back(self.driver, 4)
+        KeyCodeSentUtils.KeyCode.touch_back(self.driver, 4)
         HomeTabUtils.TabUtils.click_tab_five(self.driver, before_wait_time=2)
         # Key_code_touch.KeyCode.touch_back(self.driver, 4)
         # Key_code_touch.KeyCode.touch_right(self.driver, 2, 2)
 
         # 专题 -2
-        Key_code_touch.KeyCode.touch_down(self.driver, 2, 2)
+        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2, 2)
         self.enterDetail()
 
         # 贴心影向标
-        Key_code_touch.KeyCode.touch_down(self.driver, 2, 5)
+        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2, 5)
         self.enterDetail()
 
         # 周末放映室
-        Key_code_touch.KeyCode.touch_down(self.driver, 2, 2)
+        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2, 2)
         self.enterDetail()
 
         # 精选专题底部
-        Key_code_touch.KeyCode.touch_down(self.driver, 2, 7)
+        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2, 7)
         self.enterDetail()
 
     """
@@ -250,16 +248,16 @@ class case_01(BaseUnittest.BaseTestCase):
 
     @unittest.skipIf(skip_case, skip_reason)
     def test_e_launcher_children(self):
-        Key_code_touch.KeyCode.touch_back(self.driver, 4)
+        KeyCodeSentUtils.KeyCode.touch_back(self.driver, 4)
         HomeTabUtils.TabUtils.click_tab_six(self.driver, before_wait_time=2)
         # Key_code_touch.KeyCode.touch_back(self.driver, 4)
         # Key_code_touch.KeyCode.touch_right(self.driver, 2, 3)
 
         # 专题
-        Key_code_touch.KeyCode.touch_down(self.driver, 2)
+        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2)
         self.enterDetail()
-        Key_code_touch.KeyCode.touch_down(self.driver, 2)
-        Key_code_touch.KeyCode.touch_left(self.driver, 2)
+        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2)
+        KeyCodeSentUtils.KeyCode.touch_left(self.driver, 2)
         self.enterDetail()
 
         # 长图标
@@ -276,13 +274,13 @@ class case_01(BaseUnittest.BaseTestCase):
 
     @unittest.skipIf(skip_case, skip_reason)
     def test_f_launcher_tv_series(self):
-        Key_code_touch.KeyCode.touch_back(self.driver, 4)
+        KeyCodeSentUtils.KeyCode.touch_back(self.driver, 4)
         HomeTabUtils.TabUtils.click_tab_seven(self.driver, before_wait_time=2)
         # Key_code_touch.KeyCode.touch_back(self.driver, 4)
         # Key_code_touch.KeyCode.touch_right(self.driver, 2, 4)
 
         # 专题
-        Key_code_touch.KeyCode.touch_down(self.driver, 2, 4)
+        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2, 4)
         self.enterDetail()
 
     """
@@ -291,17 +289,17 @@ class case_01(BaseUnittest.BaseTestCase):
 
     @unittest.skipIf(skip_case, skip_reason)
     def test_g_launcher_variety(self):
-        Key_code_touch.KeyCode.touch_back(self.driver, 4)
+        KeyCodeSentUtils.KeyCode.touch_back(self.driver, 4)
         HomeTabUtils.TabUtils.click_tab_eight(self.driver, before_wait_time=2)
         # Key_code_touch.KeyCode.touch_back(self.driver, 4)
         # Key_code_touch.KeyCode.touch_right(self.driver, 2, 5)
 
         # 专题-2
-        Key_code_touch.KeyCode.touch_down(self.driver, 2, 2)
+        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2, 2)
         self.enterDetail()
 
         # 卫视综艺 -卫视
-        Key_code_touch.KeyCode.touch_down(self.driver, 2, 7)
+        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2, 7)
         self.enterDetail()
 
     """
@@ -310,27 +308,27 @@ class case_01(BaseUnittest.BaseTestCase):
 
     @unittest.skipIf(skip_case, skip_reason)
     def test_h_launcher_sport(self):
-        Key_code_touch.KeyCode.touch_back(self.driver, 4)
+        KeyCodeSentUtils.KeyCode.touch_back(self.driver, 4)
         HomeTabUtils.TabUtils.click_tab_nine(self.driver, before_wait_time=2)
         # Key_code_touch.KeyCode.touch_back(self.driver, 4)
         # Key_code_touch.KeyCode.touch_right(self.driver, 2, 6)
 
         # 专题-2
-        Key_code_touch.KeyCode.touch_down(self.driver, 2)
+        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2)
         self.enterDetail()
-        Key_code_touch.KeyCode.touch_down(self.driver, 2)
+        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2)
         self.enterDetail()
 
         # 最热赛事
-        Key_code_touch.KeyCode.touch_down(self.driver, 2)
+        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2)
         self.enterDetail()
 
         # WWE
-        Key_code_touch.KeyCode.touch_down(self.driver, 2, 8)
+        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2, 8)
         self.enterDetail()
 
         # UFC
-        Key_code_touch.KeyCode.touch_down(self.driver, 2)
+        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2)
         self.enterDetail()
 
     """
@@ -339,19 +337,19 @@ class case_01(BaseUnittest.BaseTestCase):
 
     @unittest.skipIf(skip_case, skip_reason)
     def test_i_launcher_4k(self):
-        Key_code_touch.KeyCode.touch_back(self.driver, 4)
+        KeyCodeSentUtils.KeyCode.touch_back(self.driver, 4)
         HomeTabUtils.TabUtils.click_tab_ten(self.driver, before_wait_time=2)
         # Key_code_touch.KeyCode.touch_back(self.driver, 4)
         # Key_code_touch.KeyCode.touch_right(self.driver, 2, 7)
 
         # 专题
-        Key_code_touch.KeyCode.touch_down(self.driver, 2)
+        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2)
         self.enterDetail()
-        Key_code_touch.KeyCode.touch_down(self.driver, 2)
+        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2)
         self.enterDetail()
 
         # 4K免费试看区
-        Key_code_touch.KeyCode.touch_down(self.driver, 2)
+        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2)
         self.enterDetail()
 
     """
@@ -360,22 +358,22 @@ class case_01(BaseUnittest.BaseTestCase):
 
     @unittest.skipIf(skip_case, skip_reason)
     def test_j_launcher_app(self):
-        Key_code_touch.KeyCode.touch_back(self.driver, 4)
+        KeyCodeSentUtils.KeyCode.touch_back(self.driver, 4)
         HomeTabUtils.TabUtils.click_tab_eleven(self.driver, before_wait_time=2)
         # Key_code_touch.KeyCode.touch_back(self.driver, 4)
         # Key_code_touch.KeyCode.touch_right(self.driver, 2, 8)
 
         # 顶部
-        Key_code_touch.KeyCode.touch_down(self.driver, 2)
+        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2)
         self.enterDetail()
-        Key_code_touch.KeyCode.touch_right(self.driver, 2)
+        KeyCodeSentUtils.KeyCode.touch_right(self.driver, 2)
         self.enterDetail()
 
         # 应用
-        Key_code_touch.KeyCode.touch_down(self.driver, 2)
+        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2)
         self.enterDetail()
-        Key_code_touch.KeyCode.touch_back(self.driver, 0)
-        Key_code_touch.KeyCode.touch_left(self.driver, 2)
+        KeyCodeSentUtils.KeyCode.touch_back(self.driver, 0)
+        KeyCodeSentUtils.KeyCode.touch_left(self.driver, 2)
         self.enterDetail()
         # Key_code_touch.KeyCode.touch_right(self.driver, 3)
         # self.enterDetail()
@@ -386,10 +384,10 @@ class case_01(BaseUnittest.BaseTestCase):
 
     @unittest.skipIf(skip_case, skip_reason)
     def test_k_launcher_search(self):
-        Key_code_touch.KeyCode.touch_back(self.driver, 4)
+        KeyCodeSentUtils.KeyCode.touch_back(self.driver, 4)
         HomeTabUtils.TabUtils.click_tab_one(self.driver, before_wait_time=2)
-        Key_code_touch.KeyCode.touch_back(self.driver, 4)
-        Key_code_touch.KeyCode.touch_left(self.driver, 2, 2)
+        KeyCodeSentUtils.KeyCode.touch_back(self.driver, 4)
+        KeyCodeSentUtils.KeyCode.touch_left(self.driver, 2, 2)
         InputManagerUtils.InputManager.input_x(self.driver)
         InputManagerUtils.InputManager.input_i(self.driver)
         InputManagerUtils.InputManager.input_a(self.driver)
@@ -407,35 +405,35 @@ class case_01(BaseUnittest.BaseTestCase):
     """
 
     @unittest.skipIf(skip_case, skip_reason)
-    def test_l_launcher_search(self):
-        Key_code_touch.KeyCode.touch_back(self.driver, 4)
+    def test_l_launcher_tab(self):
+        KeyCodeSentUtils.KeyCode.touch_back(self.driver, 4)
         # log()
-        HomeTabUtils.TabUtils.click_tab_one(self.driver, before_wait_time=2)
-        HomeTabUtils.TabUtils.click_tab_two(self.driver, before_wait_time=2)
-        HomeTabUtils.TabUtils.click_tab_three(self.driver, before_wait_time=2)
-        HomeTabUtils.TabUtils.click_tab_four(self.driver, before_wait_time=2)
-        HomeTabUtils.TabUtils.click_tab_five(self.driver, before_wait_time=2)
-        HomeTabUtils.TabUtils.click_tab_six(self.driver, before_wait_time=2)
-        HomeTabUtils.TabUtils.click_tab_seven(self.driver, before_wait_time=2)
-        HomeTabUtils.TabUtils.click_tab_eight(self.driver, before_wait_time=2)
-        HomeTabUtils.TabUtils.click_tab_nine(self.driver, before_wait_time=2)
-        HomeTabUtils.TabUtils.click_tab_ten(self.driver, before_wait_time=2)
-        HomeTabUtils.TabUtils.click_tab_eleven(self.driver, before_wait_time=2)
+        # HomeTabUtils.TabUtils.click_tab_one(self.driver, before_wait_time=2)
+        # HomeTabUtils.TabUtils.click_tab_two(self.driver, before_wait_time=2)
+        # HomeTabUtils.TabUtils.click_tab_three(self.driver, before_wait_time=2)
+        # HomeTabUtils.TabUtils.click_tab_four(self.driver, before_wait_time=2)
+        # HomeTabUtils.TabUtils.click_tab_five(self.driver, before_wait_time=2)
+        # HomeTabUtils.TabUtils.click_tab_six(self.driver, before_wait_time=2)
+        # HomeTabUtils.TabUtils.click_tab_seven(self.driver, before_wait_time=2)
+        # HomeTabUtils.TabUtils.click_tab_eight(self.driver, before_wait_time=2)
+        # HomeTabUtils.TabUtils.click_tab_nine(self.driver, before_wait_time=2)
+        # HomeTabUtils.TabUtils.click_tab_ten(self.driver, before_wait_time=2)
+        # HomeTabUtils.TabUtils.click_tab_eleven(self.driver, before_wait_time=2)
         time.sleep(3)
 
     def enter_load_retry(self):
-        Key_code_touch.KeyCode.touch_center(self.driver, 0, 2)
+        KeyCodeSentUtils.KeyCode.touch_center(self.driver, 0, 2)
         enter_activity = self.driver.current_activity
         try:
             self.assertNotEqual(self.currentActivity, enter_activity)
-            Key_code_touch.KeyCode.touch_back(self.driver, 2)
+            KeyCodeSentUtils.KeyCode.touch_back(self.driver, 2)
         except Exception as e:
             self.add_img()
             time.sleep(6)
             self.enterDetail()
 
     def enterDetail(self):
-        Key_code_touch.KeyCode.touch_center(self.driver, 0, 2)
+        KeyCodeSentUtils.KeyCode.touch_center(self.driver, 0, 2)
         enter_activity = self.driver.current_activity
         try:
             self.assertNotEqual(self.currentActivity, enter_activity)
@@ -445,7 +443,7 @@ class case_01(BaseUnittest.BaseTestCase):
 
         Utils.Logging.error("当前界面：test_case111:   " + self.driver.current_activity)
         # Key_code_touch.KeyCode.touch_down(self.driver, 2)
-        Key_code_touch.KeyCode.touch_back(self.driver, 2)
+        KeyCodeSentUtils.KeyCode.touch_back(self.driver, 2)
 
 
 # class case_02(unittest.TestCase):

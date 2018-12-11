@@ -42,24 +42,3 @@ def get_fps(devices, pkg_name):
                 f_sum += float(r.group())
             # t_result.append('%.2f'%f_sum)
         return float('%.2f'%f_sum)
-    # print(r_result)
-    # print(t_result)
-# get_phone_info("MSM8926")
-
-# 取到流量后可以用步骤后的流量减去步骤前的流量得到步骤消耗流量！也可以用时间差来计算！
-# def getFlow(pid="31586"):
-#     flow_info = os.popen("adb shell cat /proc/"+pid+"/net/dev").readlines()
-#     t = []
-#     for info in flow_info:
-#         temp_list = info.split()
-#         t.append(temp_list)
-#     flow[0].append(ceil(int(t[6][1])/1024)) # 下载
-#     flow[1].append(ceil(int(t[6][9])/1024)) # 发送
-#     return flow
-# def read_report(f=""):
-#     from common.operateFile import OperateFile
-#     op = OperateFile(f, "r")
-#     return op.read_txt_row()
-# if __name__ == '__main__':
-#     print(top_cpu(devices="DU2TAN15AJ049163",pkg_name="cn.ibona.t1_beta"))
-#     pass

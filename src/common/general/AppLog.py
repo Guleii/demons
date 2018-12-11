@@ -1,42 +1,18 @@
-import subprocess
-import time
 import os
 from config import globalparameter as gl
-import re
-def log(filename='..\\testFFS.log',logtag='',loglevel='E'):
-    global file,pi
-    now = time.strftime("%Y-%m-%d-%H_%M_%S", time.localtime(time.time())) # 获取当前时间
-    # filename = "D:/test/logs/" + now + r"log.txt" # 日志文件名添加当前时间
-    # file = open(filename, 'w')
-    logcmd = "adb logcat"
-    # pi = subprocess.popen(logcmd, stdout=filename, stderr=subprocess.PIPE)
-    # pi = subprocess.Popen(logcmd,stdout=filename,shell=True)
 
-    # pi = subprocess.Popen(logcmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-    # print(pi.stdout.read())
-    # dir = os.path.abspath(os.path.join(os.path.dirname('TestReport3.py'), os.path.pardir)) + ""
-    # testdir = r'' + dir
-    # testdir = r"D:\Android_AutoTest\TestCode\Module\LaucherTest\report"+"\\"+gl.log_name
-    logcatname = gl.report_path+gl.log_name
-    # testdir = r"D:\other\jenkins\workspace\AppiumTest"
-    now = time.strftime('%Y-%m-%d-%H_%M_%S', time.localtime(time.time()))
-    # logcatname = testdir + "\\" +filename+ "_"+now + r"_logcat.log"
-    cmd = "adb logcat *:"+loglevel+" -s "+logtag+" -f >%s" % (logcatname) # 真正可以过滤的条件
-    # cmd = "adb  logcat -v time >%s" % (logcatname)+"  *:W | grep "+logtag+""
-    # cmd = "adb logcat  >%s" % (logcatname)
+"""
+    log_tag: 日志过滤条件
+    log_level： 日志过滤级别
+"""
+def log(log_tag='', log_level='E'):
+    log_name = gl.report_path+gl.log_name
+    if "" == log_tag:
+        log_tag = "*"
+    cmd = "adb logcat " + " -s " + log_tag + ":" + log_level + " -f >%s" % log_name  # 真正可以过滤的条件
     os.popen(cmd)
 
 
-
-def log_get_now(filename='..\\testFFS.log',logtag='',loglevel='E'):
-    global file,pi
-    logcat_name = gl.report_path+"Current.log"
-    # cmd = "adb logcat "+" -s "+logtag+":"+loglevel+" -f >%s" % (logcat_name)
-    cmd = "adb logcat -t 10"+" -s "+"*:"+loglevel+" -f >%s" % (logcat_name)
-    os.popen(cmd)
-
-
-def closeLog():
-    # os.system('adb kill-server')
-    os.popen('Ctrl c')
+def close_log():
+    os.system('adb kill-server')
 
