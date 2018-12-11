@@ -6,7 +6,7 @@ __author__ = 'Alan'
 description: 单元测试基类
 '''
 
-from config import driver_configure
+from config import DriverConfig
 from general.AppLog import *
 
 
@@ -14,7 +14,7 @@ class BaseTestCase(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        driver_config = driver_configure.driver_configure()
+        driver_config = DriverConfig.driver_configure()
         cls.driver = driver_config.get_driver()
         log()
 

@@ -7,7 +7,7 @@ description:执行测试
 '''
 import unittest
 from general.BaseEmail import *
-from config.globalparameter import test_case_path,report_name
+from config.GlobalConfig import test_case_path,report_name
 
 # 构建测试集,包含src/test_case目录下的所有以test开头的.py文件
 suite = unittest.defaultTestLoader.discover(start_dir=test_case_path, pattern='Test*.py')

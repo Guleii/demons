@@ -11,7 +11,7 @@ from email.mime.application import MIMEApplication
 import smtplib
 import os
 import time
-from config import globalparameter as gl
+from config import GlobalConfig as gl
 PATH = lambda p: os.path.abspath(
     os.path.join(os.path.dirname(__file__), p)
 )

@@ -2,7 +2,7 @@
 
 """HTMLTestRunner 截图版示例 appium版"""
 import sys
-from config import globalparameter as gl
+from config import GlobalConfig as gl
 from appium import webdriver
 import unittest
 # from HTMLTestRunner_cn import HTMLTestRunner

@@ -1,5 +1,5 @@
 import os
-from config import globalparameter as gl
+from config import GlobalConfig as gl
 
 """
     log_tag: 日志过滤条件

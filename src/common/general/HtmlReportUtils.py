@@ -4,7 +4,7 @@ __author__ = 'Alan'
 description:生成HTML报告的实例获取
 '''
 from general.HTMLTestRunner_cn import HTMLTestRunner
-from config import globalparameter as gl
+from config import GlobalConfig as gl
 
 
 class HtmlReport:
