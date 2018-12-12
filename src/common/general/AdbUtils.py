@@ -158,14 +158,16 @@ class ADB(object):
         """
         out = self.shell(
             "dumpsys activity activities | %s mFocusedActivity" %
-            find_util).stdout.read().strip().split(' ')[3]
-        return out
+            find_util).stdout.read().strip()
+        name = str(out).split(' ')[3]
+        return name
 
     def get_current_package_name(self):
         """
         获取当前运行的应用的包名
         """
-        return self.get_focused_package_and_activity().split("/")[0]
+        package = str(self.get_focused_package_and_activity())
+        return package.split("/")[0]
 
     def get_current_activity(self):
         """
@@ -268,13 +270,15 @@ class ADB(object):
 
     def get_third_app_list(self):
         """
-        获取设备中安装的第三方应用包名列表
+        获取设备中安装的第三方应用包名列表，并转换成字符串
         """
         thirdApp = []
         for packages in self.shell("pm list packages -3").stdout.readlines():
-            thirdApp.append(packages.split(":")[-1].splitlines()[0])
+            package = str(packages)
+            thirdApp.append(package.split(":")[-1].splitlines()[0])
 
-        return thirdApp
+        app_list = ",".join(thirdApp)
+        return app_list
 
     def get_matching_app_list(self, keyword):
         """

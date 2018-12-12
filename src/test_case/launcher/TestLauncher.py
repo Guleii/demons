@@ -8,7 +8,11 @@ from general.HtmlReportUtils import HtmlReport
 from moudle import HomeTabUtils, InputManagerUtils
 from src.pages.launcher.LauncherTabPage import *
 from src.pages.launcher.LauncherMultiPostersJumpPage import *
+from src.pages.launcher.LauncherSingleAppPosterJumpPage import *
+from moudle import HomeTabUtils
 
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 skip_case = True
 skip_reason = "调试"
@@ -83,6 +87,7 @@ class case_01(BaseUnittest.BaseTestCase):
         KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2)
         # 我的顶部专题
         self.enterDetail()
+        U.Logging.error("当前界面： "+self.driver.current_activity)
 
         time.sleep(3)
         # closeLog()
@@ -364,7 +369,6 @@ class case_01(BaseUnittest.BaseTestCase):
     """
             Launcher:tab测试
     """
-
     @unittest.skipIf(skip_case, skip_reason)
     def test_l_launcher_tab(self):
         KeyCodeSentUtils.KeyCode.touch_back(self.driver, 4)
@@ -372,12 +376,55 @@ class case_01(BaseUnittest.BaseTestCase):
         launcher_tab.click_tab_from_left_to_right()
         time.sleep(3)
 
-    # @unittest.skipIf(skip_case, skip_reason)
+    """
+                Launcher:多级海报点击测试
+    """
+    @unittest.skipIf(skip_case, skip_reason)
     def test_l_launcher_multi_posters_jump(self):
         multi_posters = MultiPosters(self.driver)
-        multi_posters.click_multi_posters_to_detail()
+        multi_posters.click_multi_posters_to_detail_no_config(tab_index=multi_posters.tab_six,
+                                                              key_down_repeat_count=2, key_left_repeat_count=1,
+                                                              key_right_repeat_count=2, target_text='贝瓦儿歌',
+                                                              key_center_wait_time=5)
+        # multi_posters.click_multi_posters_to_detail_no_config(tab_index=HomeTabUtils.tab_two,
+        #                                                       key_down_repeat_count=1, key_left_repeat_count=0,
+        #                                                       key_right_repeat_count=0,
+        #                                                       key_center_wait_time=3)
         time.sleep(3)
 
+    """
+               Launcher:点击任意一个非内置应用海报，判断是否下载成功
+    """
+    # @unittest.skipIf(skip_case, skip_reason)
+    def test_l_launcher_app_load(self):
+
+        singlePoster = SingleAppPosterJump(self.driver)
+        TabUtils.click_tab_eleven(self.driver,after_wait_time=2)
+        KeyCode.touch_down(driver=self.driver,repeat_count=4)
+        # KeyCode.touch_right(driver=self.driver,repeat_count=4)
+        # KeyCode.touch_center(driver=self.driver,repeat_count=2,wait_time=2)
+        # KeyCode.touch_back(driver=self.driver,repeat_count=1,wait_time=2)
+        singlePoster.check_has_element_by_text("CIBN酷喵影视")
+        # singlePoster.check_has_element_by_text("CIBN酷喵影视")
+        text = "CIBN酷喵影视"
+        # text = "再按一次退出"
+        # toast_loc = ("xpath", ".//*[contains(@text,'%s')]" % text)
+        # KeyCode.touch_back(driver=self.driver,repeat_count=1, wait_time=2)
+        # WebDriverWait(self.driver, 10, 0.1).until(EC.presence_of_element_located(toast_loc))
+        # adb = ADB()
+        # U.Logging.error("当前活跃应用名称：11"+adb.get_current_package_name())
+        current_activity = self.driver.current_activity
+        # singlePoster.test_load_or_enter_video_app(app_package=singlePoster.cibn_ku_miao_ying_shi,
+        #                                           tab_index=singlePoster.tab_eleven,
+        #                                           key_down_repeat_count=1,
+        #                                           key_left_repeat_count=0,
+        #                                           key_right_repeat_count=4)
+        # singlePoster.test_load_or_enter_sport_app()
+        # U.Logging.error("当前活跃应用名称：11" + adb.get_current_package_name())
+        # self.assertEqual(current_activity,enter_activity)
+        # self.driver.find_element_by_android_uiautomator('new UiSelector().resourceId("com.xgimi.vcontrol:id/tvName")')
+        # self.driver.find_element_by_android_uiautomator('new UiSelector().resourceId("com.xgimi.home:id/viewpagertab")')
+        time.sleep(3)
 
     def enter_load_retry(self):
         KeyCodeSentUtils.KeyCode.touch_center(self.driver, 0, 2)
@@ -393,105 +440,29 @@ class case_01(BaseUnittest.BaseTestCase):
     def enterDetail(self):
         KeyCodeSentUtils.KeyCode.touch_center(self.driver, 0, 2)
         enter_activity = self.driver.current_activity
-        try:
-            self.assertNotEqual(self.currentActivity, enter_activity)
-        except Exception as e:
-            self.add_img()
-            raise e
+        # try:
+        #     self.assertNotEqual(self.currentActivity, enter_activity)
+        # except Exception as e:
+        #     self.add_img()
+        #     raise e
 
         Utils.Logging.error("当前界面：test_case111:   " + self.driver.current_activity)
         # Key_code_touch.KeyCode.touch_down(self.driver, 2)
-        KeyCodeSentUtils.KeyCode.touch_back(self.driver, 2)
+        # KeyCodeSentUtils.KeyCode.touch_back(self.driver, 2)
 
 
-# class case_02(unittest.TestCase):
-#
-#     @classmethod
-#     def setUpClass(cls):
-#         desired_caps = {}
-#         desired_caps['platformName'] = 'Android'
-#         desired_caps['platformVersion'] = '6.0'
-#         desired_caps['deviceName'] = 'Android Emulator'
-#         desired_caps['app'] = 'com.xgimi.instruction30'
-#         desired_caps['appActivity'] = 'com.xgimi.instruction30.net_instruction.ui.SplashActivity'
-#         cls.driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)
-#
-#     @classmethod
-#     def tearDownClass(cls):
-#
-#         cls.driver.quit()
-#         # closeLog()
-#
-#     def add_img(self):
-#         # 在是python3.x 中，如果在这里初始化driver ，因为3.x版本 unittest 运行机制不同，会导致用力失败时截图失败
-#         self.imgs.append(self.driver.get_screenshot_as_base64())
-#         return True
-#
-#     def setUp(self):
-#         self.imgs = []
-#         self.addCleanup(self.cleanup)
-#
-#     def cleanup(self):
-#         pass
-#
-#     def test_case1(self):
-#         """ 手机QQ截图"""
-#         pass
-#         # self.driver.get
-#         # self.add_img()
-#         # self.add_img()
-#         # self.add_img()
-#         # self.add_img()
-#         # self.add_img()
-#         # browser=self.browser
-#         # browser.get(self.base_url+'/')
-#         # u"""百度云登录"""
-#         # browser.find_element_by_name("userName").clear()
-#         # username=browser.find_element_by_name("userName")
-#         # username.send_keys("alu***")
-#         # username.send_keys(Keys.TAB)
-#         # time.sleep(2)
-#         # password=browser.find_element_by_name("password")
-#         # password.send_keys("***")
-#         # password.send_keys(Keys.ENTER)
-#         # time.sleep(3)
-#         # browser.close()
-#
-#     def test_case2(self):
-#         """ 手机QQ截图"""
-#         Utils.Logging.error("纸飞机反击反击减肥减肥22222")
-#         log(filename="case222--—-")
-#         title = self.driver.find_element_by_id("com.xgimi.instruction30:id/tv2")
-#         title.click()
-#         # self.driver.get
-#         # self.add_img()
-#         # self.add_img()
-#         # self.add_img()
-#         # self.add_img()
-#         # self.add_img()
-#         # browser=self.browser
-#         # browser.get(self.base_url+'/')
-#         # u"""百度云登录"""
-#         # browser.find_element_by_name("userName").clear()
-#         # username=browser.find_element_by_name("userName")
-#         # username.send_keys("alu***")
-#         # username.send_keys(Keys.TAB)
-#         # time.sleep(2)
-#         # password=browser.find_element_by_name("password")
-#         # password.send_keys("***")
-#         # password.send_keys(Keys.ENTER)
-#         # time.sleep(3)
-#         # browser.close()
-# # 仿佛附近
 
+from general.AdbUtils import ADB
 
 if __name__ == "__main__":
     # dir = os.path.abspath(os.path.join(os.path.dirname('TestReport3.py'),os.path.pardir))+""
     # testdir = r''+dir
     # testdir = r'D:\other\jenkins\workspace\AppiumTest'
-
+    # app = ADB().get_third_app_list()
+    # U.Logging.error("应用：" + ",".join(app))
     Utils.Logging.error("纸飞机反击反击减肥减肥111")
 
+    time.sleep(10)
 
     # testdir = r'D:\Android_AutoTest\TestCode\Module\LaucherTest\report'
     # # now = time.strftime('%Y-%m-%d-%H_%M_%S', time.localtime(time.time()))

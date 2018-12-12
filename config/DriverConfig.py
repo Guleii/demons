@@ -22,6 +22,7 @@ class driver_configure():
             self.desired_caps['newCommandTimeout'] = '120'  # Appium服务器等待Appium客户端发送新消息的时间。默认为60秒
             self.desired_caps['deviceName'] = '612QKBQD225A2'     # 手机ID
             self.desired_caps['noReset'] = True  # true:不重新安装APP，false:重新安装app
+            self.desired_caps['automationName'] = 'Uiautomator2'
             self.driver = webdriver.Remote("http://127.0.0.1:4723/wd/hub", self.desired_caps)
 
             # desired_caps = {}
