@@ -1,518 +1,181 @@
 # -*- coding: utf-8 -*-
 
 """HTMLTestRunner 截图版示例 appium版"""
-import sys
-from config import GlobalConfig as gl
-from appium import webdriver
 import unittest
 # from HTMLTestRunner_cn import HTMLTestRunner
-from general.HTMLTestRunner_cn import HTMLTestRunner
-from general.AppLog import *
 from general import KeyCodeSentUtils, Utils, BaseUnittest
-from general.BaseEmail import start_send_email
 from general.HtmlReportUtils import HtmlReport
 from moudle import HomeTabUtils, InputManagerUtils
+from src.pages.launcher.LauncherTabPage import *
+from src.pages.launcher.LauncherMultiPostersJumpPage import *
+from src.pages.launcher.LauncherSingleAppPosterJumpPage import *
+from src.pages.launcher.LauncherSingleVideoPosterPage import SingleVideoPoster
+from general.ImageContrastUtils import ImageContrast
+from config import GlobalConfig as gl
+from moudle import HomeTabUtils
 
-sys.path.append('D:\machine_Learning\machine_pycharm\Common')
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+skip_case = False
+skip_reason = "调试"
 
 
-class case_01(BaseUnittest.BaseTestCase):
-    currentActivity = ""
-
-    # @classmethod
-    # def setUpClass(cls):
-    #     desired_caps = {}
-    #     desired_caps['platformName'] = 'Android'
-    #     desired_caps['platformVersion'] = '8.0.0'
-    #     desired_caps['deviceName'] = '621MECQE3DY4K'
-    #     desired_caps['noReset'] =True
-    #     desired_caps['unicodeKeyboard'] = True
-    #     desired_caps['resetKeyboard'] = True
-    #     # desired_caps['app'] = 'com.xgimi.instruction30'
-    #     desired_caps['app'] = 'com.xgimi.home'
-    #     # desired_caps['appActivity'] = 'com.xgimi.instruction30.net_instruction.ui.SplashActivity'
-    #     desired_caps['appActivity'] = 'com.xgimi.home.ui.MainActivity'
-    #     cls.driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)
-    #
-    # @classmethod
-    # def tearDownClass(cls):
-    #
-    #     cls.driver.quit()
-    #     # closeLog()
-    #
-    # # closeLog()
-    #
-    # def add_img(self):
-    #     # 在是python3.x 中，如果在这里初始化driver ，因为3.x版本 unittest 运行机制不同，会导致用力失败时截图失败
-    #     self.imgs.append(self.driver.get_screenshot_as_base64())
-    #     return True
-    #
-    # def setUp(self):
-    #     self.imgs = []
-    #     self.addCleanup(self.cleanup)
-    #
-    # def cleanup(self):
-    #     pass
+class LauncherTest(BaseUnittest.BaseTestCase):
 
     """
-        Launcher:更多模块测试
+        判断点击海报是否正确的播放视频以及返回复位
     """
-    def a_launcher_more(self):
-        Utils.Logging.error("当前界面：test_case1:  " + self.driver.current_activity)
-        self.currentActivity = self.driver.current_activity
-
-        HomeTabUtils.TabUtils.click_tab_two(self.driver, before_wait_time=2)
-
-        # Key_code_touch.KeyCode.touch_left(self.driver, 4)
-        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2)
-
-        # 首页专题
-        self.enterDetail()
-
-        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 1, 6)
-
-        # 视频应用
-        self.enterDetail()
-
-        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 1)
-
-        # 主题影院
-        self.enterDetail()
-
-        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 1, 2)
-
-        # 剧集分类
-        self.enterDetail()
-
-        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 1, 2)
-
-        # 综艺show
-        self.enterDetail()
-
-        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 1, 2)
-
-        # 少儿天地
-        self.enterDetail()
-        KeyCodeSentUtils.KeyCode.touch_back(self.driver, 2)
-
-        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2, 2)
-
-        # 电影票房榜
-        self.enterDetail()
+    def check_video_jump_is_right_and_back(self):
+        single_video_poster = SingleVideoPoster(self.driver)
+        single_video_poster.check_video_has_playing_normal()
+        single_video_poster.touch_back(key_back_repeat_count=3,key_back_wait_time=1)
 
     """
-         Launcher:我的模块测试
-     """
-    def _b_launcher_user(self):
-        log(filename="TV22", log_tag="com.xgimi.instruction30")
-
-        HomeTabUtils.TabUtils.click_tab_three(self.driver, before_wait_time=2)
-
-        # 防止上一个用例执行失败，返回Tab栏
-        # Key_code_touch.KeyCode.touch_back(self.driver, 4)
-        # Key_code_touch.KeyCode.touch_right(self.driver, 2)
-
-        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2)
-
-        # 我的顶部专题
-        # self.enterDetail()
-
-        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2, 2)
-
-        # 我的精选，第一次如果未安装，则点击安装，然后等待6秒后重试
-        # self.enter_load_retry()
-
-        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2)
-
-        # 观影历史
-        # self.enterDetail()
-
-        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2)
-
-        # 今天值得观看，第一次如果未安装，则点击安装，然后等待6秒后重试
-        # self.enter_load_retry()
-
-        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2)
-
-        # 为你推荐
-        # self.enterDetail()
-
-        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2)
-
-        # 系统设置
-        # self.enterDetail()
-
-        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2)
-
-        # 豆瓣佳片推荐，欢乐好时光
-        # self.enterDetail()
-        # Key_code_touch.KeyCode.touch_back(self.driver, 2)
-
-        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2)
-
-        # 今日热播，大家都在看
-        # self.enterDetail()
-
-        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2, 2)
-
-        # 最新上线
-        # self.enterDetail()
-
-        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2)
-
-        # 精选专区
-        # self.enterDetail()
-
-        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2)
-
-        # 重磅推荐：精选好句看不停
-        # self.enterDetail()
-
-        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2, 2)
-
-        # 电影：精选大片看到爽
-        # self.enterDetail()
-
-        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2, 2)
-
-        # 精彩不容错过
-        self.enterDetail()
-        KeyCodeSentUtils.KeyCode.touch_back(self.driver, 2, 1)
-        # Key_code_touch.KeyCode.touch_down(self.driver, 2, 2)
-        KeyCodeSentUtils.KeyCode.touch_center(self.driver, wait_time=2)
-
-        # Key_code_touch.KeyCode.touch_down(self.driver, 2)
-
-        # 古装言情剧
-        # self.enterDetail()
-
-        # Key_code_touch.KeyCode.touch_down(self.driver, 2)
-
-        # 爱情喜剧电影
-        # self.enterDetail()
-
-        """
-            Launcher:VIP模块测试
-        """
-    def _c_launcher_vip(self):
-        HomeTabUtils.TabUtils.click_tab_four(self.driver, before_wait_time=2)
-        # Key_code_touch.KeyCode.touch_back(self.driver, 4)
-        # Key_code_touch.KeyCode.touch_right(self.driver, 2)
-
-        # 专题-2
-        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2, 3)
-        self.enterDetail()
+        单张海报跳转到聚体育  点击海报正确的播放视频
+    """
+    @unittest.skipIf(skip_case, skip_reason)
+    def test_a_a_ju_ti_yu_poster(self):
+        LauncherUtils.move_to_target_location(driver=self.driver, tab_index=HomeTabUtils.tab_nine,
+                                              key_down_repeat_count=1, key_left_repeat_count=0,
+                                              key_right_repeat_count=0, key_center_repeat_count=1,
+                                              )
+        self.check_video_jump_is_right_and_back()
 
     """
-        Launcher:电影模块测试
-     """
-    def _d_launcher_movie(self):
-        HomeTabUtils.TabUtils.click_tab_five(self.driver, before_wait_time=2)
-        # Key_code_touch.KeyCode.touch_back(self.driver, 4)
-        # Key_code_touch.KeyCode.touch_right(self.driver, 2, 2)
-
-        # 专题 -2
-        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2, 2)
-        self.enterDetail()
-
-        # 贴心影向标
-        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2, 5)
-        self.enterDetail()
-
-        # 周末放映室
-        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2, 2)
-        self.enterDetail()
-
-        # 精选专题底部
-        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2, 7)
-        self.enterDetail()
+        单张海报跳转到芒果TV 点击海报正确的播放视频
+    """
+    @unittest.skipIf(skip_case, skip_reason)
+    def test_a_b_mang_guo_poster(self):
+        LauncherUtils.move_to_target_location(driver=self.driver, tab_index=HomeTabUtils.tab_eight,
+                                              key_down_repeat_count=1, key_left_repeat_count=0,
+                                              key_right_repeat_count=0, key_center_repeat_count=1)
+        self.check_video_jump_is_right_and_back()
 
     """
-         Launcher:少儿 模块测试
-     """
-    def _e_launcher_children(self):
-        HomeTabUtils.TabUtils.click_tab_six(self.driver, before_wait_time=2)
-        # Key_code_touch.KeyCode.touch_back(self.driver, 4)
-        # Key_code_touch.KeyCode.touch_right(self.driver, 2, 3)
-
-        # 专题
-        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2)
-        self.enterDetail()
-        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2)
-        KeyCodeSentUtils.KeyCode.touch_left(self.driver, 2)
-        self.enterDetail()
-
-        # 长图标
-        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2, 6)
-        self.enterDetail()
-
-        # 中间的
-        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2, 31)
-        self.enterDetail()
-
+        单张海报跳转到爱奇艺  点击海报正确的播放视频
     """
-        Launcher:电视剧 模块测试
-    """
-    def _f_launcher_tv_series(self):
-        HomeTabUtils.TabUtils.click_tab_seven(self.driver, before_wait_time=2)
-        # Key_code_touch.KeyCode.touch_back(self.driver, 4)
-        # Key_code_touch.KeyCode.touch_right(self.driver, 2, 4)
+    @unittest.skipIf(skip_case, skip_reason)
+    def test_a_c_ai_qi_yi_poster(self):
+        LauncherUtils.move_to_target_location(driver=self.driver, tab_index=HomeTabUtils.tab_five,
+                                              key_down_repeat_count=1, key_left_repeat_count=0,
+                                              key_right_repeat_count=0, key_center_repeat_count=1)
+        self.check_video_jump_is_right_and_back()
 
-        # 专题
-        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2, 4)
-        self.enterDetail()
 
-    """
-         Launcher:综艺 模块测试
-    """
-    def _g_launcher_variety(self):
-        HomeTabUtils.TabUtils.click_tab_eight(self.driver, before_wait_time=2)
-        # Key_code_touch.KeyCode.touch_back(self.driver, 4)
-        # Key_code_touch.KeyCode.touch_right(self.driver, 2, 5)
-
-        # 专题-2
-        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2, 2)
-        self.enterDetail()
-
-        # 卫视综艺 -卫视
-        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2, 7)
-        self.enterDetail()
-
-    """
-        Launcher:体育 模块测试
-    """
-    def _h_launcher_sport(self):
-        HomeTabUtils.TabUtils.click_tab_nine(self.driver, before_wait_time=2)
-        # Key_code_touch.KeyCode.touch_back(self.driver, 4)
-        # Key_code_touch.KeyCode.touch_right(self.driver, 2, 6)
-
-        # 专题-2
-        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2)
-        self.enterDetail()
-        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2)
-        self.enterDetail()
-
-        # 最热赛事
-        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2)
-        self.enterDetail()
-
-        # WWE
-        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2, 8)
-        self.enterDetail()
-
-        # UFC
-        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2)
-        self.enterDetail()
-
-    """
-         Launcher:4K 模块测试
-    """
-    def _i_launcher_4k(self):
-        HomeTabUtils.TabUtils.click_tab_ten(self.driver, before_wait_time=2)
-        # Key_code_touch.KeyCode.touch_back(self.driver, 4)
-        # Key_code_touch.KeyCode.touch_right(self.driver, 2, 7)
-
-        # 专题
-        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2)
-        self.enterDetail()
-        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2)
-        self.enterDetail()
-
-        # 4K免费试看区
-        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2)
-        self.enterDetail()
-
-    """
-        Launcher:应用 模块测试
-    """
-    def _j_launcher_app(self):
-        HomeTabUtils.TabUtils.click_tab_eleven(self.driver, before_wait_time=2)
-        # Key_code_touch.KeyCode.touch_back(self.driver, 4)
-        # Key_code_touch.KeyCode.touch_right(self.driver, 2, 8)
-
-        # 顶部
-        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2)
-        self.enterDetail()
-        KeyCodeSentUtils.KeyCode.touch_right(self.driver, 2)
-        self.enterDetail()
-
-        # 应用
-        KeyCodeSentUtils.KeyCode.touch_down(self.driver, 2)
-        self.enterDetail()
-        KeyCodeSentUtils.KeyCode.touch_back(self.driver, 0)
-        KeyCodeSentUtils.KeyCode.touch_left(self.driver, 2)
-        self.enterDetail()
-        KeyCodeSentUtils.KeyCode.touch_right(self.driver, 3)
-        self.enterDetail()
-
-    """
-         Launcher:搜索 模块测试
-    """
-    def _k_launcher_search(self):
-        HomeTabUtils.TabUtils.click_tab_one(self.driver, before_wait_time=2)
-        KeyCodeSentUtils.KeyCode.touch_back(self.driver, 4)
-        KeyCodeSentUtils.KeyCode.touch_left(self.driver, 2, 2)
-        InputManagerUtils.InputManager.input_x(self.driver)
-        InputManagerUtils.InputManager.input_i(self.driver)
-        InputManagerUtils.InputManager.input_a(self.driver)
-        InputManagerUtils.InputManager.input_o(self.driver)
-        InputManagerUtils.InputManager.input_m(self.driver)
-        InputManagerUtils.InputManager.input_i(self.driver)
-        InputManagerUtils.InputManager.input_nine(self.driver)
-        InputManagerUtils.InputManager.input_delete(self.driver, after_wait_time=3)
-        InputManagerUtils.InputManager.input_clear(self.driver)
-        time.sleep(3)
-        time.sleep(9)
 
     """
             Launcher:tab测试
     """
-    def test_j_launcher_search(self):
-        # log()
-        HomeTabUtils.TabUtils.click_tab_one(self.driver, before_wait_time=2)
-        HomeTabUtils.TabUtils.click_tab_two(self.driver, before_wait_time=2)
-        HomeTabUtils.TabUtils.click_tab_three(self.driver, before_wait_time=2)
-        HomeTabUtils.TabUtils.click_tab_four(self.driver, before_wait_time=2)
-        HomeTabUtils.TabUtils.click_tab_five(self.driver, before_wait_time=2)
-        HomeTabUtils.TabUtils.click_tab_six(self.driver, before_wait_time=2)
-        HomeTabUtils.TabUtils.click_tab_seven(self.driver, before_wait_time=2)
-        HomeTabUtils.TabUtils.click_tab_eight(self.driver, before_wait_time=2)
-        HomeTabUtils.TabUtils.click_tab_nine(self.driver, before_wait_time=2)
-        HomeTabUtils.TabUtils.click_tab_ten(self.driver, before_wait_time=2)
-        HomeTabUtils.TabUtils.click_tab_eleven(self.driver, before_wait_time=2)
-        time.sleep(3)
-
-    def enter_load_retry(self):
-        KeyCodeSentUtils.KeyCode.touch_center(self.driver, 0, 2)
-        enter_activity = self.driver.current_activity
-        try:
-            self.assertNotEqual(self.currentActivity, enter_activity)
-            KeyCodeSentUtils.KeyCode.touch_back(self.driver, 2)
-        except Exception as e:
-            self.add_img()
-            time.sleep(6)
-            self.enterDetail()
-
-    def enterDetail(self):
-        KeyCodeSentUtils.KeyCode.touch_center(self.driver, 0, 2)
-        enter_activity = self.driver.current_activity
-        try:
-            self.assertNotEqual(self.currentActivity, enter_activity)
-        except Exception as e:
-            self.add_img()
-            raise e
-
-        Utils.Logging.error("当前界面：test_case111:   " + self.driver.current_activity)
-        # Key_code_touch.KeyCode.touch_down(self.driver, 2)
-        KeyCodeSentUtils.KeyCode.touch_back(self.driver, 2)
+    # @unittest.skipIf(skip_case, skip_reason)
+    def test_b_a_launcher_tab(self):
+        KeyCodeSentUtils.KeyCode.touch_back(self.driver, 4)
+        launcher_tab = LauncherTab(self.driver)
+        launcher_tab.click_tab_from_left_to_right()
 
 
-# class case_02(unittest.TestCase):
-#
-#     @classmethod
-#     def setUpClass(cls):
-#         desired_caps = {}
-#         desired_caps['platformName'] = 'Android'
-#         desired_caps['platformVersion'] = '6.0'
-#         desired_caps['deviceName'] = 'Android Emulator'
-#         desired_caps['app'] = 'com.xgimi.instruction30'
-#         desired_caps['appActivity'] = 'com.xgimi.instruction30.net_instruction.ui.SplashActivity'
-#         cls.driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)
-#
-#     @classmethod
-#     def tearDownClass(cls):
-#
-#         cls.driver.quit()
-#         # closeLog()
-#
-#     def add_img(self):
-#         # 在是python3.x 中，如果在这里初始化driver ，因为3.x版本 unittest 运行机制不同，会导致用力失败时截图失败
-#         self.imgs.append(self.driver.get_screenshot_as_base64())
-#         return True
-#
-#     def setUp(self):
-#         self.imgs = []
-#         self.addCleanup(self.cleanup)
-#
-#     def cleanup(self):
-#         pass
-#
-#     def test_case1(self):
-#         """ 手机QQ截图"""
-#         pass
-#         # self.driver.get
-#         # self.add_img()
-#         # self.add_img()
-#         # self.add_img()
-#         # self.add_img()
-#         # self.add_img()
-#         # browser=self.browser
-#         # browser.get(self.base_url+'/')
-#         # u"""百度云登录"""
-#         # browser.find_element_by_name("userName").clear()
-#         # username=browser.find_element_by_name("userName")
-#         # username.send_keys("alu***")
-#         # username.send_keys(Keys.TAB)
-#         # time.sleep(2)
-#         # password=browser.find_element_by_name("password")
-#         # password.send_keys("***")
-#         # password.send_keys(Keys.ENTER)
-#         # time.sleep(3)
-#         # browser.close()
-#
-#     def test_case2(self):
-#         """ 手机QQ截图"""
-#         Utils.Logging.error("纸飞机反击反击减肥减肥22222")
-#         log(filename="case222--—-")
-#         title = self.driver.find_element_by_id("com.xgimi.instruction30:id/tv2")
-#         title.click()
-#         # self.driver.get
-#         # self.add_img()
-#         # self.add_img()
-#         # self.add_img()
-#         # self.add_img()
-#         # self.add_img()
-#         # browser=self.browser
-#         # browser.get(self.base_url+'/')
-#         # u"""百度云登录"""
-#         # browser.find_element_by_name("userName").clear()
-#         # username=browser.find_element_by_name("userName")
-#         # username.send_keys("alu***")
-#         # username.send_keys(Keys.TAB)
-#         # time.sleep(2)
-#         # password=browser.find_element_by_name("password")
-#         # password.send_keys("***")
-#         # password.send_keys(Keys.ENTER)
-#         # time.sleep(3)
-#         # browser.close()
-# # 仿佛附近
+
+
+    """
+                Launcher:多级海报点击测试
+    """
+    # @unittest.skipIf(skip_case, skip_reason)
+    def test_b_b_launcher_multi_posters_jump(self):
+        multi_posters = MultiPosters(self.driver)
+        multi_posters.click_multi_posters_to_detail_no_config(tab_index=multi_posters.tab_six,
+                                                              key_down_repeat_count=2, key_left_repeat_count=1,
+                                                              key_right_repeat_count=2, target_text='贝瓦儿歌',
+                                                              key_center_wait_time=5)
+        # multi_posters.click_multi_posters_to_detail_no_config(tab_index=HomeTabUtils.tab_two,
+        #                                                       key_down_repeat_count=1, key_left_repeat_count=0,
+        #                                                       key_right_repeat_count=0,
+        #                                                       key_center_wait_time=3)
+
+
+
+
+
+    """
+        Launcher:点击任意一个非内置应用海报，判断是否下载成功 云视听极光
+    """
+    @unittest.skipIf(skip_case, skip_reason)
+    def test_c_a_launcher_app_load_yun_shi_ting_ji_guang(self):
+        single_poster = SingleAppPosterJump(self.driver)
+        single_poster.test_load_or_enter_video_app(app_package=single_poster.yun_shi_ting_ji_guang,
+                                                   key_down_repeat_count=7, tab_index=single_poster.tab_two)
+
+    """
+        Launcher:点击任意一个非内置应用海报，判断是否下载成功     CIBN酷喵影视
+    """
+    @unittest.skipIf(skip_case, skip_reason)
+    def test_c_b_launcher_app_load_cibn_ku_miao_ying_shi(self):
+        single_poster = SingleAppPosterJump(self.driver)
+        single_poster.test_load_or_enter_video_app(app_package=single_poster.cibn_ku_miao_ying_shi,
+                                                   key_down_repeat_count=7, key_right_repeat_count=2,
+                                                   tab_index=single_poster.tab_two)
+
+    """
+        Launcher:点击任意一个非内置应用海报，判断是否下载成功  yun_shi_ting_mao   云视听电视猫
+    """
+    @unittest.skipIf(skip_case, skip_reason)
+    def test_c_c_launcher_app_load_yun_shi_ting_mao(self):
+        single_poster = SingleAppPosterJump(self.driver)
+        single_poster.test_load_or_enter_video_app(app_package=single_poster.yun_shi_ting_dian_shi_mao,
+                                                   key_down_repeat_count=7, key_right_repeat_count=4,
+                                                   tab_index=single_poster.tab_two)
+
+    """
+         Launcher:点击任意一个非内置应用海报，判断是否下载成功    哔哩哔哩TV版
+    """
+    @unittest.skipIf(skip_case, skip_reason)
+    def test_c_d_launcher_app_load_bili_bili(self):
+        # 哔哩哔哩
+        single_poster = SingleAppPosterJump(self.driver)
+        LauncherUtils.move_to_target_location(driver=self.driver, tab_index=HomeTabUtils.tab_two,
+                                              key_down_repeat_count=1, key_right_repeat_count=2,
+                                              key_center_repeat_count=1, key_back_repeat_count=0)
+        single_poster.test_load_or_enter_video_app(app_package=single_poster.bi_li_bi_li_tv, key_down_repeat_count=1,
+                                                   tab_index=single_poster.tab_two, key_back_repeat_count=0)
+
+    """
+        Launcher:点击任意一个非内置应用海报，判断是否下载成功   FitTime
+    """
+    @unittest.skipIf(skip_case, skip_reason)
+    def test_c_e_launcher_app_load_fit_time(self):
+        single_poster = SingleAppPosterJump(self.driver)
+        LauncherUtils.move_to_target_location(driver=self.driver, tab_index=HomeTabUtils.tab_eleven,
+                                              key_down_repeat_count=1, key_right_repeat_count=2,
+                                              key_center_repeat_count=1, key_back_repeat_count=0)
+        single_poster.test_load_or_enter_video_app(app_package=single_poster.fit_time, key_down_repeat_count=1,
+                                                   tab_index=single_poster.tab_two, key_back_repeat_count=0)
+
+    """
+        Launcher:点击任意一个非内置应用海报，判断是否下载成功   百视通TV
+    """
+    @unittest.skipIf(skip_case, skip_reason)
+    def test_c_f_launcher_app_load_fit_time(self):
+        single_poster = SingleAppPosterJump(self.driver)
+        LauncherUtils.move_to_target_location(driver=self.driver, tab_index=HomeTabUtils.tab_seven,
+                                              key_down_repeat_count=2, key_right_repeat_count=2,
+                                              key_center_repeat_count=1, key_back_repeat_count=0)
+        single_poster.test_load_or_enter_video_app(app_package=single_poster.bai_shi_tong_tv, key_down_repeat_count=3,
+                                                   tab_index=single_poster.tab_two, key_back_repeat_count=0)
 
 
 if __name__ == "__main__":
-    # dir = os.path.abspath(os.path.join(os.path.dirname('TestReport3.py'),os.path.pardir))+""
-    # testdir = r''+dir
-    # testdir = r'D:\other\jenkins\workspace\AppiumTest'
 
     Utils.Logging.error("纸飞机反击反击减肥减肥111")
 
-
-    # testdir = r'D:\Android_AutoTest\TestCode\Module\LaucherTest\report'
-    # # now = time.strftime('%Y-%m-%d-%H_%M_%S', time.localtime(time.time()))
-    # # logcatname = testdir + "\\" + now + "报告.html"
-    # logcatname = testdir + "\\" + gl.report_name
-
-
+    time.sleep(10)
     suiteAll = unittest.TestSuite()
-    test1 = unittest.TestLoader().loadTestsFromTestCase(case_01)
+    test1 = unittest.TestLoader().loadTestsFromTestCase(LauncherTest)
     # test2 = unittest.TestLoader().loadTestsFromTestCase(case_02)
     suiteAll.addTest(test1)
-    # suiteAll.addTest(test2)
-    # runer = HTMLTestRunner(title="带截图的测试报告", description="测试描述", stream=open(logcatname, "wb"), verbosity=2, retry=0, save_last_try=True)
     runner = HtmlReport.get_generate_report_object()
     runner.run(suiteAll)
 
     # 发送邮件
-    start_send_email()
+    # start_send_email()
 
 
 
