@@ -19,7 +19,9 @@ report_name = "report.html"
 log_name = "Launcher.log"
 # report_name = report_path+time.strftime('%Y%m%d%H%S', time.localtime())
 
-
+# 截屏存储路径
+screen_shot_path = project_path+"\\screenshot\\"
+screen_shot_picture_format = ".png"
 
 
 

@@ -47,6 +47,7 @@ class MultiPosters(LauncherBasePage):
         KeyCode.touch_center(self.driver, after_time=key_center_wait_time)
         self.check_has_element_by_text(text=target_text)
         KeyCode.touch_back(self.driver, wait_time=key_back_wait_time, repeat_count=key_back_repeat_count)
+        self.touch_back(key_back_repeat_count=1)
 
 
 

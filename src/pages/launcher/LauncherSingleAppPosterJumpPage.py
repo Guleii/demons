@@ -1,11 +1,10 @@
 # coding:utf-8
-from moudle.LauncherBasePage import LauncherBasePage
 
 __author__ = 'Alan'
 '''
 description: Launcher 单张海报点击跳转测试
 '''
-
+from moudle.LauncherBasePage import LauncherBasePage
 from general.Base_page import Base
 from moudle.HomeTabUtils import TabUtils
 from moudle import HomeTabUtils
@@ -14,7 +13,7 @@ from moudle import LauncherUtils
 from general.KeyCodeSentUtils import *
 from general import Utils as U
 from general.AdbUtils import ADB
-
+from general.ImageUtils import ImageUtil
 
 
 """
@@ -45,7 +44,10 @@ class SingleAppPosterJump(LauncherBasePage):
         bi_li_bi_li_tv = "com.xiaodianshi.tv.yst"  #  哔哩哔哩TV版
         xiao_yao_jie_wu = "com.streetdance.fittime.tv.common"  # 小腰街舞
 
-        down_load_time_out = 1  # 下载超时时间
+        down_load_time_out = 1  # 下载超时时间单位/分钟
+
+        load_apk_fail = "应用下载失败应用包名： "
+        open_apk_fail = "没有正确打开第三方应用： "
 
         def test_load_or_enter_video_app(self, app_package=you_ku, wait_time=LauncherBasePage.function_perform_time,
                                          tab_index=HomeTabUtils.tab_one,
@@ -53,6 +55,7 @@ class SingleAppPosterJump(LauncherBasePage):
                                          key_down_repeat_count=LauncherBasePage.key_down_repeat_count,
                                          key_left_wait_time=LauncherBasePage.key_left_wait_time,
                                          key_left_repeat_count=LauncherBasePage.key_left_repeat_count,
+                                         key_back_repeat_count=LauncherBasePage.key_back_repeat_count,
                                          key_right_wait_time=LauncherBasePage.key_right_wait_time,
                                          key_right_repeat_count=LauncherBasePage.key_right_repeat_count):
                 self.move_to_target(key_down_repeat_count=key_down_repeat_count,
@@ -61,6 +64,7 @@ class SingleAppPosterJump(LauncherBasePage):
                                     key_left_wait_time=key_left_wait_time,
                                     key_right_repeat_count=key_right_repeat_count,
                                     key_right_wait_time=key_right_wait_time,
+                                    key_back_repeat_count=key_back_repeat_count,
                                     tab_index=tab_index,
                                     wait_time=wait_time)
                 self.check_enter_or_load(app_package)
@@ -68,38 +72,45 @@ class SingleAppPosterJump(LauncherBasePage):
         def check_enter_or_load(self, app_package):
                 adb = ADB()
                 app = adb.get_third_app_list()
-                current_activity = self.driver.current_activity
+                # current_activity = self.driver.current_activity
                 U.Logging.error("应用：" + app)
                 if app_package in app:
                         self.enter_video_app(adb, app_package=app_package)
                 else:
                         KeyCode.touch_center(self.driver, wait_time=1, after_time=1)
-                        KeyCode.touch_center(self.driver, wait_time=1, after_time=2)
-                        self.check_has_element_by_text("CIBN酷喵影视")
-                        enter_activity = self.driver.current_activity
-                        if current_activity != enter_activity:
-                                raise Exception("应用下载失败应用包名： " + app_package)
+
+                        #不要删除一下代码 ，一下代码是另一种判断下载框是否弹出的条件
+                        # KeyCode.touch_center(self.driver, wait_time=1, after_time=2)
+                        # self.check_has_element_by_text("CIBN酷喵影视")
+                        # enter_activity = self.driver.current_activity
+                        # if current_activity != enter_activity:
+                        #         raise Exception(self.load_apk_fail + app_package)
+
+                        if ImageUtil.check_video_has_playing_normal(driver=self.driver,perform_first_screen_shot_wait_time=1, perform_second_screen_shot_wait_time=3):
+                                pass
                         else:
                                 start_time = int(time.time())
                                 while True:
                                         current_time = int(time.time())
                                         dif_time = current_time - start_time
                                         app_list_now = adb.get_third_app_list()
-                                        if self.you_ku in app_list_now:
+                                        if app_package in app_list_now:
                                                 self.enter_video_app(adb, app_package=app_package)
                                                 break
                                         elif dif_time / 60 > self.down_load_time_out:  # 下载超时
-                                                raise Exception("应用下载失败应用包名： " + app_package)
+                                                raise Exception(self.load_apk_fail + app_package)
 
         def enter_video_app(self, adb, app_package=you_ku):
                 U.Logging.error("已经包含优酷：11")
                 KeyCode.touch_center(self.driver, wait_time=1, after_time=3)
                 current_activity_package_name = adb.get_current_package_name()
                 if app_package not in current_activity_package_name:
-                        raise Exception("没有正确打开第三方视频应用包名： "+app_package)
+                        raise Exception(self.open_apk_fail+app_package)
 
-        def test_load_or_enter_sport_app(self):
-                self.move_to_target(tab_index=LauncherBasePage.tab_eleven, key_down_repeat_count=1,
-                                    key_left_repeat_count=0, key_right_repeat_count=2)
-                KeyCode.touch_center(self.driver)
-                self.check_enter_or_load(self.fit_time)
+                self.touch_back_by_package_name(app_package)
+
+        # def test_load_or_enter_sport_app(self):
+        #         self.move_to_target(tab_index=LauncherBasePage.tab_eleven, key_down_repeat_count=1,
+        #                             key_left_repeat_count=0, key_right_repeat_count=2)
+        #         KeyCode.touch_center(self.driver)
+        #         self.check_enter_or_load(self.fit_time)
