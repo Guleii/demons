@@ -24,7 +24,7 @@ skip_reason = "调试"
 class LauncherTest(BaseUnittest.BaseTestCase):
 
     """
-        判断点击海报是否正确的播放视频以及返回复位
+        判断点击海报是否正确的播放视频以及返回复位   12344566
     """
     def check_video_jump_is_right_and_back(self):
         single_video_poster = SingleVideoPoster(self.driver)
