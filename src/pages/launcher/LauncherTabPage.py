@@ -1,4 +1,6 @@
 # coding:utf-8
+from general.ImageUtils import ImageUtil
+
 __author__ = 'Alan'
 '''
 description: Launcher Tab切换测试
@@ -29,6 +31,8 @@ class LauncherTab(Base):
 
     tab_down_count_list = [0, 6, 0, 3, 4, 4, 7, 5, 0, 0, 0]  # 每个Tab需要通过遥控器的下键移动多少步骤才能展现要找的文本View, 该数组大小需要与tab_text_list数组大小一样，并且下标一一对应
 
+    tab_enter_detail_steps = [[1, 2], [1, 2], [1], [1], [1], [1], [1], [1], [1], [1], [1]]
+
     key_down_wait_time = 1
     key_back_wait_time = 2
     key_right_wait_time = 1
@@ -40,6 +44,7 @@ class LauncherTab(Base):
     """
     def click_tab_from_left_to_right(self, wait_time=function_perform_time):
         time.sleep(wait_time)
+        U.Logging.error("数组     ：" + str(self.tab_enter_detail_steps[1]))
         for text in self.tab_text_list:
             touch_down_count = self.tab_text_list.index(text)
 
@@ -51,8 +56,35 @@ class LauncherTab(Base):
 
             U.Logging.error("获取的元素位置:  " + str(touch_down_count))
             self.check_has_element_by_text(text)
-            KeyCode.touch_back(self.driver, wait_time=self.key_back_wait_time)
+
+            self.check_tab_page_load_normal(touch_down_count)
+
+            KeyCode.touch_back(self.driver, wait_time=self.key_back_wait_time,repeat_count=2)
             KeyCode.touch_right(self.driver, wait_time=self.key_right_wait_time)
+
+    def check_tab_page_load_normal(self, touch_down_count):
+        KeyCode.touch_back(self.driver, wait_time=self.key_back_wait_time,repeat_count=2)
+        step_list = self.tab_enter_detail_steps[touch_down_count]
+        for step in step_list:
+            step_index = step_list.index(step)
+            U.Logging.error("数组：" + str(step_list) + "       下标： " + str(touch_down_count)+"  单个数组下标： "+str(step_index))
+            if step_index == 0:
+                KeyCode.touch_down(self.driver, repeat_count=step)
+                U.Logging.error("长度 ： " + str(len(step_list)))
+                if len(step_list) == 1:
+                    U.Logging.error("进入enter长度 ： " + str(len(step_list)))
+                    ImageUtil.check_video_has_playing_normal(driver=self.driver, perform_first_screen_shot_wait_time=1,
+                                                             perform_second_screen_shot_wait_time=2,
+                                                             neet_enter_center=True)
+                    KeyCode.touch_back(self.driver, wait_time=self.key_back_wait_time, repeat_count=2)
+
+            elif step_index == 1:
+                KeyCode.touch_right(self.driver, repeat_count=step)
+                ImageUtil.check_video_has_playing_normal(driver=self.driver, perform_first_screen_shot_wait_time=1,
+                                                         perform_second_screen_shot_wait_time=2, neet_enter_center=True)
+                KeyCode.touch_back(self.driver, wait_time=self.key_back_wait_time, repeat_count=2)
+
+        time.sleep(2)
 
 
 

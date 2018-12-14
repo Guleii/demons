@@ -10,7 +10,7 @@ from moudle import LauncherUtils
 from general.KeyCodeSentUtils import KeyCode
 from moudle import HomeTabUtils
 from moudle import HomeTabUtils
-
+from general import Utils as U
 
 class LauncherBasePage(Base):
 
@@ -66,7 +66,8 @@ class LauncherBasePage(Base):
                        key_right_wait_time=key_right_wait_time,
                        tab_index=tab_index,
                        key_back_repeat_count=key_back_repeat_count,
-                       wait_time=function_perform_time):
+                       wait_time=function_perform_time
+                       ,need_first_back=True):
         LauncherUtils.move_to_target_location(driver=self.driver,
                                               key_down_repeat_count=key_down_repeat_count,
                                               key_down_wait_time=key_down_wait_time,
@@ -76,10 +77,11 @@ class LauncherBasePage(Base):
                                               key_right_wait_time=key_right_wait_time,
                                               key_back_repeat_count=key_back_repeat_count,
                                               tab_index=tab_index,
-                                              wait_time=wait_time)
+                                              wait_time=wait_time,
+                                              need_first_back=need_first_back)
 
     def touch_back(self, key_back_repeat_count=key_back_repeat_count, key_back_wait_time=key_back_wait_time):
-        KeyCode.touch_back(self.driver, key_back_repeat_count, key_back_wait_time)
+        KeyCode.touch_back(self.driver,  key_back_wait_time, key_back_repeat_count)
 
     """
         根据影视应用的包名返回
@@ -92,12 +94,14 @@ class LauncherBasePage(Base):
             self.touch_back(key_back_repeat_count=1, key_back_wait_time=1)
 
         elif package_name == self.yun_shi_ting_dian_shi_mao:  # 云视听电视猫 按两次次返回键
-            self.touch_back(key_back_repeat_count=2, key_back_wait_time=0)
-            self.touch_back(key_back_repeat_count=1, key_back_wait_time=1)
+            self.touch_back(key_back_repeat_count=2, key_back_wait_time=1)
+            self.touch_back(key_back_repeat_count=3, key_back_wait_time=1)
+            U.Logging.error("应用：云视听电视猫 " + package_name)
 
         elif package_name == self.bai_shi_tong_tv or package_name == self.yun_shi_ting_ji_guang:  # 百事通TV、云视听极光   按一次返回键
             self.touch_back(key_back_repeat_count=1, key_back_wait_time=0)
-            self.touch_back(key_back_repeat_count=1, key_back_wait_time=2)
+            self.touch_back(key_back_repeat_count=2, key_back_wait_time=2)
+            U.Logging.error("应用：" + package_name)
 
         elif package_name == self.fit_time:  # Fit time  先按返回-再按右键-再按OK键-再按返回
             self.touch_back(key_back_repeat_count=1, key_back_wait_time=1)

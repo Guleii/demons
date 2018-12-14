@@ -2,6 +2,7 @@ import time
 
 from general.ImageContrastUtils import ImageContrast
 from config import GlobalConfig as gl
+from general.KeyCodeSentUtils import KeyCode
 
 
 class ImageUtil:
@@ -29,12 +30,16 @@ class ImageUtil:
                                        screen_shot_left_up_y=screen_shot_left_up_y,
                                        screen_shot_right_down_x=screen_shot_right_down_x,
                                        screen_shot_right_down_y=screen_shot_right_down_y,
-                                       err_message=err_message):
+                                       err_message=err_message,neet_enter_center=False):
         image_contrast = ImageContrast(driver)
 
         time.sleep(perform_first_screen_shot_wait_time)
         image_contrast.get_screen_shot_by_custom_size(screen_shot_left_up_x, screen_shot_left_up_y,
                                                       screen_shot_right_down_x, screen_shot_right_down_y).write_to_file(gl.screen_shot_path, first_screen_shot_name)
+
+        if neet_enter_center: # 是否需要进入
+            KeyCode.touch_center(driver)
+
         time.sleep(perform_second_screen_shot_wait_time)
         image_contrast.get_screen_shot_by_custom_size(screen_shot_left_up_x, screen_shot_left_up_y,
                                                       screen_shot_right_down_x, screen_shot_right_down_y).write_to_file(gl.screen_shot_path, second_screen_shot_name)
