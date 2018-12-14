@@ -50,7 +50,7 @@ class LauncherTest(BaseUnittest.BaseTestCase):
         Launcher:点击任意一个非内置应用海报，判断是否下载成功  yun_shi_ting_mao   云视听电视猫
     """
 
-    # @unittest.skipIf(skip_case, skip_reason)
+    @unittest.skipIf(skip_case, skip_reason)
     def test_c_c_launcher_app_load_yun_shi_ting_mao(self):
         single_poster = SingleAppPosterJump(self.driver)
         single_poster.test_load_or_enter_video_app(app_package=single_poster.yun_shi_ting_dian_shi_mao,
@@ -61,7 +61,7 @@ class LauncherTest(BaseUnittest.BaseTestCase):
          Launcher:点击任意一个非内置应用海报，判断是否下载成功    哔哩哔哩TV版
     """
 
-    # @unittest.skipIf(skip_case, skip_reason)
+    @unittest.skipIf(skip_case, skip_reason)
     def test_c_d_launcher_app_load_bili_bili(self):
         # 哔哩哔哩
         single_poster = SingleAppPosterJump(self.driver)
@@ -85,14 +85,14 @@ class LauncherTest(BaseUnittest.BaseTestCase):
         single_poster.test_load_or_enter_video_app(app_package=single_poster.fit_time, key_down_repeat_count=1,
                                                    tab_index=single_poster.tab_two, key_back_repeat_count=0,
                                                    need_first_back=False)
-        time.sleep(15)
+        single_poster.touch_back(key_back_repeat_count=2)
 
     """
         Launcher:点击任意一个非内置应用海报，判断是否下载成功   百视通TV
     """
 
     @unittest.skipIf(skip_case, skip_reason)
-    def test_c_f_launcher_app_load_fit_time(self):
+    def test_c_f_launcher_app_load_bai_shi_tong(self):
         single_poster = SingleAppPosterJump(self.driver)
         LauncherUtils.move_to_target_location(driver=self.driver, tab_index=HomeTabUtils.tab_seven,
                                               key_down_repeat_count=2, key_right_repeat_count=2,
@@ -100,6 +100,7 @@ class LauncherTest(BaseUnittest.BaseTestCase):
         single_poster.test_load_or_enter_video_app(app_package=single_poster.bai_shi_tong_tv, key_down_repeat_count=3,
                                                    tab_index=single_poster.tab_two, key_back_repeat_count=0,
                                                    need_first_back=False)
+        single_poster.touch_back(key_back_repeat_count=2)
 
 
 

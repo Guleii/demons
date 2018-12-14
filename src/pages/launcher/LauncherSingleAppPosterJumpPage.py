@@ -112,7 +112,7 @@ class SingleAppPosterJump(LauncherBasePage):
                                         elif dif_time / 60 > self.down_load_time_out:  # 下载超时
                                                 if ImageUtil.check_video_has_playing_normal(driver=self.driver,
                                                                                             perform_first_screen_shot_wait_time=1,
-                                                                                            perform_second_screen_shot_wait_time=3,
+                                                                                            perform_second_screen_shot_wait_time=10,
                                                                                             err_message=fail_tip):
                                                         pass
                                                 else:
