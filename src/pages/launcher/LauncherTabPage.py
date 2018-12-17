@@ -31,12 +31,16 @@ class LauncherTab(Base):
 
     tab_down_count_list = [0, 6, 0, 3, 4, 4, 7, 5, 0, 0, 0]  # 每个Tab需要通过遥控器的下键移动多少步骤才能展现要找的文本View, 该数组大小需要与tab_text_list数组大小一样，并且下标一一对应
 
-    tab_enter_detail_steps = [[1, 2], [1, 2], [1], [1], [1], [1], [1], [1], [1], [1], [1]]
+    tab_enter_detail_steps = [[1, 2], [1, 2], [1], [1], [1], [1], [1], [1], [1], [1], [1]]  # 检查当前Tab加载是否成功的定位海报步骤
 
     key_down_wait_time = 1
     key_back_wait_time = 2
     key_right_wait_time = 1
     function_perform_time = 2
+
+    default_key_back_count = 2
+    perform_first_screen_shot_wait_time = 1
+    perform_second_screen_shot_wait_time = 2
 
     """
     从Tab栏的左边往右点击，
@@ -59,11 +63,11 @@ class LauncherTab(Base):
 
             self.check_tab_page_load_normal(touch_down_count)
 
-            KeyCode.touch_back(self.driver, wait_time=self.key_back_wait_time,repeat_count=2)
+            KeyCode.touch_back(self.driver, wait_time=self.key_back_wait_time, repeat_count=self.default_key_back_count)
             KeyCode.touch_right(self.driver, wait_time=self.key_right_wait_time)
 
     def check_tab_page_load_normal(self, touch_down_count):
-        KeyCode.touch_back(self.driver, wait_time=self.key_back_wait_time,repeat_count=2)
+        KeyCode.touch_back(self.driver, wait_time=self.key_back_wait_time,repeat_count=self.default_key_back_count)
         step_list = self.tab_enter_detail_steps[touch_down_count]
         for step in step_list:
             step_index = step_list.index(step)
@@ -73,16 +77,18 @@ class LauncherTab(Base):
                 U.Logging.error("长度 ： " + str(len(step_list)))
                 if len(step_list) == 1:
                     U.Logging.error("进入enter长度 ： " + str(len(step_list)))
-                    ImageUtil.check_video_has_playing_normal(driver=self.driver, perform_first_screen_shot_wait_time=1,
-                                                             perform_second_screen_shot_wait_time=2,
+                    ImageUtil.check_video_has_playing_normal(driver=self.driver,
+                                                             perform_first_screen_shot_wait_time=self.perform_first_screen_shot_wait_time,
+                                                             perform_second_screen_shot_wait_time=self.perform_second_screen_shot_wait_time,
                                                              neet_enter_center=True)
-                    KeyCode.touch_back(self.driver, wait_time=self.key_back_wait_time, repeat_count=2)
+                    KeyCode.touch_back(self.driver, wait_time=self.key_back_wait_time, repeat_count=self.default_key_back_count)
 
             elif step_index == 1:
                 KeyCode.touch_right(self.driver, repeat_count=step)
-                ImageUtil.check_video_has_playing_normal(driver=self.driver, perform_first_screen_shot_wait_time=1,
-                                                         perform_second_screen_shot_wait_time=2, neet_enter_center=True)
-                KeyCode.touch_back(self.driver, wait_time=self.key_back_wait_time, repeat_count=2)
+                ImageUtil.check_video_has_playing_normal(driver=self.driver,
+                                                         perform_first_screen_shot_wait_time=self.perform_first_screen_shot_wait_time,
+                                                         perform_second_screen_shot_wait_time=self.perform_second_screen_shot_wait_time, neet_enter_center=True)
+                KeyCode.touch_back(self.driver, wait_time=self.key_back_wait_time, repeat_count=self.default_key_back_count)
 
         time.sleep(2)
 

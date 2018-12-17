@@ -46,6 +46,17 @@ class SingleAppPosterJump(LauncherBasePage):
 
         down_load_time_out = 1  # 下载超时时间单位/分钟
 
+        down_load_time_out_unit = 60  # 下载超时时间分母
+        perform_first_screen_shot_wait_time = 1  # 检查图片是否一直第一次截屏等待时间
+        perform_second_screen_shot_wait_time_pic = 3  # 检查应用是否跳转成功的第二次截屏等待时间
+        perform_second_screen_shot_wait_time_down_load = 10  # 检查下载进度的第二次截屏等待时间
+        need_first_back_key_back_repeat_count = 2  # 进入第一次需要复位的次数
+        enter_video_app_wait_time = 1  # 进入app前的等待时间
+        enter_video_app_after_time = 3  # 进入app后的等待时间
+        exit_app_key_back_repeat_count = 3  # 退出app返回键次数
+        down_load_app_wait_time = 1   # 下载app前的等待时间
+        down_load_app_after_time = 1  # 下载app后的等待时间
+
         load_apk_fail = "应用下载失败应用包名： "
         open_apk_fail = "没有正确打开第三方应用： "
 
@@ -60,7 +71,7 @@ class SingleAppPosterJump(LauncherBasePage):
                                          key_right_repeat_count=LauncherBasePage.key_right_repeat_count,
                                          need_first_back=True):
                 if need_first_back:
-                        self.touch_back(key_back_repeat_count=2)
+                        self.touch_back(key_back_repeat_count=self.need_first_back_key_back_repeat_count)
                 self.move_to_target(key_down_repeat_count=key_down_repeat_count,
                                     key_down_wait_time=key_down_wait_time,
                                     key_left_repeat_count=key_left_repeat_count,
@@ -84,11 +95,11 @@ class SingleAppPosterJump(LauncherBasePage):
                 if app_package in app:
                         self.enter_video_app(adb, app_package=app_package)
                         if self.fit_time == app_package or self.bi_li_bi_li_tv == app_package:
-                                self.touch_back(key_back_repeat_count=3)
+                                self.touch_back(key_back_repeat_count=self.exit_app_key_back_repeat_count)
                         else:
                                 self.touch_back_by_package_name(app_package)
                 else:
-                        KeyCode.touch_center(self.driver, wait_time=1, after_time=1)
+                        KeyCode.touch_center(self.driver, wait_time=self.down_load_app_wait_time, after_time=self.down_load_app_after_time)
 
                         #不要删除一下代码 ，一下代码是另一种判断下载框是否弹出的条件
                         # KeyCode.touch_center(self.driver, wait_time=1, after_time=2)
@@ -97,7 +108,7 @@ class SingleAppPosterJump(LauncherBasePage):
                         # if current_activity != enter_activity:
                         #         raise Exception(self.load_apk_fail + app_package)
 
-                        if ImageUtil.check_video_has_playing_normal(driver=self.driver,perform_first_screen_shot_wait_time=1, perform_second_screen_shot_wait_time=3):
+                        if ImageUtil.check_video_has_playing_normal(driver=self.driver,perform_first_screen_shot_wait_time=self.perform_first_screen_shot_wait_time, perform_second_screen_shot_wait_time=self.perform_second_screen_shot_wait_time_pic):
                                 pass
                         else:
                                 start_time = int(time.time())
@@ -109,10 +120,10 @@ class SingleAppPosterJump(LauncherBasePage):
                                                 self.enter_video_app(adb, app_package=app_package)
                                                 self.touch_back_by_package_name(app_package)
                                                 break
-                                        elif dif_time / 60 > self.down_load_time_out:  # 下载超时
+                                        elif dif_time / self.down_load_time_out_unit > self.down_load_time_out:  # 下载超时
                                                 if ImageUtil.check_video_has_playing_normal(driver=self.driver,
-                                                                                            perform_first_screen_shot_wait_time=1,
-                                                                                            perform_second_screen_shot_wait_time=10,
+                                                                                            perform_first_screen_shot_wait_time=self.perform_first_screen_shot_wait_time,
+                                                                                            perform_second_screen_shot_wait_time=self.perform_second_screen_shot_wait_time_down_load,
                                                                                             err_message=fail_tip):
                                                         pass
                                                 else:
@@ -122,7 +133,7 @@ class SingleAppPosterJump(LauncherBasePage):
 
         def enter_video_app(self, adb, app_package=you_ku):
                 U.Logging.error("已经包含优酷：11")
-                KeyCode.touch_center(self.driver, wait_time=1, after_time=3)
+                KeyCode.touch_center(self.driver, wait_time=self.enter_video_app_wait_time, after_time=self.enter_video_app_after_time)
                 current_activity_package_name = adb.get_current_package_name()
                 if app_package not in current_activity_package_name:
                         raise Exception(self.open_apk_fail+app_package)
