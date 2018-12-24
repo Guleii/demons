@@ -17,7 +17,7 @@ import time
 # sevenLocation = [(950, 123), (1136, 165)]
 # eightLocation = [(1136, 123), (1286, 165)]
 # nineLocation = [(1286, 123), (1436, 165)]
-# tenLocation = [(1436, 123), (1557, 165)]
+tenLocation = [(1436, 123), (1557, 165)]
 # elevenLocation = [(1557, 123), (1707, 165)]
 
 # 测试环境tab坐标

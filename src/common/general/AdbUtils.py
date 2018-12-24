@@ -921,7 +921,10 @@ class ADB(object):
         :return:mac地址
         """
         t = self.shell("cat /sys/class/net/wlan0/address").stdout.readlines()
-        return ''.join(t).strip()
+        info = str(t)  # 需要更改添加str()
+        # info1 = info[0]
+        # info2 = info1.decode('GBK')
+        return ''.join(info).strip()
 
     def get_cpu_info_all(self):
         """

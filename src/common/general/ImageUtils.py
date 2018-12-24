@@ -6,8 +6,8 @@ from general.KeyCodeSentUtils import KeyCode
 
 
 class ImageUtil:
-    first_screen_shot_name = "first_screen_shot"  # 第一张截图的默认名称
-    second_screen_shot_name = "second_screen_shot"  # 第二张截图的默认名称
+    first_screen_shot_name = gl.test_app_more_device_device_name+"first_screen_shot"  # 第一张截图的默认名称
+    second_screen_shot_name = gl.test_app_more_device_device_name+"second_screen_shot"  # 第二张截图的默认名称
     perform_first_screen_shot_wait_time = 10  # 第一张截图执行前默认等待的时间
     perform_second_screen_shot_wait_time = 10  # 第二张截图执行前默认等待的时间
     image_contrast_percent = 10  # 图片默认对比是否一致的百分比

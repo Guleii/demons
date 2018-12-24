@@ -62,5 +62,8 @@ def get_app_pix(devices):
     result = os.popen("adb -s " + devices+ " shell wm size", "r")
     return result.readline().split("Physical size:")[1]
 
+
+
+
 if __name__=="__main__":
     getPhoneInfo("DU2TAN15AJ049163")

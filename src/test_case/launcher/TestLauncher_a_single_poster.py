@@ -17,7 +17,7 @@ from moudle import HomeTabUtils
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-skip_case = False
+skip_case = True
 skip_reason = "调试"
 
 
@@ -34,7 +34,7 @@ class LauncherTest(BaseUnittest.BaseTestCase):
     """
         单张海报跳转到聚体育  点击海报正确的播放视频
     """
-    @unittest.skipIf(skip_case, skip_reason)
+    # @unittest.skipIf(skip_case, skip_reason)
     def test_a_a_ju_ti_yu_poster(self):
         LauncherUtils.move_to_target_location(driver=self.driver, tab_index=HomeTabUtils.tab_nine,
                                               key_down_repeat_count=1, key_left_repeat_count=0,

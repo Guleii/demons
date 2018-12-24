@@ -6,17 +6,25 @@ description:配置全局参数
 import time
 import os
 
+
+
+
+test_app_more_device_device_name = ""  # 用于多设备连接时生成的报告的名称的前缀
+
+
+
+
 # 配置生成报告与日志的名称与目录
 # 获取项目路径
 # project_path = os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)[0]), '.'))
 project_path = os.path.abspath(os.path.join(os.path.dirname(os.path.split(os.path.realpath(__file__))[0]), '.'))
 # 测试用例代码存放路径（用于构建suite,注意该文件夹下的文件都应该以test开头命名）
-test_case_path = project_path+"\\src\\test_case"
+test_case_path = project_path+"\\src\\test_case\\launcher"
 # print u'日志路径：'+log_path
 # 测试报告存储路径，并以当前时间作为报告名称前缀
 report_path = project_path+"\\report\\"
-report_name = "report.html"
-log_name = "Launcher.log"
+report_name = test_app_more_device_device_name+"report.html"
+log_name = test_app_more_device_device_name+"Launcher.log"
 # report_name = report_path+time.strftime('%Y%m%d%H%S', time.localtime())
 
 # 截屏存储路径
@@ -58,3 +66,15 @@ email_content = 'Launcher测试用例已完成测试，请查收，报告与日�
 # email_To = ["alan.li@xgimi.com", "1291380515@qq.com"]  # 收件人 可发送多个，多个邮件以英文逗号分隔
 # email_title = 'Launcher测试报告'  # 邮件标题
 # email_content = 'Launcher测试用例已完成测试，请查收，报告与日志'  # 邮件内容
+
+
+
+
+# 添加测试App路径
+# test_app_path = project_path+"/app/WuPingZhuShou4.0.4_Oppo.apk"  # 如果想测试移动端应用，就添加应用到app目录下面，此路径是模版
+test_app_more_devices = True  # 是否进行多设备连接
+test_app_path = ""  # 如果想测试移动端应用，就添加应用到app目录下面，默认是不添加
+# test_app_package = "com.xgimi.zhushou"  # 如果想测试移动端应用，就添加应用到app目录下面，默认是不添加
+test_app_package = "com.xgimi.home"  # 如果想测试移动端应用，就添加应用到app目录下面，默认是不添加
+# test_app_need_start_splash_activity = "com.xgimi.zhushou.alan.ui.SplashActivity"  # 如果想测试移动端应用，就添加应用到app目录下面，默认是不添加
+test_app_need_start_splash_activity = "com.xgimi.home.ui.MainActivity"  # 如果想测试移动端应用，就添加应用到app目录下面，默认是不添加

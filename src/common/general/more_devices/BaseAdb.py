@@ -1,5 +1,9 @@
 
 # -*- coding: utf-8 -*-
+__author__ = 'Alan'
+"""
+adb工具类
+"""
 
 import subprocess
 

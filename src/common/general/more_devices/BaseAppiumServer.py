@@ -1,4 +1,9 @@
+
 # -*- coding: utf-8 -*-
+__author__ = 'Alan'
+"""
+启动appium的工具类
+"""
 import os
 import socket
 import urllib.request
