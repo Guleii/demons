@@ -42,6 +42,10 @@ class AndroidDebugBridge(object):
         # print(result)
         # print(devices)
         return devices
+
+
+
+
     # 状态
     def get_state(self):
         result = self.call_adb("get-state")
@@ -89,6 +93,18 @@ class AndroidDebugBridge(object):
         result = string.split(" ")
         # print(result[4])
         return result[4]
+
+    # 当连接单个设备时获取设备名称
+    def get_only_one_device_name(self):
+        # result = self.call_adb("devices")
+        devices = self.attached_devices()
+        devices_name =""
+        for item in devices:
+            devices_name = item
+        # print(result)
+        # print(devices)
+        return devices_name
+
 
 if __name__ == '__main__':
 

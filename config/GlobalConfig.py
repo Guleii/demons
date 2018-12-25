@@ -8,8 +8,8 @@ import os
 
 
 
-
-test_app_more_device_device_name = ""  # 用于多设备连接时生成的报告的名称的前缀
+test_app_more_device_device_identity_prefix = ""  # 用于多设备连接时生成的报告的名称的前缀
+test_app_more_device_device_name = ""  # 用于多设备连接时adb devices 时设备名称
 
 
 
@@ -23,8 +23,8 @@ test_case_path = project_path+"\\src\\test_case\\launcher"
 # print u'日志路径：'+log_path
 # 测试报告存储路径，并以当前时间作为报告名称前缀
 report_path = project_path+"\\report\\"
-report_name = test_app_more_device_device_name+"report.html"
-log_name = test_app_more_device_device_name+"Launcher.log"
+report_name = "report.html"
+log_name = "Launcher.log"
 # report_name = report_path+time.strftime('%Y%m%d%H%S', time.localtime())
 
 # 截屏存储路径
@@ -72,7 +72,7 @@ email_content = 'Launcher测试用例已完成测试，请查收，报告与日�
 
 # 添加测试App路径
 # test_app_path = project_path+"/app/WuPingZhuShou4.0.4_Oppo.apk"  # 如果想测试移动端应用，就添加应用到app目录下面，此路径是模版
-test_app_more_devices = True  # 是否进行多设备连接
+test_app_more_devices = False  # 是否进行多设备连接
 test_app_path = ""  # 如果想测试移动端应用，就添加应用到app目录下面，默认是不添加
 # test_app_package = "com.xgimi.zhushou"  # 如果想测试移动端应用，就添加应用到app目录下面，默认是不添加
 test_app_package = "com.xgimi.home"  # 如果想测试移动端应用，就添加应用到app目录下面，默认是不添加

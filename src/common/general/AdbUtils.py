@@ -974,6 +974,29 @@ class ADB(object):
         """
         self.shell("ime set %s" % arg)
 
+    def get_screen_normal_size(self):
+        """
+        获取设备屏幕分辨率 >> 标配
+        :return:
+        """
+        return self.shell('wm size').read().strip().split()[-1].split('x')
+
+    def get_screen_reality_size(self):
+        """
+        获取设备屏幕分辨率 >> 实际分辨率
+        :return:
+        """
+        x = 0
+        y = 0
+        l = self.shell(r'getevent -p | %s -e "0"' % self.__find).readlines()
+        for n in l:
+            if len(n.split()) > 0:
+                if n.split()[0] == '0035':
+                    x = int(n.split()[7].split(',')[0])
+                elif n.split()[0] == '0036':
+                    y = int(n.split()[7].split(',')[0])
+        return x, y
+
 
 if __name__ == "__main__":
     A = ADB()

@@ -40,7 +40,7 @@ class LauncherTest(BaseUnittest.BaseTestCase):
                                               key_down_repeat_count=1, key_left_repeat_count=0,
                                               key_right_repeat_count=0, key_center_repeat_count=1,
                                               )
-        self.check_video_jump_is_right_and_back()
+        # self.check_video_jump_is_right_and_back()
 
     """
         单张海报跳转到芒果TV 点击海报正确的播放视频

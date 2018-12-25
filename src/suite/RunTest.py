@@ -17,15 +17,18 @@ suite = unittest.defaultTestLoader.discover(start_dir=test_case_path, pattern='T
 
 
 def run_case_one_device():
+    gl.test_app_more_device_device_name = AndroidDebugBridge().get_only_one_device_name()
+    # runner = unittest.TextTestRunner(verbosity=2)
+    # runner.run(suite)
     runner = HtmlReport.get_generate_report_object()
     runner.run(suite)
     start_send_email()  # 发送邮件
 
 
-def run_case_more_devices():
-    runner = HtmlReport.get_generate_report_object()
+def run_case_more_devices(current_device):
+    runner = HtmlReport.get_generate_report_object(current_device)
     runner.run(suite)
-    # start_send_email()  # 发送邮件
+    start_send_email()  # 发送邮件
     # runner = unittest.TextTestRunner(verbosity=2)
     # runner.run(suite)
 

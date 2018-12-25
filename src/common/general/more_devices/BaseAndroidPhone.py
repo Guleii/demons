@@ -1,5 +1,7 @@
 
 # -*- coding: utf-8 -*-
+from general.AdbUtils import ADB
+
 __author__ = 'shikun'
 import os
 import re
@@ -63,7 +65,24 @@ def get_app_pix(devices):
     return result.readline().split("Physical size:")[1]
 
 
+"""
+    返回设备的信息
+    device_name 连接设备时adb devices 显示的设备名称
+"""
+def get_device_identity(device_name):
+    get_phone = getPhoneInfo(device_name)
+    device_identity = get_phone["device"] + "_" + get_phone["brand"] + "_" + get_phone[
+        "model"] + "_" + "android" + "_" + get_phone[
+                                              "release"]
+    return device_identity
 
+
+def get_device_mac(device_name):
+    adb = ADB(device_id=device_name)
+    mac = adb.get_mac_address().upper().replace(':', '')
+    mac1 = mac[3:15]
+
+    return mac1
 
 if __name__=="__main__":
     getPhoneInfo("DU2TAN15AJ049163")

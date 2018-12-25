@@ -25,10 +25,10 @@ mail_pass = gl.email_password
 port = gl.email_port
 header_msg = gl.email_title
 attach = gl.email_content
-report = gl.report_path+gl.report_name
-log = gl.report_path+gl.log_name
-log_name = gl.log_name
-report_name = gl.report_name
+report = gl.report_path+gl.test_app_more_device_device_identity_prefix+"_"+gl.report_name
+log = gl.report_path+gl.test_app_more_device_device_identity_prefix+"_"+gl.log_name
+log_name = gl.test_app_more_device_device_identity_prefix+"_"+gl.log_name
+report_name = gl.test_app_more_device_device_identity_prefix+"_"+gl.report_name
 
 
 def _format_addr(s):
@@ -84,6 +84,14 @@ def start_send_email():
     # report_list.sort(
     #     key=lambda fn: os.path.getmtime(gl.report_path + fn) if not os.path.isdir(gl.report_path + fn) else 0)
     # new_report = os.path.join(gl.report_path, report_list[-1])
+
+    log = gl.report_path +gl.log_name
+    log_name = gl.log_name
+
+    report = gl.report_path + gl.report_name
+    report_name = gl.report_name
+
+
     time.sleep(5)  # 设置睡眠时间，等待测试报告生成完毕（不然邮件会因为报告为空而无法发送）
     send_mail(to_addr=to_addr, mail_host=mail_host, mail_user=mail_user, port=port, mail_pass=mail_pass,
               header_msg=header_msg, report=report, attach=attach, report_name=report_name, log=log, log_name=log_name)

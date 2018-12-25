@@ -206,7 +206,7 @@ def start_run_test_with_more_devices_with_accurate():
 
 def run_test_case(devices):
     DriverConfig.driver_configure.set_device_value(devices)
-    run_case_more_devices()
+    run_case_more_devices(devices)
     # testDemo(devices)
 
 

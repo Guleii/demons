@@ -1,10 +1,11 @@
 # coding:utf-8
-from general.more_devices.BaseAndroidPhone import getPhoneInfo
+
 
 __author__ = 'Helen'
 '''
 description:driver配置
 '''
+from general.more_devices.BaseAndroidPhone import *
 from appium import webdriver
 import config.GlobalConfig as  gl
 from general.AdbUtils import ADB
@@ -39,17 +40,14 @@ class driver_configure():
                 port = current_connect_device_info["port"]
                 device_name = current_connect_device_info["deviceName"]
                 # gl.test_app_more_device_device_name = device_name
-                adb = ADB(device_id=device_name)
-                get_phone = getPhoneInfo(device_name)
-                gl.test_app_more_device_device_name = get_phone["device"] + "_"+get_phone["brand"] + "_" + get_phone["model"] + "_" + "android" + "_" + get_phone[
-                    "release"]+"_"+adb.get_mac_address()
-
-                ImageUtil.first_screen_shot_name = gl.test_app_more_device_device_name + "first_screen_shot"
-                ImageUtil.second_screen_shot_name = gl.test_app_more_device_device_name + "second_screen_shot"
-                gl.report_name = gl.test_app_more_device_device_name + "report.html"
-                gl.log_name = gl.test_app_more_device_device_name + "Launcher.log"
+                gl.test_app_more_device_device_identity_prefix = get_device_mac(device_name)+"_"
+                gl.test_app_more_device_device_name = device_name
+                # ImageUtil.first_screen_shot_name = gl.test_app_more_device_device_identity_prefix + "first_screen_shot"
+                # ImageUtil.second_screen_shot_name = gl.test_app_more_device_device_identity_prefix + "second_screen_shot"
+                gl.report_name = gl.test_app_more_device_device_identity_prefix + "report.html"
+                gl.log_name = gl.test_app_more_device_device_identity_prefix + "Launcher.log"
                 self.desired_caps['systemPort'] = current_connect_device_info["systemPort"]
-                print("...................................................  qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq   " + gl.test_app_more_device_device_name+"   "+device_name+"   "+ImageUtil.second_screen_shot_name)
+                print("...................................................  qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq   " + gl.test_app_more_device_device_identity_prefix + "   " + device_name + "  mac地址：    ")
 
 
 
