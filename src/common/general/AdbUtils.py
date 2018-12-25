@@ -952,7 +952,7 @@ class ADB(object):
         :return:设备全部进程信息
         """
         t = self.shell("ps").stdout.readlines()
-        return ''.join(t).strip()
+        return ''.join(str(t)).strip()
 
     def get_cpu_mem_info(self):
         """

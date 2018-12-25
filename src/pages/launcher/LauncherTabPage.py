@@ -75,13 +75,13 @@ class LauncherTab(Base):
                     U.Logging.error("进入enter长度 ： " + str(len(step_list)))
                     ImageUtil.check_video_has_playing_normal(driver=self.driver, perform_first_screen_shot_wait_time=1,
                                                              perform_second_screen_shot_wait_time=2,
-                                                             neet_enter_center=True)
+                                                             need_enter_center=True)
                     KeyCode.touch_back(self.driver, wait_time=self.key_back_wait_time, repeat_count=2)
 
             elif step_index == 1:
                 KeyCode.touch_right(self.driver, repeat_count=step)
                 ImageUtil.check_video_has_playing_normal(driver=self.driver, perform_first_screen_shot_wait_time=1,
-                                                         perform_second_screen_shot_wait_time=2, neet_enter_center=True)
+                                                         perform_second_screen_shot_wait_time=2, need_enter_center=True)
                 KeyCode.touch_back(self.driver, wait_time=self.key_back_wait_time, repeat_count=2)
 
         time.sleep(2)
