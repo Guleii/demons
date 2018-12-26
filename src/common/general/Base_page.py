@@ -18,9 +18,10 @@ class Base:
     """
     def check_has_element_by_text(self, text="", wait_time=2):
         content = "//*[@text='%s']" % text
-        U.Logging.error("获取的元素:  "+content)
+        # U.Logging.error("获取的元素:  "+content)
         if "" != content:
             time.sleep(wait_time)
+            U.Logging.error("查找获取的元素:  " + content)
             self.driver.find_element_by_xpath(content)
 
     # 重新封装单个元素定位方法

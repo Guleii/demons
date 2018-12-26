@@ -39,11 +39,13 @@ class ImageUtil:
         image_contrast = ImageContrast(driver)
 
         time.sleep(perform_first_screen_shot_wait_time)
+        print("。。。。。。。。。。。。。。。。。。。。。。。。。。。。。开始拍第一张照片")
         image_contrast.get_screen_shot_by_custom_size(screen_shot_left_up_x, screen_shot_left_up_y,
                                                       screen_shot_right_down_x, screen_shot_right_down_y).write_to_file(gl.screen_shot_path, gl.test_app_more_device_device_identity_prefix + first_screen_shot_name)
 
         if need_enter_center:  # 是否需要进入
-            KeyCode.touch_center(driver, key_center_repeat_count, wait_time=key_center_wait_time)
+            print("。。。。。。。。。。。。。。。。。。。。。。。。。。。。。打开应用")
+            KeyCode.touch_center(driver, repeat_count=key_center_repeat_count, wait_time=key_center_wait_time)
 
         time.sleep(perform_second_screen_shot_wait_time)
         image_contrast.get_screen_shot_by_custom_size(screen_shot_left_up_x, screen_shot_left_up_y,

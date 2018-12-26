@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-
+# coding:utf-8
 
-"""HTMLTestRunner 截图版示例 appium版"""
+__author__ = 'Alan'
+"""
+    description:应用市场测试用例
+"""
+
 import unittest
 # from HTMLTestRunner_cn import HTMLTestRunner
 from general import KeyCodeSentUtils, Utils, BaseUnittest
@@ -16,30 +21,21 @@ from moudle import HomeTabUtils
 
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from src.pages.appMarket.SearchAppPage import SearchApp
 
 skip_case = False
 skip_reason = "调试"
 
 
-class LauncherTest(BaseUnittest.BaseTestCase):
-
-
-
+class AppMarketTest(BaseUnittest.BaseTestCase):
 
     """
-                Launcher:多级海报点击测试
+        测试应用市场
     """
-    # @unittest.skipIf(skip_case, skip_reason)
-    def test_b_b_launcher_multi_posters_jump(self):
-        multi_posters = MultiPosters(self.driver)
-        multi_posters.click_multi_posters_to_detail_no_config(tab_index=multi_posters.tab_six,
-                                                              key_down_repeat_count=2, key_left_repeat_count=1,
-                                                              key_right_repeat_count=2, target_text='贝瓦儿歌',
-                                                              key_center_wait_time=5)
-        # multi_posters.click_multi_posters_to_detail_no_config(tab_index=HomeTabUtils.tab_two,
-        #                                                       key_down_repeat_count=1, key_left_repeat_count=0,
-        #                                                       key_right_repeat_count=0,
-        #                                                       key_center_wait_time=3)
+    @unittest.skipIf(skip_case, skip_reason)
+    def test_a_app_market(self):
+        search_app = SearchApp(self.driver)
+        search_app.start_test_search_app()
 
 
 
@@ -53,7 +49,7 @@ if __name__ == "__main__":
 
     time.sleep(10)
     suiteAll = unittest.TestSuite()
-    test1 = unittest.TestLoader().loadTestsFromTestCase(LauncherTest)
+    test1 = unittest.TestLoader().loadTestsFromTestCase(AppMarketTest)
     # test2 = unittest.TestLoader().loadTestsFromTestCase(case_02)
     suiteAll.addTest(test1)
     runner = HtmlReport.get_generate_report_object()
@@ -61,6 +57,4 @@ if __name__ == "__main__":
 
     # 发送邮件
     # start_send_email()
-
-
 

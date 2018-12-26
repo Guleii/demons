@@ -15,7 +15,7 @@ from general.ImageUtils import ImageUtil
 from src.pages.appManage.AppManageDataConfig import *
 
 
-class SearchApp(LauncherBasePage):
+class UninstallApp(LauncherBasePage):
 
     """
         定位到应用市场位置
@@ -76,6 +76,58 @@ class SearchApp(LauncherBasePage):
             return True
         except Exception:
             return False
+
+    """
+        检测系统应用的卸载应用按钮是否可以被选中
+    """
+    def test_system_app_can_uninstall(self):
+        self.location_app_market()
+        self.find_uninstall_button_and_check_attribute()
+        self.location_reset()
+
+    """
+        找到卸载按钮并检查其属性
+    """
+    def find_uninstall_button_and_check_attribute(self):
+        while True:
+            KeyCode.touch_down(self.driver)
+            try:
+                self.check_has_element_by_text(uninstall_system_app_name)
+                uninstall_button_index, uninstall_button_view_elements = self.find_need_uninstall_system_view_index()
+
+                self.check_uninstall_button_attribute(uninstall_button_index, uninstall_button_view_elements)
+                break
+            except Exception:
+                pass
+
+    """
+        检查卸载按钮的属性
+    """
+    def check_uninstall_button_attribute(self, uninstall_button_index, uninstall_button_view_elements):
+        if uninstall_button_view_elements:
+            uninstall_system_app = uninstall_button_view_elements[
+                uninstall_button_index]  # 根据要停止的应用名称对应的index获取到对应的强行停止的view的index
+            focusable = uninstall_system_app.get_attribute(uninstall_app_button_attribute)
+            if focusable == uninstall_app_button_attribute_value:
+                raise Exception(system_app_can_uninstall)
+
+    """
+         找到需要停止的应用的"强行停止"按钮的index
+     """
+
+    def find_need_uninstall_system_view_index(self):
+        self.check_has_element_by_text(stop_app_name)
+        uninstall_button_view_elements = self.driver.find_elements_by_id(uninstall_app_button_view_id)  # 获取显示应用的强行停止的view集合
+        uninstall_text_view_elements = self.driver.find_elements_by_id(uninstall_system_app_name)  # 获取显示应用的名称的view集合
+        uninstall_button_index = 0
+        if uninstall_text_view_elements:
+            for view in uninstall_text_view_elements:
+                index = uninstall_text_view_elements.index(view)
+                text = view.text()
+                if text == uninstall_system_app_name:
+                    uninstall_button_index = index  # 找到要停止的应用名称对应的index
+                    break
+        return uninstall_button_index, uninstall_button_view_elements
 
     """
         位置复位

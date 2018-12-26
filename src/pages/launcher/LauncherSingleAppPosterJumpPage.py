@@ -2,7 +2,7 @@
 
 __author__ = 'Alan'
 '''
-description: Launcher 单张海报点击跳转测试
+description: Launcher 单张海报点击应用跳转测试
 '''
 from moudle.LauncherBasePage import LauncherBasePage
 from general.Base_page import Base

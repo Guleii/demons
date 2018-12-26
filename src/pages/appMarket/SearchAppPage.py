@@ -1,7 +1,7 @@
 # coding:utf-8
 __author__ = 'Alan'
 '''
-description: 应用管理 --》更新应用
+description: 应用市场 --》搜索应用测试
 '''
 
 import random
@@ -15,7 +15,7 @@ from general.ImageUtils import ImageUtil
 from src.pages.appMarket.AppMarketDataConfig import *
 
 
-class UpdateApp(LauncherBasePage):
+class SearchApp(LauncherBasePage):
 
     """
         定位到应用市场位置
@@ -52,6 +52,7 @@ class UpdateApp(LauncherBasePage):
         self.location_search_and_enter()
         self.enter_test_content()
         self.check_search_is_successful()
+        self.check_search_result_can_use()
 
         self.location_reset()
 
@@ -85,14 +86,19 @@ class UpdateApp(LauncherBasePage):
     """
     def check_has_open_search_app_page_and_open_app(self):
         self.check_has_element_by_text(check_search_app_can_show)
+        time.sleep(enter_search_app_wait_time)
+        KeyCode.touch_center(self.driver, wait_time=enter_search_app_wait_time, after_time=enter_search_app_wait_time)
         start_time = int(time.time())
-        while self.check_search_result_app_has_download_finish:
+        while True:
             current_time = int(time.time())
             dif_time = current_time - start_time
+            if self.check_search_result_app_has_download_finish():
+                break
             if dif_time/60 > down_load_time_out:  # 下载超时
                 if self.check_search_result_app_has_download_finish():  # 下载失败
                     raise Exception(load_apk_fail)
-            break
+
+        print("。。。。。。。。。。。。。。。。。。。。。。。。。。。。。开始拍照")
         ImageUtil.check_video_has_playing_normal(self.driver, need_enter_center=True,
                                                  key_center_wait_time=enter_search_app_wait_time,
                                                  key_center_repeat_count=search_result_app_open_repeat_count)
@@ -101,8 +107,13 @@ class UpdateApp(LauncherBasePage):
         退出打开的应用
     """
     def reset_has_opened_search_result_app(self):
+        print("。。。。。。。。。。。。。。。。。。。。。。。。。。。。。截图完成，开始点击center")
+        KeyCode.touch_center(self.driver, wait_time=enter_search_app_wait_time, after_time=enter_search_app_wait_time)
+        print("。。。。。。。。。。。。。。。。。。。。。。。。。。。。。截图完成，开始点击返回")
         KeyCode.touch_back(self.driver)
-        KeyCode.touch_down(self.driver)
+        print("。。。。。。。。。。。。。。。。。。。。。。。。。。。。。截图完成，开始点击向下")
+        KeyCode.touch_down(self.driver, wait_time=enter_search_app_wait_time)
+        print("。。。。。。。。。。。。。。。。。。。。。。。。。。。。。截图完成，开始点击退出")
         KeyCode.touch_center(self.driver, wait_time=enter_search_app_wait_time, after_time=enter_search_app_wait_time)
 
     """
@@ -111,6 +122,7 @@ class UpdateApp(LauncherBasePage):
     def check_search_result_app_has_download_finish(self):
         try:
             self.check_has_element_by_text(check_search_app_has_download_finish)
+            print("。。。。。。。。。。。。。。。。。。。。。。。。。。。。。获取到打开")
             return True
         except Exception:
             return False
@@ -122,7 +134,7 @@ class UpdateApp(LauncherBasePage):
     def location_search_app(self):
         KeyCode.touch_right(self.driver)
         KeyCode.touch_center(self.driver, wait_time=enter_search_app_wait_time, after_time=enter_search_app_wait_time)
-        KeyCode.touch_center(self.driver, wait_time=enter_search_app_wait_time, after_time=enter_search_app_wait_time)
+
 
     """
         搜索应用位置复位

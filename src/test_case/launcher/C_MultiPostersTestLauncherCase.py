@@ -1,6 +1,8 @@
-# -*- coding: utf-8 -*-
-
-"""HTMLTestRunner 截图版示例 appium版"""
+# coding:utf-8
+__author__ = 'Alan'
+'''
+description: Launcher 多级海报点击跳转测试
+'''
 import unittest
 # from HTMLTestRunner_cn import HTMLTestRunner
 from general import KeyCodeSentUtils, Utils, BaseUnittest
@@ -25,14 +27,23 @@ class LauncherTest(BaseUnittest.BaseTestCase):
 
 
 
+
     """
-            Launcher:tab测试
+                Launcher:多级海报点击测试
     """
     # @unittest.skipIf(skip_case, skip_reason)
-    def test_b_a_launcher_tab(self):
-        KeyCodeSentUtils.KeyCode.touch_back(self.driver, 4)
-        launcher_tab = LauncherTab(self.driver)
-        launcher_tab.click_tab_from_left_to_right()
+    def test_b_b_launcher_multi_posters_jump(self):
+        multi_posters = MultiPosters(self.driver)
+        multi_posters.click_multi_posters_to_detail_no_config(tab_index=multi_posters.tab_six,
+                                                              key_down_repeat_count=2, key_left_repeat_count=1,
+                                                              key_right_repeat_count=2, target_text='贝瓦儿歌',
+                                                              key_center_wait_time=5)
+        # multi_posters.click_multi_posters_to_detail_no_config(tab_index=HomeTabUtils.tab_two,
+        #                                                       key_down_repeat_count=1, key_left_repeat_count=0,
+        #                                                       key_right_repeat_count=0,
+        #                                                       key_center_wait_time=3)
+
+
 
 
 

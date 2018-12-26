@@ -1,6 +1,4 @@
 # coding:utf-8
-from general.ImageUtils import ImageUtil
-
 __author__ = 'Alan'
 '''
 description: Launcher Tab切换测试
@@ -10,7 +8,7 @@ from general.Base_page import Base
 from moudle.HomeTabUtils import TabUtils
 from general.KeyCodeSentUtils import *
 from general import Utils as U
-
+from general.ImageUtils import ImageUtil
 
 class LauncherTab(Base):
 

@@ -15,7 +15,7 @@ from general.ImageUtils import ImageUtil
 from src.pages.appManage.AppManageDataConfig import *
 
 
-class SearchApp(LauncherBasePage):
+class UpdateApp(LauncherBasePage):
 
     """
         定位到应用市场位置
