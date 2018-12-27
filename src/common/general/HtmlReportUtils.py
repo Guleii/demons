@@ -5,7 +5,7 @@ description:生成HTML报告的实例获取
 '''
 from general.HTMLTestRunner_cn import HTMLTestRunner
 from config import GlobalConfig as gl
-
+from general.more_devices.BaseAndroidPhone import *
 
 class HtmlReport:
 
@@ -13,8 +13,23 @@ class HtmlReport:
         获取生成报告的HtmlTestRunner实例
     """
     @staticmethod
+    def get_generate_report_object(current_device):
+        gl.test_app_more_device_device_identity_prefix = get_device_mac(current_device["deviceName"])+"_"
+        report_html = gl.report_path+gl.test_app_more_device_device_identity_prefix+gl.report_name
+        gl.report_name = report_html
+        print("地址wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww： "+str(report_html))
+        runner = HTMLTestRunner(title=gl.html_title, description=gl.html_description, stream=open(report_html, "wb"),
+                                verbosity=2, retry=gl.test_case_retry_count, save_last_try=gl.save_last_try_result)
+        return runner
+
+    """
+            获取生成报告的HtmlTestRunner实例
+    """
+
+    @staticmethod
     def get_generate_report_object():
         report_html = gl.report_path+gl.report_name
+        print("地址wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww： " + str(report_html))
         runner = HTMLTestRunner(title=gl.html_title, description=gl.html_description, stream=open(report_html, "wb"),
                                 verbosity=2, retry=gl.test_case_retry_count, save_last_try=gl.save_last_try_result)
         return runner

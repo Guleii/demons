@@ -1,6 +1,4 @@
 # coding:utf-8
-from general.ImageUtils import ImageUtil
-
 __author__ = 'Alan'
 '''
 description: Launcher Tab切换测试
@@ -10,7 +8,7 @@ from general.Base_page import Base
 from moudle.HomeTabUtils import TabUtils
 from general.KeyCodeSentUtils import *
 from general import Utils as U
-
+from general.ImageUtils import ImageUtil
 
 class LauncherTab(Base):
 
@@ -75,13 +73,13 @@ class LauncherTab(Base):
                     U.Logging.error("进入enter长度 ： " + str(len(step_list)))
                     ImageUtil.check_video_has_playing_normal(driver=self.driver, perform_first_screen_shot_wait_time=1,
                                                              perform_second_screen_shot_wait_time=2,
-                                                             neet_enter_center=True)
+                                                             need_enter_center=True)
                     KeyCode.touch_back(self.driver, wait_time=self.key_back_wait_time, repeat_count=2)
 
             elif step_index == 1:
                 KeyCode.touch_right(self.driver, repeat_count=step)
                 ImageUtil.check_video_has_playing_normal(driver=self.driver, perform_first_screen_shot_wait_time=1,
-                                                         perform_second_screen_shot_wait_time=2, neet_enter_center=True)
+                                                         perform_second_screen_shot_wait_time=2, need_enter_center=True)
                 KeyCode.touch_back(self.driver, wait_time=self.key_back_wait_time, repeat_count=2)
 
         time.sleep(2)

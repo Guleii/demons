@@ -8,17 +8,17 @@ from general.KeyCodeSentUtils import *
 import time
 
 # 正式环境tab坐标（1920*1080）
-# oneLocation = [(102, 123), (223, 165)]
-# twoLocation = [(216, 123), (366, 165)]
-# threeLocation = [(366, 123), (516, 165)]
-# fourLocation = [(516, 123), (650, 165)]
-# fiveLocation = [(650, 123), (800, 165)]
-# sixLocation = [(800, 123), (950, 165)]
-# sevenLocation = [(950, 123), (1136, 165)]
-# eightLocation = [(1136, 123), (1286, 165)]
-# nineLocation = [(1286, 123), (1436, 165)]
-# tenLocation = [(1436, 123), (1557, 165)]
-# elevenLocation = [(1557, 123), (1707, 165)]
+oneLocation = [(102, 123), (223, 165)]
+twoLocation = [(216, 123), (366, 165)]
+threeLocation = [(366, 123), (516, 165)]
+fourLocation = [(516, 123), (650, 165)]
+fiveLocation = [(650, 123), (800, 165)]
+sixLocation = [(800, 123), (950, 165)]
+sevenLocation = [(950, 123), (1136, 165)]
+eightLocation = [(1136, 123), (1286, 165)]
+nineLocation = [(1286, 123), (1436, 165)]
+tenLocation = [(1436, 123), (1557, 165)]
+elevenLocation = [(1557, 123), (1707, 165)]
 
 # 测试环境tab坐标(1920*1080)
 # oneLocation = [(102, 123), (216, 165)]
@@ -33,16 +33,16 @@ import time
 # elevenLocation = nineLocation
 
 # 测试环境tab坐标(1280*800)
-oneLocation = [(68, 82), (144, 110)]
-twoLocation = [(138, 80), (250, 112)]
-threeLocation = [(244, 82), (344, 110)]
-fourLocation = [(344, 82), (468, 110)]
-fiveLocation = [(468, 82), (568, 110)]
-sixLocation = [(568, 82), (668, 110)]
-sevenLocation = [(668, 82), (749, 110)]
-eightLocation = [(749, 82), (849, 110)]
-nineLocation = [(841, 82), (985, 110)]
-elevenLocation = nineLocation
+# oneLocation = [(68, 82), (144, 110)]
+# twoLocation = [(138, 80), (250, 112)]
+# threeLocation = [(244, 82), (344, 110)]
+# fourLocation = [(344, 82), (468, 110)]
+# fiveLocation = [(468, 82), (568, 110)]
+# sixLocation = [(568, 82), (668, 110)]
+# sevenLocation = [(668, 82), (749, 110)]
+# eightLocation = [(749, 82), (849, 110)]
+# nineLocation = [(841, 82), (985, 110)]
+# elevenLocation = nineLocation
 
 # 测试环境tab坐标(1280*720)
 # oneLocation = [(68, 82), (149, 110)]

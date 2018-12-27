@@ -921,7 +921,10 @@ class ADB(object):
         :return:mac地址
         """
         t = self.shell("cat /sys/class/net/wlan0/address").stdout.readlines()
-        return ''.join(t).strip()
+        info = str(t)  # 需要更改添加str()
+        # info1 = info[0]
+        # info2 = info1.decode('GBK')
+        return ''.join(info).strip()
 
     def get_cpu_info_all(self):
         """
@@ -949,7 +952,7 @@ class ADB(object):
         :return:设备全部进程信息
         """
         t = self.shell("ps").stdout.readlines()
-        return ''.join(t).strip()
+        return ''.join(str(t)).strip()
 
     def get_cpu_mem_info(self):
         """
@@ -970,6 +973,29 @@ class ADB(object):
         :return: 更改手机输入法
         """
         self.shell("ime set %s" % arg)
+
+    def get_screen_normal_size(self):
+        """
+        获取设备屏幕分辨率 >> 标配
+        :return:
+        """
+        return self.shell('wm size').read().strip().split()[-1].split('x')
+
+    def get_screen_reality_size(self):
+        """
+        获取设备屏幕分辨率 >> 实际分辨率
+        :return:
+        """
+        x = 0
+        y = 0
+        l = self.shell(r'getevent -p | %s -e "0"' % self.__find).readlines()
+        for n in l:
+            if len(n.split()) > 0:
+                if n.split()[0] == '0035':
+                    x = int(n.split()[7].split(',')[0])
+                elif n.split()[0] == '0036':
+                    y = int(n.split()[7].split(',')[0])
+        return x, y
 
 
 if __name__ == "__main__":

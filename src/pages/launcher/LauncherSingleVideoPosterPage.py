@@ -1,6 +1,4 @@
 # coding:utf-8
-from general.ImageContrastUtils import ImageContrast
-
 __author__ = 'Alan'
 '''
 description: Launcher 单张海报点击跳转测试

@@ -17,7 +17,7 @@ from moudle import HomeTabUtils
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-skip_case = False
+skip_case = True
 skip_reason = "调试"
 
 
@@ -69,17 +69,30 @@ class LauncherTest(BaseUnittest.BaseTestCase):
     """
     # @unittest.skipIf(skip_case, skip_reason)
     def test_b_a_launcher_tab(self):
-        KeyCodeSentUtils.KeyCode.touch_back(self.driver, 4)
-        launcher_tab = LauncherTab(self.driver)
-        launcher_tab.click_tab_from_left_to_right()
-
-
-
+        # KeyCodeSentUtils.KeyCode.touch_back(self.driver, 4)
+        # launcher_tab = LauncherTab(self.driver)
+        # launcher_tab.click_tab_from_left_to_right()
+        time.sleep(3)
+        # TabUtils.click_tab_eleven(self.driver)
+        KeyCode.touch_right(self.driver, repeat_count=8)
+        time.sleep(3)
+        KeyCode.touch_down(self.driver,repeat_count=4)
+        text="WPS 投影宝"
+        content = "//*[@text='%s']" % text
+        U.Logging.error("获取的元素:  " + content)
+        self.driver.find_element_by_id()
+        if "" != content:
+            time.sleep(2)
+            self.driver.find_element_by_xpath(content).click()
+            time.sleep(6)
+            KeyCode.touch_center(self.driver)
+            time.sleep(6)
+            KeyCode.touch_back(self.driver,repeat_count=2)
 
     """
                 Launcher:多级海报点击测试
     """
-    # @unittest.skipIf(skip_case, skip_reason)
+    @unittest.skipIf(skip_case, skip_reason)
     def test_b_b_launcher_multi_posters_jump(self):
         multi_posters = MultiPosters(self.driver)
         multi_posters.click_multi_posters_to_detail_no_config(tab_index=multi_posters.tab_six,
@@ -154,6 +167,8 @@ class LauncherTest(BaseUnittest.BaseTestCase):
     """
     @unittest.skipIf(skip_case, skip_reason)
     def test_c_f_launcher_app_load_fit_time(self):
+        self.driver.find_element_by_id().get_attribute("")
+        self.driver.find_element_by_id().get
         single_poster = SingleAppPosterJump(self.driver)
         LauncherUtils.move_to_target_location(driver=self.driver, tab_index=HomeTabUtils.tab_seven,
                                               key_down_repeat_count=2, key_right_repeat_count=2,

@@ -10,6 +10,20 @@ import sys
 import sqlite3
 import re
 
+"""
+       检测是否能够找到对应文本的View
+   """
+
+
+def check_has_element_by_text(driver, text="", wait_time=2):
+    content = "//*[@text='%s']" % text
+
+    # U.Logging.error("获取的元素:  " + content)
+    if "" != content:
+        time.sleep(wait_time)
+        print("。。。。。。。。。。。。。。。。。。。。。。。。。。。。。查找元素 ： " + text)
+        return driver.find_element_by_xpath(content)
+
 
 def get_now_time():
     return time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time()))

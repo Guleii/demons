@@ -77,6 +77,7 @@ class case_01(BaseUnittest.BaseTestCase):
 
     @unittest.skipIf(skip_case, skip_reason)
     def test_b_launcher_user(self):
+        self.driver.find_element_by_id("").text()
 
         HomeTabUtils.TabUtils.click_tab_three(self.driver, before_wait_time=2)
 
@@ -467,6 +468,7 @@ class case_01(BaseUnittest.BaseTestCase):
     def enterDetail(self):
         KeyCodeSentUtils.KeyCode.touch_center(self.driver, 0, 2)
         enter_activity = self.driver.current_activity
+        self.driver.find_element_by_id().click()
         # try:
         #     self.assertNotEqual(self.currentActivity, enter_activity)
         # except Exception as e:
@@ -477,7 +479,9 @@ class case_01(BaseUnittest.BaseTestCase):
         # Key_code_touch.KeyCode.touch_down(self.driver, 2)
         # KeyCodeSentUtils.KeyCode.touch_back(self.driver, 2)
 
-
+    def test_ps(self):
+        ps = ADB().get_ps()
+        print("应用进程新：    "+ps)
 
 from general.AdbUtils import ADB
 
@@ -488,8 +492,9 @@ if __name__ == "__main__":
     # app = ADB().get_third_app_list()
     # U.Logging.error("应用：" + ",".join(app))
     Utils.Logging.error("纸飞机反击反击减肥减肥111")
-
-    time.sleep(10)
+    ps = ADB().get_ps()
+    print("应用进程新：    " + ps)
+    # time.sleep(10)
 
     # testdir = r'D:\Android_AutoTest\TestCode\Module\LaucherTest\report'
     # # now = time.strftime('%Y-%m-%d-%H_%M_%S', time.localtime(time.time()))
@@ -497,14 +502,14 @@ if __name__ == "__main__":
     # logcatname = testdir + "\\" + gl.report_name
 
 
-    suiteAll = unittest.TestSuite()
-    test1 = unittest.TestLoader().loadTestsFromTestCase(case_01)
-    # test2 = unittest.TestLoader().loadTestsFromTestCase(case_02)
-    suiteAll.addTest(test1)
-    # suiteAll.addTest(test2)
-    # runer = HTMLTestRunner(title="带截图的测试报告", description="测试描述", stream=open(logcatname, "wb"), verbosity=2, retry=0, save_last_try=True)
-    runner = HtmlReport.get_generate_report_object()
-    runner.run(suiteAll)
+    # suiteAll = unittest.TestSuite()
+    # test1 = unittest.TestLoader().loadTestsFromTestCase(case_01)
+    # # test2 = unittest.TestLoader().loadTestsFromTestCase(case_02)
+    # suiteAll.addTest(test1)
+    # # suiteAll.addTest(test2)
+    # # runer = HTMLTestRunner(title="带截图的测试报告", description="测试描述", stream=open(logcatname, "wb"), verbosity=2, retry=0, save_last_try=True)
+    # runner = HtmlReport.get_generate_report_object()
+    # runner.run(suiteAll)
 
     # 发送邮件
     # start_send_email()

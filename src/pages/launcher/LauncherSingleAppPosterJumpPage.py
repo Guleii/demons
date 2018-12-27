@@ -2,7 +2,7 @@
 
 __author__ = 'Alan'
 '''
-description: Launcher 单张海报点击跳转测试
+description: Launcher 单张海报点击应用跳转测试
 '''
 from moudle.LauncherBasePage import LauncherBasePage
 from general.Base_page import Base
@@ -14,6 +14,7 @@ from general.KeyCodeSentUtils import *
 from general import Utils as U
 from general.AdbUtils import ADB
 from general.ImageUtils import ImageUtil
+import config.GlobalConfig as gl
 
 
 """
@@ -76,7 +77,7 @@ class SingleAppPosterJump(LauncherBasePage):
                 # self.touch_back(key_back_repeat_count=2)
 
         def check_enter_or_load(self, app_package):
-                adb = ADB()
+                adb = ADB(gl.test_app_more_device_device_name)
                 app = adb.get_third_app_list()
                 fail_tip = self.load_apk_fail + app_package
                 # current_activity = self.driver.current_activity
