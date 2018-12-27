@@ -58,7 +58,9 @@ class UpdateApp(LauncherBasePage):
     """
     def test_update_all_apps(self):
         self.location_app_market()
+        time.sleep(check_update_all_app_wait_time)
         update_element = self.check_has_update_app()
+        time.sleep(check_up_date_wait_time)
         update_element.click()
         check_count = 0
         self.check_update_all_is_successful(check_count)
@@ -69,9 +71,11 @@ class UpdateApp(LauncherBasePage):
     """
     def test_update_one_app(self):
         self.location_app_market()
+        time.sleep(check_update_all_app_wait_time)
         self.check_has_update_app()
         num_view = self.driver.find_element_by_id(update_all_number_view_resource_id)
-        update_before_need_update_app_num = num_view.text()  # 获取可以更新应用数量
+        time.sleep(check_up_date_wait_time)
+        update_before_need_update_app_num = num_view.text  # 获取可以更新应用数量
 
         self.location_one_app_update()
 
@@ -85,30 +89,38 @@ class UpdateApp(LauncherBasePage):
     def check_update_one_app_is_successful(self, update_before_need_update_app_num):
         check_count = 0
         while True:
-            time.sleep(check_update_all_app_wait_time)
+            time.sleep(check_up_date_wait_time)
             check_count += 1
             KeyCode.touch_back(self.driver)
+            time.sleep(check_up_date_wait_time)
             KeyCode.touch_center(self.driver, wait_time=enter_manage_app_wait_time,
                                  after_time=after_enter_manage_app_wait_time)
-            num_view = self.driver.find_element_by_id(update_all_number_view_resource_id)
-            update_after_need_update_app_num = num_view.text()  # 获取更新单个应用后可以更新应用数量
-            if check_count > check_update_all_app_count:
-                if update_before_need_update_app_num == update_after_need_update_app_num:
-                    raise Exception(update_all_app_fail)
+            try:
+                num_view = self.driver.find_element_by_id(update_all_number_view_resource_id)
+                time.sleep(check_up_date_wait_time)
+                update_after_need_update_app_num = num_view.text  # 获取更新单个应用后可以更新应用数量
+                if check_count > check_update_all_app_count:
+                    if update_before_need_update_app_num == update_after_need_update_app_num:
+                        raise Exception(update_all_app_fail)
+                    else:
+                        break
                 else:
-                    break
-            else:
-                if update_before_need_update_app_num != update_after_need_update_app_num:
-                    break
+                    if update_before_need_update_app_num != update_after_need_update_app_num:
+                        break
+            except Exception:
+                break
+
+
 
     """
         检测应用更新是否全部成功
     """
     def check_update_all_is_successful(self, check_count):
         while True:
-            time.sleep(check_update_all_app_wait_time)
+            time.sleep(check_up_date_wait_time)
             check_count += 1
             KeyCode.touch_back(self.driver)
+            time.sleep(check_up_date_wait_time)
             KeyCode.touch_center(self.driver, wait_time=enter_manage_app_wait_time,
                                  after_time=after_enter_manage_app_wait_time)
 

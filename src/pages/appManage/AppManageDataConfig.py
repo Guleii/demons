@@ -25,6 +25,7 @@ update_all_app_view_keyword = "全部更新"  # 应用全部更新的关键字
 update_one_app_view_keyword = "更新"  # 单个应用更新的关键字
 update_all_app_fail = "更新全部应用失败"  # 更新应用失败后抛出异常的关键字
 update_one_app_fail = "更新单个应用失败"  # 更新应用失败后抛出异常的关键字
+check_up_date_wait_time = 2
 check_update_all_app_wait_time = 5  # 检测更新全部应用，退出进入应用管理的间隔时间
 check_update_all_app_count = 5  # 检测更新全部应用，退出进入应用管理的最大次数，超过这个次数
 no_need_update_apps = "没有需要更新的应用"
@@ -38,6 +39,7 @@ unintall_app_view_recource_id = "com.android.packageinstaller:id/ok_button"  # �
 uninstall_app_view_app_name_resource_id = "com.android.packageinstaller:id/app_name"  # 应用卸载弹框的显示应用名称view的ID
 uninstall_later_wait_time = 3  # 卸载完后等待时间
 uninstall_app_button_view_id = "com.xgimi.home:id/item_localapk_btn_uninstall"  # 卸载按钮view的ID
+uninstall_app_fail = "卸载应用失败"
 
 uninstall_app_button_attribute = "focusable"  # 判断系统应用是否能够卸载的属性
 uninstall_app_button_attribute_value = "true"  # 判断系统应用是否能够卸载的属性的值

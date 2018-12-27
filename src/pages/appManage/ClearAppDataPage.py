@@ -77,13 +77,16 @@ class ClearAppData(LauncherBasePage):
             try:
                 Utils.Logging.info("。。。。。。。。。。。。。。。。。。。查找指定清除的元素")
                 clear_button_index, clear_button_view_elements = self.find_need_clear_view_index()
-                Utils.Logging.info("。。。。。。。。。。。。。。。。。。。找到多个元素")
+                Utils.Logging.info("。。。。。。。。。。。。。。。。。。。找到多个元素 个数： "+str(len(clear_button_view_elements)))
                 if clear_button_view_elements:
                     Utils.Logging.info("。。。。。。。。。。。。。。。。。。。;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;找到了指定清除的元素")
                     clear_button_view = clear_button_view_elements[clear_button_index]  # 根据要停止的应用名称对应的index获取到对应的清除数据的view的index
                     time.sleep(enter_app_later_wait_time)
-                    Utils.Logging.info("。。。。。。。。。。。。。。。。。。。点击指定清除的元素 ，下标为： "+str(clear_button_index))
+                    Utils.Logging.info("。。。。。。。。。。。。。。。。。。。点击指定清除的元素 ，下标为： "+str(clear_button_index)+"  文本： "+str(clear_button_view.text))
                     clear_button_view.click()
+                    time.sleep(enter_app_later_wait_time)
+                    KeyCode.touch_center(self.driver, after_time=enter_app_later_wait_time)  # 必须再次点击OK键才能生效，我也不知道为什么上面的使用了click还不行，只是获取了焦点
+                    Utils.Logging.info("。。。。。。。。。。。。。。。。。。。111111111111111111111111111111111111点击指定清除的元素")
                     break
 
             except Exception:

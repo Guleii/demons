@@ -36,7 +36,7 @@ class AppManageTest(BaseUnittest.BaseTestCase):
     """
         测试清除应用数据
     """
-    # @unittest.skipIf(skip_case, skip_reason)
+    @unittest.skipIf(skip_case, skip_reason)
     def test_a_clear_app_data(self):
         clear_app_data = ClearAppData(self.driver)
         clear_app_data.test_clear_app_data()
@@ -76,7 +76,7 @@ class AppManageTest(BaseUnittest.BaseTestCase):
     """
         测试更新全部应用
     """
-    @unittest.skipIf(skip_case, skip_reason)
+    # @unittest.skipIf(skip_case, skip_reason)
     def test_a_update_all_app(self):
         update_app = UpdateApp(self.driver)
         update_app.test_update_all_apps()

@@ -98,7 +98,8 @@ class KeyCode:
            repeat_count:按键重复发送的次数
      """
     @staticmethod
-    def touch_home(driver, wait_time=0, repeat_count=1):
+    def touch_home(driver, wait_time=0, repeat_count=1, after_time=2):
         for num in range(0, repeat_count):
             time.sleep(wait_time)
             driver.keyevent(3)
+            time.sleep(after_time)
