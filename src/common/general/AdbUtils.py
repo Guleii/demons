@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import chardet
+
 __author__ = 'Alan'
 
 import platform
@@ -242,7 +244,8 @@ class ADB(object):
         out = self.shell(
             "dumpsys display | %s DisplayDeviceInfo" %
             find_util).stdout.read()
-        display = pattern.findall(out)
+
+        display = pattern.findall(str(out))
 
         return int(display[0]), int(display[1])
 
@@ -979,7 +982,7 @@ class ADB(object):
         获取设备屏幕分辨率 >> 标配
         :return:
         """
-        return self.shell('wm size').read().strip().split()[-1].split('x')
+        return self.shell('wm size').stdout.read().strip().decode('utf-8').split()[-1].split('x')
 
     def get_screen_reality_size(self):
         """

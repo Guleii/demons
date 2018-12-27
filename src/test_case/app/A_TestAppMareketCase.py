@@ -23,7 +23,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from src.pages.appMarket.SearchAppPage import SearchApp
 
-skip_case = False
+skip_case = True
 skip_reason = "调试"
 
 
@@ -37,6 +37,11 @@ class AppMarketTest(BaseUnittest.BaseTestCase):
         search_app = SearchApp(self.driver)
         search_app.start_test_search_app()
 
+
+    def test_device_size(self):
+        # ['1280', '800']
+        widh  = ADB(gl.test_app_more_device_device_name).get_screen_normal_size()
+        Utils.Logging.info("。。。。。。。。。。。。。。。。。。。width:  "+str(widh)+"    high:  ")
 
 
 

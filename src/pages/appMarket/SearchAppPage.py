@@ -12,6 +12,8 @@ from src.common.moudle import LauncherUtils, LauncherBasePage
 from moudle.LauncherBasePage import LauncherBasePage
 from src.common.moudle.InputManagerUtils import InputManager
 from general.ImageUtils import ImageUtil
+from general.AdbUtils import ADB
+from config import GlobalConfig as gl
 from src.pages.appMarket.AppMarketDataConfig import *
 
 
@@ -47,6 +49,8 @@ class SearchApp(LauncherBasePage):
         测试搜索应用是否成功
     """
     def start_test_search_app(self):
+        time.sleep(enter_search_app_wait_time)
+        self.remove_app_first()
         self.location_app_market()
         time.sleep(enter_search_app_wait_time)
         self.location_search_and_enter()
@@ -55,6 +59,18 @@ class SearchApp(LauncherBasePage):
         self.check_search_result_can_use()
 
         self.location_reset()
+
+    """
+        测试前移除需要测试的应用
+    """
+    def remove_app_first(self):
+        try:
+            ADB(gl.test_app_more_device_device_name).remove_app(packageName=check_open_app_package_name)
+            time.sleep(enter_search_app_wait_time)
+        except Exception:
+            pass
+
+
 
     """
         输入KW内容
@@ -102,6 +118,13 @@ class SearchApp(LauncherBasePage):
         ImageUtil.check_video_has_playing_normal(self.driver, need_enter_center=True,
                                                  key_center_wait_time=enter_search_app_wait_time,
                                                  key_center_repeat_count=search_result_app_open_repeat_count)
+
+        time.sleep(enter_search_app_wait_time)
+        current_activity_name = self.driver.current_activity
+        if current_activity_name != check_open_app_splash_activity_name:  # 根据打开的应用的界面名称匹配是否正确打开应用
+            raise Exception(open_apk_fail+"_"+check_search_is_successful_keyword)
+
+        print("获取到的当前界面名称、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、： "+str(current_activity_name))
 
     """
         退出打开的应用
