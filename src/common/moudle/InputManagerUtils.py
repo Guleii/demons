@@ -7,21 +7,21 @@ description:主界面输入法的工具类
 
 import time
 
-# 正式环境键盘坐标
+# 键盘坐标（分辨率1920*1080）
 # oneLocation = [(101, 355), (209, 441)]
 # twoLocation = [(253, 355), (361, 441)]
 # threeLocation = [(405, 355), (513, 441)]
 # fourLocation = [(101, 485), (209, 571)]
 # fiveLocation = [(253, 485), (361, 571)]
 # sixLocation = [(407, 485), (515, 571)]
-# sevenLocation = [(101, 615), (208, 701)]
-# eightLocation = [(253, 615), (209, 701)]
+# sevenLocation = [(101, 615), (209, 701)]
+# eightLocation = [(253, 615), (361, 701)]
 # nineLocation = [(407, 615), (515, 701)]
 # tenLocation = [(101, 745), (209, 831)]
-# elevenLocation = [(4253, 745), (361, 831)]
+# elevenLocation = [(253, 745), (361, 831)]
 # twelveLocation = [(407, 745), (515, 831)]
 
-# 测试环境键盘坐标
+# 键盘坐标（分辨率1280*800）
 oneLocation = [(67, 236), (139, 293)]
 twoLocation = [(168, 236), (240, 293)]
 threeLocation = [(269, 236), (341, 293)]
@@ -30,10 +30,25 @@ fiveLocation = [(168, 322), (240, 379)]
 sixLocation = [(271, 322), (343, 379)]
 sevenLocation = [(67, 409), (139, 466)]
 eightLocation = [(168, 409), (240, 466)]
-nineLocation = [(271, 409), (343, 553)]
+nineLocation = [(271, 409), (343, 466)]
 tenLocation = [(67, 496), (139, 553)]
 elevenLocation = [(168, 496), (240, 553)]
 twelveLocation = [(271, 496), (343, 553)]
+
+# 键盘坐标（分辨率1280*720）
+# oneLocation = [(67, 236), (139, 293)]
+# twoLocation = [(168, 236), (240, 293)]
+# threeLocation = [(269, 236), (341, 293)]
+# fourLocation = [(67, 322), (139, 379)]
+# fiveLocation = [(168, 322), (240, 379)]
+# sixLocation = [(271, 322), (343, 379)]
+# sevenLocation = [(67, 409), (139, 466)]
+# eightLocation = [(168, 409), (240, 466)]
+# nineLocation = [(271, 409), (343, 466)]
+# tenLocation = [(67, 496), (139, 553)]
+# elevenLocation = [(168, 496), (240, 553)]
+# twelveLocation = [(271, 496), (343, 553)]
+
 
 # 点击某一个输入前默认的等待的时间
 defaultWaitTime = 3

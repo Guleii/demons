@@ -46,29 +46,34 @@ class LauncherStability(BaseUnittest.BaseTestCase):
 
     @unittest.skipIf(skip_case, skip_reason)
     def test_search_more(self):
+        time.sleep(4)
         count = 0
-        for num in range(1, 50):
-
+        for num in range(1, execNumber):
+            KeyCode.touch_back(driver=self.driver, repeat_count=4)
+            time.sleep(2)
             # 随机生成一个键盘数，并点击搜索后的影视
-            LauncherUtils.move_to_target_location(self.driver, key_down_repeat_count=2, wait_time=5,
-                                                  key_down_wait_time=3, tab_index=1)
+            KeyCode.touch_left(driver=self.driver)
+            # LauncherUtils.move_to_target_location(self.driver, key_down_repeat_count=2, wait_time=5,
+            #                                       key_down_wait_time=3, tab_index=1)
             time.sleep(2)
 
+            # 搜索完键盘后，默认回到了搜索tab
             one = random.randint(1, len(listKeyBoard)-1)
             method_name = listKeyBoard[one]
-            time.sleep(4)
             self.method_map(method_name)
-
-            KeyCode.touch_right(self.driver, repeat_count=0, wait_time=3)
+            Utils.Logging.debug(method_name)
+            time.sleep(2)
+            # 因此需要先向下移动一位，后向右移动两位，并点击海报
+            KeyCode.touch_down(self.driver, repeat_count=1, wait_time=3)
+            KeyCode.touch_right(self.driver, repeat_count=2, wait_time=3)
             KeyCode.touch_center(self.driver, wait_time=3)
             KeyCode.touch_back(self.driver, wait_time=3)
             count = count+1
-
+            time.sleep(3)
+            InputManager.input_clear(self.driver, before_wait_time=1, after_wait_time=3)
             Utils.Logging.debug("已搜索了%i次" % count)
-            # 重新归位到tab搜索框， 否则后面的点击焦点会错乱
-            LauncherUtils.move_to_target_location(self.driver, key_down_repeat_count=1,
-                                                  key_down_wait_time=1, tab_index=1)
 
+            """
             # 再次生成一个随机键盘数， 两个字母搜索影视后点击， 并返回重新执行
             one = random.randint(1, len(listKeyBoard)-1)
             method_name = listKeyBoard[one]
@@ -85,6 +90,7 @@ class LauncherStability(BaseUnittest.BaseTestCase):
 
             Utils.Logging.debug(method_name)
             Utils.Logging.debug("已搜索了%i次" % count)
+            """
 
     def method_map(self, methd_name='input_five'):
 
@@ -166,13 +172,16 @@ class LauncherStability(BaseUnittest.BaseTestCase):
             InputManager.input_five(self.driver, after_wait_time=2, before_wait_time=2)
 
     # def test_input(self):
-    #     time.sleep(3)
-    #     TabUtils.click_tab_one(self.driver)
+    #     KeyCode.touch_back(driver=self.driver, repeat_count=4)
+    #     time.sleep(2)
+    #     # 随机生成一个键盘数，并点击搜索后的影视
+    #     KeyCode.touch_left(driver=self.driver)
     #     time.sleep(3)
     #     # InputManager.input_three(self.driver)
-    #     InputManager.input_d(self.driver)
+    #     #InputManager.input_i(self.driver)
     #     # self.driver.tap([(168, 322), (240, 379)], 100)
     #     # self.driver.tap([(269, 236), (341, 293)], 100)
+    #     self.driver.tap([(67, 322), (139, 379)], 100)
     #     time.sleep(3)
     #     # InputManager.find_text_view_by_text(self.driver, 'K').click()
     #     # time.sleep(3)
