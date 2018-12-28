@@ -10,6 +10,27 @@ from appium import webdriver
 import config.GlobalConfig as  gl
 from general.AdbUtils import ADB
 from general.ImageUtils import ImageUtil
+from moudle.InputManagerUtils import InputManager
+from moudle import InputManagerUtils, HomeTabUtils
+
+"""
+    初始化整个项目
+"""
+
+
+def init_all_project_by_device_name(device_name=""):
+    init_input_manager_and_tab_location(device_name)
+
+
+"""
+    初始化搜索模块的坐标
+"""
+
+
+def init_input_manager_and_tab_location(device_name):
+    current_screen_size_list = ADB(device_name).get_screen_normal_size()
+    InputManagerUtils.choose_location_by_device_screen_size(screen_size=current_screen_size_list)
+    HomeTabUtils.choose_location_by_device_screen_size(screen_size=current_screen_size_list)
 
 
 class driver_configure():
@@ -34,6 +55,8 @@ class driver_configure():
 
             port = 4723
             device_name ='612QKBQD225A2'
+
+
             if gl.test_app_more_devices:
                 print("...................................................   "+str(current_connect_device_info))
 
@@ -42,8 +65,6 @@ class driver_configure():
                 # gl.test_app_more_device_device_name = device_name
                 gl.test_app_more_device_device_identity_prefix = get_device_mac(device_name)+"_"
                 gl.test_app_more_device_device_name = device_name
-                # ImageUtil.first_screen_shot_name = gl.test_app_more_device_device_identity_prefix + "first_screen_shot"
-                # ImageUtil.second_screen_shot_name = gl.test_app_more_device_device_identity_prefix + "second_screen_shot"
                 gl.report_name = gl.test_app_more_device_device_identity_prefix + "report.html"
                 gl.log_name = gl.test_app_more_device_device_identity_prefix + "Launcher.log"
                 self.desired_caps['systemPort'] = current_connect_device_info["systemPort"]
@@ -88,4 +109,8 @@ class driver_configure():
     def set_device_value(device):
         global current_connect_device_info
         current_connect_device_info = device
+        init_all_project_by_device_name(current_connect_device_info["deviceName"])
+
+
+
 

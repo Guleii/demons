@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # coding:utf-8
 from general.more_devices.BaseAdb import AndroidDebugBridge
+from moudle.InputManagerUtils import InputManager
 
 __author__ = 'Alan'
 """
@@ -41,7 +42,7 @@ class AppMarketTest(BaseUnittest.BaseTestCase):
 
 
     def test_device_size(self):
-        time.sleep(2)
+        time.sleep(4)
         KeyCode.touch_left(self.driver,repeat_count=2)
         time.sleep(3)
         InputManagerUtils.InputManager.input_nine(self.driver)
@@ -57,17 +58,28 @@ class AppMarketTest(BaseUnittest.BaseTestCase):
 
 
 if __name__ == "__main__":
+    # DriverConfig.init_all_project_by_device_name(AndroidDebugBridge().get_only_one_device_name())
+    # Utils.Logging.error("纸飞机反击反击减肥减肥111")
+    #
+    # time.sleep(10)
+    # suiteAll = unittest.TestSuite()
+    # test1 = unittest.TestLoader().loadTestsFromTestCase(AppMarketTest)
+    # # test2 = unittest.TestLoader().loadTestsFromTestCase(case_02)
+    # suiteAll.addTest(test1)
+    # runner = HtmlReport.get_generate_report_object()
+    # runner.run(suiteAll)
+    Utils.Logging.debug("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAjjjjjjjjjjj22222222222222jjjjjjjLauncher稳定性测试")
+    # DriverConfig.init_all_project_by_device_name(AndroidDebugBridge().get_only_one_device_name())
     DriverConfig.init_all_project_by_device_name(AndroidDebugBridge().get_only_one_device_name())
-    Utils.Logging.error("纸飞机反击反击减肥减肥111")
+    InputManager.get_loacation()
 
     time.sleep(10)
     suiteAll = unittest.TestSuite()
     test1 = unittest.TestLoader().loadTestsFromTestCase(AppMarketTest)
     # test2 = unittest.TestLoader().loadTestsFromTestCase(case_02)
     suiteAll.addTest(test1)
-    runner = HtmlReport.get_generate_report_object()
+    runner = HtmlReport.get_generate_report_object_one_device()
     runner.run(suiteAll)
-
     # 发送邮件
     # start_send_email()
 

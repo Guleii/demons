@@ -1,4 +1,6 @@
 # coding:utf-8
+from general import Utils
+
 __author__ = 'Alan'
 '''
 description: Launcher主界面点击Tab栏法的工具类
@@ -75,6 +77,78 @@ tab_eight = 8
 tab_nine = 9
 tab_ten = 10
 tab_eleven = 11
+
+can_get_device_screen_size = "无法获取屏幕分辨率"
+
+
+"""
+    根据屏幕分辨率动态选择坐标
+
+"""
+
+
+def choose_location_by_device_screen_size(screen_size=[]):
+    global oneLocation
+    global twoLocation
+    global threeLocation
+    global fourLocation
+    global fiveLocation
+    global sixLocation
+    global sevenLocation
+    global eightLocation
+    global nineLocation
+    global tenLocation
+    global elevenLocation
+
+    Utils.Logging.info("。。。。。。。。。。。。。。。。。。。width:  开始区别分辨率" + "   " + str(screen_size))
+    # tenLocation = [(101, 745), (209, 831)]
+    width = '1920'
+    high = '1080'
+    if len(screen_size) == 2:
+        width = screen_size[0]
+        high = screen_size[1]
+    else:
+        raise Exception(can_get_device_screen_size)
+
+    if width == '1920' and high == '1080':
+        # 键盘坐标（分辨率1920*1080）
+        Utils.Logging.info("。。。。。。。。。。。。。。。。。。。width:  开始赋值")
+        oneLocation = [(102, 123), (223, 165)]
+        twoLocation = [(216, 123), (366, 165)]
+        threeLocation = [(366, 123), (516, 165)]
+        fourLocation = [(516, 123), (650, 165)]
+        fiveLocation = [(650, 123), (800, 165)]
+        sixLocation = [(800, 123), (950, 165)]
+        sevenLocation = [(950, 123), (1136, 165)]
+        eightLocation = [(1136, 123), (1286, 165)]
+        nineLocation = [(1286, 123), (1436, 165)]
+        tenLocation = [(1436, 123), (1557, 165)]
+        elevenLocation = [(1557, 123), (1707, 165)]
+        Utils.Logging.info("。。。。。。。。。。。。。。。。。。。width:  赋值成功::   "+str(tenLocation))
+    elif width == '1280' and high == '800':
+        oneLocation = [(68, 82), (144, 110)]
+        twoLocation = [(138, 80), (250, 112)]
+        threeLocation = [(244, 82), (344, 110)]
+        fourLocation = [(344, 82), (468, 110)]
+        fiveLocation = [(468, 82), (568, 110)]
+        sixLocation = [(568, 82), (668, 110)]
+        sevenLocation = [(668, 82), (749, 110)]
+        eightLocation = [(749, 82), (849, 110)]
+        nineLocation = [(841, 82), (985, 110)]
+        elevenLocation = nineLocation
+    elif width == '1280' and high == '720':
+        oneLocation = [(68, 82), (149, 110)]
+        twoLocation = [(144, 82), (244, 110)]
+        threeLocation = [(244, 82), (344, 110)]
+        fourLocation = [(344, 82), (468, 110)]
+        fiveLocation = [(468, 82), (568, 110)]
+        sixLocation = [(568, 82), (668, 110)]
+        sevenLocation = [(668, 82), (749, 110)]
+        eightLocation = [(749, 82), (849, 110)]
+        nineLocation = [(849, 82), (977, 110)]
+        elevenLocation = nineLocation
+
+
 
 
 class TabUtils:

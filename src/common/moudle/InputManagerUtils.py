@@ -1,4 +1,6 @@
 # coding:utf-8
+from general import Utils
+
 __author__ = 'Alan'
 '''
 description:主界面输入法的工具类
@@ -6,6 +8,8 @@ description:主界面输入法的工具类
 
 
 import time
+
+
 
 # 键盘坐标（分辨率1920*1080）
 # oneLocation = [(101, 355), (209, 441)]
@@ -21,19 +25,33 @@ import time
 # elevenLocation = [(253, 745), (361, 831)]
 # twelveLocation = [(407, 745), (515, 831)]
 
+# # 键盘坐标（分辨率1920*1080）
+# oneLocation = [(101, 355), (209, 441)]
+# twoLocation = [(253, 355), (361, 441)]
+# threeLocation = [(405, 355), (513, 441)]
+# fourLocation = [(101, 485), (209, 571)]
+# fiveLocation = [(253, 485), (361, 571)]
+# sixLocation = [(407, 485), (515, 571)]
+# sevenLocation = [(101, 615), (209, 701)]
+# eightLocation = [(253, 615), (361, 701)]
+# nineLocation = [(407, 615), (515, 701)]
+# tenLocation = [(101, 745), (209, 831)]
+# elevenLocation = [(253, 745), (361, 831)]
+# twelveLocation = [(407, 745), (515, 831)]
+
 # 键盘坐标（分辨率1280*800）
-oneLocation = [(67, 236), (139, 293)]
-twoLocation = [(168, 236), (240, 293)]
-threeLocation = [(269, 236), (341, 293)]
-fourLocation = [(67, 322), (139, 379)]
-fiveLocation = [(168, 322), (240, 379)]
-sixLocation = [(271, 322), (343, 379)]
-sevenLocation = [(67, 409), (139, 466)]
-eightLocation = [(168, 409), (240, 466)]
-nineLocation = [(271, 409), (343, 466)]
-tenLocation = [(67, 496), (139, 553)]
-elevenLocation = [(168, 496), (240, 553)]
-twelveLocation = [(271, 496), (343, 553)]
+# oneLocation = [(67, 236), (139, 293)]
+# twoLocation = [(168, 236), (240, 293)]
+# threeLocation = [(269, 236), (341, 293)]
+# fourLocation = [(67, 322), (139, 379)]
+# fiveLocation = [(168, 322), (240, 379)]
+# sixLocation = [(271, 322), (343, 379)]
+# sevenLocation = [(67, 409), (139, 466)]
+# eightLocation = [(168, 409), (240, 466)]
+# nineLocation = [(271, 409), (343, 466)]
+# tenLocation = [(67, 496), (139, 553)]
+# elevenLocation = [(168, 496), (240, 553)]
+# twelveLocation = [(271, 496), (343, 553)]
 
 # 键盘坐标（分辨率1280*720）
 # oneLocation = [(67, 236), (139, 293)]
@@ -49,11 +67,105 @@ twelveLocation = [(271, 496), (343, 553)]
 # elevenLocation = [(168, 496), (240, 553)]
 # twelveLocation = [(271, 496), (343, 553)]
 
+# global oneLocation
+# global twoLocation
+# global threeLocation
+# global fourLocation
+# global fiveLocation
+# global sixLocation
+# global sevenLocation
+# global eightLocation
+# global nineLocation
+# global tenLocation
+# global elevenLocation
+# global twelveLocation
+
+
+
+
 
 # 点击某一个输入前默认的等待的时间
 defaultWaitTime = 3
 # 点击某一个输入后默认的等待的时间
 defaultAfterWaitTime = 0
+
+
+can_get_device_screen_size = "无法获取屏幕分辨率"
+
+
+"""
+    根据屏幕分辨率动态选择坐标
+
+"""
+
+
+def choose_location_by_device_screen_size(screen_size=[]):
+    global oneLocation
+    global twoLocation
+    global threeLocation
+    global fourLocation
+    global fiveLocation
+    global sixLocation
+    global sevenLocation
+    global eightLocation
+    global nineLocation
+    global tenLocation
+    global elevenLocation
+    global twelveLocation
+
+    Utils.Logging.info("。。。。。。。。。。。。。。。。。。。width:  开始区别分辨率" + "   " + str(screen_size))
+    # tenLocation = [(101, 745), (209, 831)]
+    width = '1920'
+    high = '1080'
+    if len(screen_size) == 2:
+        width = screen_size[0]
+        high = screen_size[1]
+    else:
+        raise Exception(can_get_device_screen_size)
+
+    if width == '1920' and high == '1080':
+        # 键盘坐标（分辨率1920*1080）
+        Utils.Logging.info("。。。。。。。。。。。。。。。。。。。width:  开始赋值")
+        oneLocation = [(101, 355), (209, 441)]
+        twoLocation = [(253, 355), (361, 441)]
+        threeLocation = [(405, 355), (513, 441)]
+        fourLocation = [(101, 485), (209, 571)]
+        fiveLocation = [(253, 485), (361, 571)]
+        sixLocation = [(407, 485), (515, 571)]
+        sevenLocation = [(101, 615), (209, 701)]
+        eightLocation = [(253, 615), (361, 701)]
+        nineLocation = [(407, 615), (515, 701)]
+        tenLocation = [(101, 745), (209, 831)]
+        elevenLocation = [(253, 745), (361, 831)]
+        twelveLocation = [(407, 745), (515, 831)]
+        Utils.Logging.info("。。。。。。。。。。。。。。。。。。。width:  赋值成功::   "+str(tenLocation))
+    elif width == '1280' and high == '800':
+        oneLocation = [(67, 236), (139, 293)]
+        twoLocation = [(168, 236), (240, 293)]
+        threeLocation = [(269, 236), (341, 293)]
+        fourLocation = [(67, 322), (139, 379)]
+        fiveLocation = [(168, 322), (240, 379)]
+        sixLocation = [(271, 322), (343, 379)]
+        sevenLocation = [(67, 409), (139, 466)]
+        eightLocation = [(168, 409), (240, 466)]
+        nineLocation = [(271, 409), (343, 466)]
+        tenLocation = [(67, 496), (139, 553)]
+        elevenLocation = [(168, 496), (240, 553)]
+        twelveLocation = [(271, 496), (343, 553)]
+    elif width == '1280' and high == '720':
+        oneLocation = [(67, 236), (139, 293)]
+        twoLocation = [(168, 236), (240, 293)]
+        threeLocation = [(269, 236), (341, 293)]
+        fourLocation = [(67, 322), (139, 379)]
+        fiveLocation = [(168, 322), (240, 379)]
+        sixLocation = [(271, 322), (343, 379)]
+        sevenLocation = [(67, 409), (139, 466)]
+        eightLocation = [(168, 409), (240, 466)]
+        nineLocation = [(271, 409), (343, 466)]
+        tenLocation = [(67, 496), (139, 553)]
+        elevenLocation = [(168, 496), (240, 553)]
+        twelveLocation = [(271, 496), (343, 553)]
+
 
 """
 用于输入法输入管理
@@ -61,6 +173,14 @@ defaultAfterWaitTime = 0
 
 
 class InputManager:
+
+
+
+    @staticmethod
+    def get_loacation():
+        locatio  = eightLocation
+        Utils.Logging.info("。。。。。。。。。。。。。。。。。。。width:111111111111111  get_loacation：   "+str(locatio))
+
 
     @staticmethod
     def find_text_view_by_text(driver, text):
@@ -77,6 +197,7 @@ class InputManager:
     @staticmethod
     def input_delete(driver, duration=100, before_wait_time=defaultWaitTime, after_wait_time=defaultAfterWaitTime):
         time.sleep(before_wait_time)
+        Utils.Logging.info("。。。。。。。。。。。。。。。。。。。width:  get_loacation：   " + str(tenLocation))
         driver.tap(tenLocation, duration)
         time.sleep(after_wait_time)
 
@@ -557,3 +678,9 @@ class InputManager:
         driver.tap(nineLocation, duration)
         InputManager.find_text_view_by_text(driver, 'Z').click()
         time.sleep(after_wait_time)
+
+
+
+if __name__ == '__main__':
+    choose_location_by_device_screen_size(['1920', '1080'])
+    InputManager.input_delete()
