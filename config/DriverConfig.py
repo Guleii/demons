@@ -31,6 +31,7 @@ def init_input_manager_and_tab_location(device_name):
     current_screen_size_list = ADB(device_name).get_screen_normal_size()
     InputManagerUtils.choose_location_by_device_screen_size(screen_size=current_screen_size_list)
     HomeTabUtils.choose_location_by_device_screen_size(screen_size=current_screen_size_list)
+    ImageUtil.choose_location_by_device_screen_size(current_screen_size_list)
 
 
 class driver_configure():
@@ -73,8 +74,8 @@ class driver_configure():
 
 
 
-            self.desired_caps['unicodeKeyboard'] = True   # 是否支持unicode的键盘。如果需要输入中文，要设置为“true”
-            self.desired_caps['resetKeyboard'] = True  # 是否在测试结束后将键盘重轩为系统默认的输入法。
+            self.desired_caps['unicodeKeyboard'] = False   # 是否支持unicode的键盘。如果需要输入中文，要设置为“true”
+            self.desired_caps['resetKeyboard'] = False  # 是否在测试结束后将键盘重轩为系统默认的输入法。
             self.desired_caps['newCommandTimeout'] = '120'  # Appium服务器等待Appium客户端发送新消息的时间。默认为60秒
 
             self.desired_caps['deviceName'] = device_name     # 手机类型 一般填写adb devices显示的名称

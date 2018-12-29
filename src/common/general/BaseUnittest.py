@@ -20,7 +20,7 @@ class BaseTestCase(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         Utils.Logging.debug("；；；；；；；；；；；；；；；；；；；；；；；；；Launcher稳定性测试111111111111")
-        # DriverConfig.init_all_project_by_device_name(AndroidDebugBridge().get_only_one_device_name())
+        DriverConfig.init_all_project_by_device_name(AndroidDebugBridge().get_only_one_device_name())
         # current_screen_size_list = ADB(AndroidDebugBridge().get_only_one_device_name()).get_screen_normal_size()
         # InputManagerUtils.choose_location_by_device_screen_size(screen_size=current_screen_size_list)
 

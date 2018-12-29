@@ -13,7 +13,8 @@ from src.common.general.more_devices.MoreDevicesUtils import *
 
 # 构建测试集,包含src/test_case目录下的所有以test开头的.py文件
 # suite = unittest.defaultTestLoader.discover(start_dir=test_case_path, pattern='Test*.py')
-suite = unittest.defaultTestLoader.discover(start_dir=test_case_path, pattern='A_SinglePosterTestLauncher*.py')
+# suite = unittest.defaultTestLoader.discover(start_dir=test_case_path, pattern='A_SinglePosterTestLauncher*.py')
+suite = unittest.defaultTestLoader.discover(start_dir=gl.project_path+"\\src\\test_stability\\testDemo", pattern='C_TestAppMareket*.py')
 
 
 def run_case_one_device():

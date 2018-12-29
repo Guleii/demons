@@ -40,16 +40,6 @@ class AppMarketTest(BaseUnittest.BaseTestCase):
         search_app.start_test_search_app()
 
 
-    def test_device_size(self):
-        time.sleep(2)
-        KeyCode.touch_left(self.driver,repeat_count=2)
-        time.sleep(3)
-        InputManagerUtils.InputManager.input_nine(self.driver)
-        # ['1280', '800']
-        # widh  = ADB(gl.test_app_more_device_device_name).get_screen_normal_size()
-        # Utils.Logging.info("。。。。。。。。。。。。。。。。。。。width:  "+str(widh)+"    high:  ")
-        # DriverConfig.init_all_project_by_device_name(AndroidDebugBridge().get_only_one_device_name())
-
 
 
 

@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 # coding:utf-8
+import zxing
+
 from general.more_devices.BaseAdb import AndroidDebugBridge
 from moudle.InputManagerUtils import InputManager
 
@@ -43,9 +45,28 @@ class AppMarketTest(BaseUnittest.BaseTestCase):
 
     def test_device_size(self):
         time.sleep(4)
-        KeyCode.touch_left(self.driver,repeat_count=2)
+        KeyCode.touch_right(self.driver, repeat_count=1)
+        KeyCode.touch_down(self.driver,wait_time=1)
+        KeyCode.touch_right(self.driver, wait_time=1,repeat_count=2)
         time.sleep(3)
-        InputManagerUtils.InputManager.input_nine(self.driver)
+        KeyCode.touch_center(self.driver, after_time=8, repeat_count=2)
+        Utils.Logging.info("。。。。。。。。。。。。。。。。。。。目前的界面:  "+str(self.driver.current_activity)+"    high:  ")
+        ImageUtil.screen_shot_by_location(self.driver, src_name="ai_qi_yi")
+
+        KeyCode.touch_back(self.driver)
+
+        KeyCode.touch_right(self.driver, wait_time=3)
+        KeyCode.touch_center(self.driver, after_time=8, repeat_count=2)
+        Utils.Logging.info("。。。。。。。。。。。。。。。。。。。目前的界面:  " + str(self.driver.current_activity) + "    high:  ")
+        ImageUtil.screen_shot_by_location(self.driver, src_name="mang_guo")
+
+        KeyCode.touch_back(self.driver)
+
+        KeyCode.touch_right(self.driver, wait_time=3)
+        KeyCode.touch_center(self.driver, after_time=8, repeat_count=2)
+        Utils.Logging.info("。。。。。。。。。。。。。。。。。。。目前的界面:  " + str(self.driver.current_activity) + "    high:  ")
+        ImageUtil.screen_shot_by_location(self.driver, src_name="sou_hu")
+        # InputManagerUtils.InputManager.input_nine(self.driver)
         # ['1280', '800']
         # widh  = ADB(gl.test_app_more_device_device_name).get_screen_normal_size()
         # Utils.Logging.info("。。。。。。。。。。。。。。。。。。。width:  "+str(widh)+"    high:  ")
@@ -53,9 +74,18 @@ class AppMarketTest(BaseUnittest.BaseTestCase):
 
 
 
-
-
-
+    # def test_a(self):
+    #     reader = zxing.BarCodeReader()
+    #     print("......................")
+    #     # barcode = reader.decode("DianZiShuoMingShuErWeiMa.png")
+    #     barcode = reader.decode("Android_AutoTest/test/LaucherTest/screenshot/ai_qi_yi.png")
+    #     # barcode = reader.decode("Android_AutoTest/test/LaucherTest/screenshot/ai_qi_yi.png")
+    #     # barcode = reader.decode("ai_qi_yi.png")
+    #     # path = r'D:\\Android_AutoTest\\test\\LaucherTest\\screenshot\\ai_qi_yi.png'
+    #     # barcode = reader.decode(path)
+    #     print(barcode.parsed)
+    #
+    #
 
 if __name__ == "__main__":
     # DriverConfig.init_all_project_by_device_name(AndroidDebugBridge().get_only_one_device_name())
