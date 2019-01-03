@@ -12,18 +12,18 @@ import time
 
 
 # 键盘坐标（分辨率1920*1080）
-# oneLocation = [(101, 355), (209, 441)]
-# twoLocation = [(253, 355), (361, 441)]
-# threeLocation = [(405, 355), (513, 441)]
-# fourLocation = [(101, 485), (209, 571)]
-# fiveLocation = [(253, 485), (361, 571)]
-# sixLocation = [(407, 485), (515, 571)]
-# sevenLocation = [(101, 615), (209, 701)]
-# eightLocation = [(253, 615), (361, 701)]
-# nineLocation = [(407, 615), (515, 701)]
-# tenLocation = [(101, 745), (209, 831)]
-# elevenLocation = [(253, 745), (361, 831)]
-# twelveLocation = [(407, 745), (515, 831)]
+oneLocation = [(101, 355), (209, 441)]
+twoLocation = [(253, 355), (361, 441)]
+threeLocation = [(405, 355), (513, 441)]
+fourLocation = [(101, 485), (209, 571)]
+fiveLocation = [(253, 485), (361, 571)]
+sixLocation = [(407, 485), (515, 571)]
+sevenLocation = [(101, 615), (209, 701)]
+eightLocation = [(253, 615), (361, 701)]
+nineLocation = [(407, 615), (515, 701)]
+tenLocation = [(101, 745), (209, 831)]
+elevenLocation = [(253, 745), (361, 831)]
+twelveLocation = [(407, 745), (515, 831)]
 
 # # 键盘坐标（分辨率1920*1080）
 # oneLocation = [(101, 355), (209, 441)]

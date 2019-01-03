@@ -1,25 +1,21 @@
 # coding:utf-8
 import unittest
-
-from config.DriverConfig import driver_configure
 from general import BaseUnittest
 from general.HtmlReportUtils import HtmlReport
 import random
 import time
 from general import Utils
 from general.KeyCodeSentUtils import KeyCode
-from general.more_devices.BaseAdb import AndroidDebugBridge
 from moudle.HomeTabUtils import TabUtils
 from src.common.moudle import LauncherUtils
 from src.common.moudle.InputManagerUtils import InputManager
-from config import DriverConfig
 
 __author__ = 'machunyan'
 '''
 description: Launcher 稳定性测试用例类
 '''
 
-skip_case = True
+skip_case = False
 skip_reason = "调试"
 # 执行操作的次数
 execNumber = 100
@@ -27,12 +23,11 @@ execNumber = 100
 """
 定义的搜索键盘列表
 """
-listKeyBoard = ['input_a', 'input_b', 'input_c', 'input_d', 'input_e',
-                'input_f', 'input_g', 'input_h', 'input_i', 'input_j',
-                'input_k', 'input_l', 'input_m', 'input_n', 'input_o',
-                'input_p', 'input_q', 'input_r', 'input_s', 'input_t',
-                'input_u', 'input_v', 'input_w', 'input_x', 'input_y',
-                'input_z']
+listKeyBoard = ['input_b', 'input_c', 'input_d', 'input_e',
+                'input_g', 'input_h', 'input_i',
+                'input_m', 'input_n', 'input_o',
+                'input_p', 'input_q', 'input_s', 'input_t',
+                'input_u', 'input_v', 'input_w', 'input_x']
 
 
 class LauncherStability(BaseUnittest.BaseTestCase):
@@ -40,7 +35,7 @@ class LauncherStability(BaseUnittest.BaseTestCase):
     """
     在我的tab上下移动焦点
     """
-    @unittest.skipIf(skip_case, skip_reason)
+    @unittest.skipIf(True, skip_reason)
     def test_switch_poster_up_down(self):
         for num in range(1, execNumber):
 
@@ -53,13 +48,12 @@ class LauncherStability(BaseUnittest.BaseTestCase):
         time.sleep(4)
         count = 0
         for num in range(1, execNumber):
-            time.sleep(2)
-            KeyCode.touch_back(driver=self.driver, repeat_count=4)
-            time.sleep(2)
-            # 随机生成一个键盘数，并点击搜索后的影视
-            KeyCode.touch_left(driver=self.driver,repeat_count=2)
-            # LauncherUtils.move_to_target_location(self.driver, key_down_repeat_count=2, wait_time=5,
-            #                                       key_down_wait_time=3, tab_index=1)
+            # KeyCode.touch_back(driver=self.driver, repeat_count=4)
+            # time.sleep(2)
+            # # 随机生成一个键盘数，并点击搜索后的影视
+            # KeyCode.touch_left(driver=self.driver)
+            LauncherUtils.move_to_target_location(self.driver, key_down_repeat_count=2, wait_time=5,
+                                                  key_down_wait_time=3, tab_index=1)
             time.sleep(2)
 
             # 搜索完键盘后，默认回到了搜索tab
@@ -69,18 +63,13 @@ class LauncherStability(BaseUnittest.BaseTestCase):
             Utils.Logging.debug(method_name)
             time.sleep(2)
             # 因此需要先向下移动一位，后向右移动两位，并点击海报
-            KeyCode.touch_down(self.driver, repeat_count=1, wait_time=3)
-            KeyCode.touch_right(self.driver, repeat_count=2, wait_time=3)
-            Utils.Logging.debug("开始点击点击进去")
+            # KeyCode.touch_down(self.driver, repeat_count=1, wait_time=3)
+            # KeyCode.touch_right(self.driver, repeat_count=2, wait_time=3)
             KeyCode.touch_center(self.driver, wait_time=3)
-            Utils.Logging.debug("开始点击返回")
             KeyCode.touch_back(self.driver, wait_time=3)
-            Utils.Logging.debug("点击返回完成")
             count = count+1
             time.sleep(3)
-            Utils.Logging.debug("开始点击清除")
-            InputManager.input_clear(self.driver, before_wait_time=1, after_wait_time=3)
-            Utils.Logging.debug("点击清除完成")
+            InputManager.input_clear(self.driver, before_wait_time=2, after_wait_time=3)
             Utils.Logging.debug("已搜索了%i次" % count)
 
             """
@@ -201,46 +190,14 @@ class LauncherStability(BaseUnittest.BaseTestCase):
     #     # InputManager.find_text_view_by_text(self.driver,'如需搜索：“极米”' )
 
 
-    def test_one(self):
-        # time.sleep(2)
-        # KeyCode.touch_back(driver=self.driver, repeat_count=4)
-        # time.sleep(2)
-        # # 随机生成一个键盘数，并点击搜索后的影视
-        # KeyCode.touch_left(driver=self.driver)
-        # time.sleep(2)
-        #
-        # # 搜索完键盘后，默认回到了搜索tab
-        # one = random.randint(1, len(listKeyBoard) - 1)
-        # method_name = listKeyBoard[11]
-        # self.method_map(method_name)
-        # Utils.Logging.debug(method_name)
-        # time.sleep(2)
-        # # 因此需要先向下移动一位，后向右移动两位，并点击海报
-        # KeyCode.touch_down(self.driver, repeat_count=1, wait_time=3)
-        # KeyCode.touch_right(self.driver, repeat_count=2, wait_time=3)
-        # Utils.Logging.debug("开始点击点击进去")
-        # KeyCode.touch_center(self.driver, wait_time=3)
-        # Utils.Logging.debug("开始点击返回")
-        # KeyCode.touch_back(self.driver, wait_time=3)
-        # # time.sleep(3)
-        # Utils.Logging.debug("开始点击清除")
-        # InputManager.input_clear(self.driver, before_wait_time=1, after_wait_time=3)
-        # Utils.Logging.debug("完成点击清除")
-        # Utils.Logging.debug("已搜索了%i次" )
-        # InputManager().get_loacation()
-        pass
-
-
 if __name__ == '__main__':
-    # driver_configure.set_device_value("")
-    Utils.Logging.debug("；；；；；；；；；；；；；；；；；；；；；；；；；jjjjjjjjjjjjjjjjjjLauncher稳定性测试")
-    # DriverConfig.init_all_project_by_device_name(AndroidDebugBridge().get_only_one_device_name())
-    DriverConfig.init_all_project_by_device_name(AndroidDebugBridge().get_only_one_device_name())
-    InputManager.get_loacation()
-    # time.sleep(10)
-    # suteAll = unittest.TestSuite()
-    # test = unittest.TestLoader().loadTestsFromTestCase(LauncherStability)
-    # suteAll.addTest(test)
+
+    Utils.Logging.debug("Launcher稳定性测试")
+
+    time.sleep(10)
+    suteAll = unittest.TestSuite()
+    test = unittest.TestLoader().loadTestsFromTestCase(LauncherStability)
+    suteAll.addTest(test)
     # runner = HtmlReport.get_generate_report_object()
     # runner.run(suteAll)
 
