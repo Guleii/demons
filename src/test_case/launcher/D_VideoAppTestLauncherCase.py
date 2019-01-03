@@ -116,7 +116,7 @@ if __name__ == "__main__":
     test1 = unittest.TestLoader().loadTestsFromTestCase(LauncherTest)
     # test2 = unittest.TestLoader().loadTestsFromTestCase(case_02)
     suiteAll.addTest(test1)
-    runner = HtmlReport.get_generate_report_object()
+    runner = HtmlReport.get_generate_report_object_one_device()
     runner.run(suiteAll)
 
     # 发送邮件

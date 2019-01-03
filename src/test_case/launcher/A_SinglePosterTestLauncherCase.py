@@ -44,7 +44,7 @@ class LauncherTest(BaseUnittest.BaseTestCase):
                                               key_down_repeat_count=1, key_left_repeat_count=0,
                                               key_right_repeat_count=0, key_center_repeat_count=1,
                                               )
-        # self.check_video_jump_is_right_and_back()
+        self.check_video_jump_is_right_and_back()
 
     """
         单张海报跳转到芒果TV 点击海报正确的播放视频
@@ -71,14 +71,14 @@ class LauncherTest(BaseUnittest.BaseTestCase):
 
 if __name__ == "__main__":
 
-    Utils.Logging.error("纸飞机反击反击减肥减肥111")
+    Utils.Logging.error("开始执行Launcher测试用例")
 
     time.sleep(10)
     suiteAll = unittest.TestSuite()
     test1 = unittest.TestLoader().loadTestsFromTestCase(LauncherTest)
     # test2 = unittest.TestLoader().loadTestsFromTestCase(case_02)
     suiteAll.addTest(test1)
-    runner = HtmlReport.get_generate_report_object()
+    runner = HtmlReport.get_generate_report_object_one_device()
     runner.run(suiteAll)
 
     # 发送邮件
