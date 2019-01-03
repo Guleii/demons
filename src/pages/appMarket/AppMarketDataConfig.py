@@ -15,11 +15,14 @@ app_market_location = {"key_down_repeat_count": 1, "key_down_wait_time": 1,
 
 enter_search_app_wait_time = 2  # 进入搜索的等待时间
 
+check_open_app_package_name ="cn.kuwo.sing.tv"  # 测试应用包名
+check_open_app_splash_activity_name ="" #测试应用Splash界面的名称
 check_search_is_successful_keyword = "酷我K歌TV版"  # 判断是否搜索成功的关键字
 check_search_app_can_show = "下载"  # 判断是搜索的应用界面能否展示的关键字
 check_search_app_has_download_finish = "打开"  # 判断是搜索的应用界面能否展示的关键字
 search_result_app_open_repeat_count = 1  # 打开搜索应用的按下center键的次数
 load_apk_fail = "应用下载失败 "  # 应用下载失败
+open_apk_fail = "打开应用失败 "  # 应用下载失败
 
 down_load_time_out = 3  # 下载超时时间单位/分钟
 

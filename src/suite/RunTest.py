@@ -13,22 +13,23 @@ from src.common.general.more_devices.MoreDevicesUtils import *
 
 # 构建测试集,包含src/test_case目录下的所有以test开头的.py文件
 # suite = unittest.defaultTestLoader.discover(start_dir=test_case_path, pattern='Test*.py')
-suite = unittest.defaultTestLoader.discover(start_dir=test_case_path, pattern='TestLauncher_a_single_*.py')
+# suite = unittest.defaultTestLoader.discover(start_dir=test_case_path, pattern='A_SinglePosterTestLauncher*.py')
+suite = unittest.defaultTestLoader.discover(start_dir=gl.project_path+"\\src\\test_stability\\testDemo", pattern='C_TestAppMareket*.py')
 
 
 def run_case_one_device():
     gl.test_app_more_device_device_name = AndroidDebugBridge().get_only_one_device_name()
     # runner = unittest.TextTestRunner(verbosity=2)
     # runner.run(suite)
-    runner = HtmlReport.get_generate_report_object()
+    runner = HtmlReport.get_generate_report_object_one_device()
     runner.run(suite)
-    start_send_email()  # 发送邮件
+    # start_send_email()  # 发送邮件
 
 
 def run_case_more_devices(current_device):
     runner = HtmlReport.get_generate_report_object(current_device)
     runner.run(suite)
-    start_send_email()  # 发送邮件
+    # start_send_email()  # 发送邮件
     # runner = unittest.TextTestRunner(verbosity=2)
     # runner.run(suite)
 

@@ -5,13 +5,15 @@ import unittest
 # from HTMLTestRunner_cn import HTMLTestRunner
 from general import KeyCodeSentUtils, Utils, BaseUnittest
 from general.HtmlReportUtils import HtmlReport
+from general.more_devices.BaseAdb import AndroidDebugBridge
 from moudle import HomeTabUtils, InputManagerUtils
+from moudle.InputManagerUtils import InputManager
 from src.pages.launcher.LauncherTabPage import *
 from src.pages.launcher.LauncherMultiPostersJumpPage import *
 from src.pages.launcher.LauncherSingleAppPosterJumpPage import *
 from src.pages.launcher.LauncherSingleVideoPosterPage import SingleVideoPoster
 from general.ImageContrastUtils import ImageContrast
-from config import GlobalConfig as gl
+from config import GlobalConfig as gl, DriverConfig
 from moudle import HomeTabUtils
 
 from selenium.webdriver.support.ui import WebDriverWait
@@ -179,18 +181,23 @@ class LauncherTest(BaseUnittest.BaseTestCase):
 
 if __name__ == "__main__":
 
-    Utils.Logging.error("纸飞机反击反击减肥减肥111")
-
-    time.sleep(10)
-    suiteAll = unittest.TestSuite()
-    test1 = unittest.TestLoader().loadTestsFromTestCase(LauncherTest)
-    # test2 = unittest.TestLoader().loadTestsFromTestCase(case_02)
-    suiteAll.addTest(test1)
-    runner = HtmlReport.get_generate_report_object()
-    runner.run(suiteAll)
+    # Utils.Logging.error("纸飞机反击反击减肥减肥111")
+    #
+    # time.sleep(10)
+    # suiteAll = unittest.TestSuite()
+    # test1 = unittest.TestLoader().loadTestsFromTestCase(LauncherTest)
+    # # test2 = unittest.TestLoader().loadTestsFromTestCase(case_02)
+    # suiteAll.addTest(test1)
+    # runner = HtmlReport.get_generate_report_object()
+    # runner.run(suiteAll)
 
     # 发送邮件
     # start_send_email()
+
+    Utils.Logging.debug("；；；；；；；；；；；；；；；；；；；；；；；；；jjjjjjjjjjj22222222222222jjjjjjjLauncher稳定性测试")
+    # DriverConfig.init_all_project_by_device_name(AndroidDebugBridge().get_only_one_device_name())
+    DriverConfig.init_all_project_by_device_name(AndroidDebugBridge().get_only_one_device_name())
+    InputManager.get_loacation()
 
 
 

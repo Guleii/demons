@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # coding:utf-8
+from general.more_devices.BaseAdb import AndroidDebugBridge
 
 __author__ = 'Alan'
 """
@@ -22,8 +23,9 @@ from moudle import HomeTabUtils
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from src.pages.appMarket.SearchAppPage import SearchApp
+from config import DriverConfig
 
-skip_case = False
+skip_case = True
 skip_reason = "调试"
 
 
@@ -43,8 +45,9 @@ class AppMarketTest(BaseUnittest.BaseTestCase):
 
 
 
-if __name__ == "__main__":
 
+if __name__ == "__main__":
+    DriverConfig.init_all_project_by_device_name(AndroidDebugBridge().get_only_one_device_name())
     Utils.Logging.error("纸飞机反击反击减肥减肥111")
 
     time.sleep(10)

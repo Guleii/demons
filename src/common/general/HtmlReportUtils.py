@@ -27,7 +27,7 @@ class HtmlReport:
     """
 
     @staticmethod
-    def get_generate_report_object():
+    def get_generate_report_object_one_device():
         report_html = gl.report_path+gl.report_name
         print("地址wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww： " + str(report_html))
         runner = HTMLTestRunner(title=gl.html_title, description=gl.html_description, stream=open(report_html, "wb"),
