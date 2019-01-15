@@ -59,6 +59,7 @@ class ADB(object):
 
     def shell(self, args):
         cmd = "%s %s shell %s" % (command, self.device_id, str(args),)
+        print("cmd:    ..............    "+cmd)
         return subprocess.Popen(
             cmd,
             shell=True,
